@@ -24,6 +24,7 @@ public class RockPaperScissors {
         // Print rule of the game
         System.out.println();
         System.out.println("Choose rock paper or scissors. 'r' for rock, 'p' for paper, or 's' for scissors.");
+        
         // Get user input and check if it is in acceptedResponses
         rawPlayerInput = scanner.nextLine();
         // Close scanner
