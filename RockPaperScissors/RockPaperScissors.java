@@ -44,31 +44,42 @@ public class RockPaperScissors {
         computerChoice = acceptedResponses[rand.nextInt(3)];
 
         // Figure out who wins
-        if (computerChoice == 'r') {
-            if (playerChoice == 'r') {
+        if (playerChoice == 'r') {
+            if (computerChoice == 'r') {
                 System.out.println("Draw!");
-            } else if (playerChoice == 'p') {
+                System.out.print("Computer's Choice: rock");
+            } else if (computerChoice == 'p') {
+                System.out.println("You Lose!");
+                System.out.print("Computer's Choice: paper");
+            } else if (computerChoice == 's') {
                 System.out.println("You Win!");
-            } else if (playerChoice == 's') {
-                System.out.println("You Lose!");
+                System.out.print("Computer's Choice: scissors");
             }
-        } else if (computerChoice == 'p') {
-            if (playerChoice == 'r') {
-                System.out.println("You Lose!");
-            } else if (playerChoice == 'p') {
+            System.out.println("\tPlayer's Choice: rock");
+        } else if (playerChoice == 'p') {
+            if (computerChoice == 'r') {
+                System.out.println("You Win!");
+                System.out.print("Computer's Choice: rock");
+            } else if (computerChoice == 'p') {
                 System.out.println("Draw!");
-            } else if (playerChoice == 's') {
-                System.out.println("You Win!");
-            }
-        } else if (computerChoice == 's') {
-            if (playerChoice == 'r') {
-                System.out.println("You Win!");
-            } else if (playerChoice == 'p') {
+                System.out.print("Computer's Choice: paper");
+            } else if (computerChoice == 's') {
                 System.out.println("You Lose!");
-            } else if (playerChoice == 's') {
-                System.out.println("Draw!");
+                System.out.print("Computer's Choice: scissors");
             }
+            System.out.println("\tPlayer's Choice: paper");
+        } else if (playerChoice == 's') {
+            if (computerChoice == 'r') {
+                System.out.println("You Lose!");
+                System.out.print("Computer's Choice: rock");
+            } else if (computerChoice == 'p') {
+                System.out.println("You Win!");
+                System.out.print("Computer's Choice: paper");
+            } else if (computerChoice == 's') {
+                System.out.println("Draw!");
+                System.out.print("Computer's Choice: scissors");
+            }
+            System.out.println("\tPlayer's Choice: scissors");
         }
-        System.out.println("Computer's choice: " + computerChoice + " Player's choice: " + playerChoice);
     }
 }

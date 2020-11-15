@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 /*
+This is the same as Rock-Paper-Scissors but with nicer graphics and options
 Thanks to wynand1004 for the ascii art hands
 Link to ascii art hands: https://gist.github.com/wynand1004/b5c521ea8392e9c6bfe101b025c39abe
 */
