@@ -24,6 +24,12 @@ public class RockPaperScissors {
         // Print rule of the game
         System.out.println();
         System.out.println("Choose rock paper or scissors. 'r' for rock, 'p' for paper, or 's' for scissors.");
+        /*
+        Mr. Zaremba, you wrote "and 's' for scissors
+        I had changed it to "or" instead of "and" as that is the correct term.
+        You do, after all, want to choose one of them, not all of them.
+        Hope you don't mind the change :)
+        */
         
         // Get user input and check if it is in acceptedResponses
         rawPlayerInput = scanner.nextLine();
