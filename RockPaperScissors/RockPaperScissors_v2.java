@@ -24,17 +24,18 @@ public class RockPaperScissors_v2 {
         boolean isFinished = false;
         Scanner scannerIn = new Scanner(System.in);
         Random rand = new Random();
-        String acceptedResponses[] = {"rock", "paper", "scissors", "r", "p", "s", "quit", "exit", "goodbye", "good-game", "well-played"};
+        String acceptedResponses[] = {"rock", "paper", "scissors", "r", "p", "s", "quit", "exit", "goodbye", "good game", "well played"};
 
         // Print intro
         printAscii("intro");
 
         // Main game loop
         while (!isFinished) {
+            // Add extra space
+            System.out.println("---------------------------------------------------------");
             System.out.println("Enter 'rock', 'paper', 'scissors', or type 'quit' to quit");
-            System.out.print("> ");
             // Get player input
-            playerChoice = scannerIn.next();
+            playerChoice = scannerIn.nextLine();
             playerChoice = playerChoice.toLowerCase();
 
             // Analyze player input
@@ -44,24 +45,26 @@ public class RockPaperScissors_v2 {
                 System.out.println();
                 continue;
             } else {
+                // Add extra space
+                System.out.println();
                 switch (playerChoice) {
                     case "quit":
-                        System.out.println("Bye! Have a good day.");
+                        System.out.println("Goodbye");
                         isFinished = true;
                         continue;
                     case "exit":
-                        System.out.println("Bye! Have a good day.");
+                        System.out.println("Goodbye");
                         isFinished = true;
                         continue;
                     case "goodbye":
-                        System.out.println("Goodbye! Have a good day.");
+                        System.out.println("Bye! Have a good day.");
                         isFinished = true;
                         continue;
-                    case "good-game":
+                    case "good game":
                         System.out.println("Same to you!");
                         isFinished = true;
                         continue;
-                    case "well-played":
+                    case "well played":
                         System.out.println("Thank you, same to you!");
                         isFinished = true;
                         continue;
@@ -73,19 +76,16 @@ public class RockPaperScissors_v2 {
                         playerChoice = "scissors";
                     default:
                 }
-                
             }
 
             // Computer randomly chooses an option
             computerChoice = acceptedResponses[rand.nextInt(3)];
             
-            // Add extra space
+            System.out.println("You chose:");
+            printAscii(playerChoice);
             System.out.println();
             System.out.println("The computer chose:");
             printAscii(computerChoice);
-            System.out.println();
-            System.out.println("You chose:");
-            printAscii(playerChoice);
             System.out.println();
             
             // Decide who won
@@ -114,10 +114,7 @@ public class RockPaperScissors_v2 {
                     System.out.println("It's a tie!");
                 }
             }
-            // Add extra space
-            System.out.println();
         }
-
         scannerIn.close();
     }
     
@@ -152,8 +149,7 @@ public class RockPaperScissors_v2 {
             System.out.println("                                    /_/                                                           ");
             System.out.println();
             System.out.println("Welcome to Rock-Paper-Scissors!");
-            System.out.println("The rules are: rock > scissors; scissors > paper; paper > rock");
-            System.out.println();
+            System.out.println("The rules are: rock beats scissors; scissors beats paper; paper beats rock");
         }
     }
 }
