@@ -6,7 +6,7 @@ This program plays rock-paper-scissors with you.
 Just follow what is printed to the console.
 */
 
-public class RockPaperScissors {
+public class RockPaperScissors_WithLoop {
     // Main method to run main code
     public static void main(String[] args) {
         // Declare variables
@@ -88,5 +88,6 @@ public class RockPaperScissors {
                 System.out.println("Invalad input. Please choose one of the options listed. Remember not to include quotes.");
             }
         }
+        scanIn.close();
     }
 }
