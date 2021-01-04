@@ -12,7 +12,6 @@ import java.util.function.IntPredicate;
 */
 
 public class CeaserCypher {
-    static boolean debugMode = false;
     public static void main(String args[]) {
         // Declare variables
         String inputStr = "";
@@ -91,24 +90,13 @@ public class CeaserCypher {
             } else if (args[i].equals("--use-basic-shift")) {
                 // Set the basic shift setting
                 useBasicShift = true;
-            } else if (args[i].equals("--debug-mode")) {
-                // To resolve errors
-                debugMode = true;
             } else {
                 // Output error message and end program
                 System.out.println("Invald argument(s). Please use '--help' for help");
                 System.exit(1);
             }
         }
-        // ------------------------------
-        if (debugMode) {
-            System.out.println("Finished analyzing input");
-            System.out.println("input: " + inputStr);
-            System.out.println("shift: " + shift);
-            System.out.println("Input encrypted: " + inputEncrypted);
-            System.out.println("Using basic shift: " + useBasicShift);
-        }
-        // ------------------------------
+
         // Normalize input
         inputStr = inputStr.toLowerCase();
 
@@ -117,9 +105,6 @@ public class CeaserCypher {
 
         // Encrypt string
         if (inputStr != "" && !inputEncrypted) {
-            // ------------------------------
-            if (debugMode) System.out.println("Encrypting string");
-            // ------------------------------
             // Make sure that the shift is not 0
             if (shift == 0) {
                 System.out.println("The shift is not specified. Please specify the shift.");
@@ -133,9 +118,6 @@ public class CeaserCypher {
             }
         // Decrypt string
         } else if (inputStr != "" && inputEncrypted) {
-            // ------------------------------
-            if (debugMode) System.out.println("Decrypting string");
-            // ------------------------------
             // Check if no shift was specified
             if (shift == 0) {
                 // Check if basicShift is enabled then decrypt the string
@@ -163,18 +145,12 @@ public class CeaserCypher {
 
 
     private String encrypt(String uncodedStr, int shift) {
-        // ------------------------------
-        if (debugMode) System.out.println("Encrypt_1 activated");
-        // ------------------------------
         CeaserCypher ceaserCypher = new CeaserCypher();
         return ceaserCypher.shiftString(uncodedStr, shift, false, false);
     }
 
 
     private String encrypt(String uncodedStr, int shift, boolean useBasicShift) {
-        // ------------------------------
-        if (debugMode) System.out.println("Encrypt_2 activated");
-        // ------------------------------
         String encryptedStr;
         CeaserCypher ceaserCypher = new CeaserCypher();
         if (useBasicShift) {
@@ -187,9 +163,6 @@ public class CeaserCypher {
 
 
     private String decrypt(String encodedStr) {
-        // ------------------------------
-        if (debugMode) System.out.println("Decrypt_1 activated");
-        // ------------------------------
         String encryptedStr = "";
         CeaserCypher ceaserCypher = new CeaserCypher();
         for (int i = 1; i < 26; i++) {
@@ -200,18 +173,12 @@ public class CeaserCypher {
 
 
     private String decrypt(String encodedStr, int shift) {
-        // ------------------------------
-        if (debugMode) System.out.println("Decrypt_2 activated");
-        // ------------------------------
         CeaserCypher ceaserCypher = new CeaserCypher();
         return ceaserCypher.shiftString(encodedStr, shift, false, true);
     }
 
 
     private String decrypt(String encodedStr, boolean useBasicShift) {
-        // ------------------------------
-        if (debugMode) System.out.println("Decrypt_3 activated");
-        // ------------------------------
         String encryptedStr = "";
         CeaserCypher ceaserCypher = new CeaserCypher();
         if (useBasicShift) {
@@ -228,9 +195,6 @@ public class CeaserCypher {
 
 
     private String decrypt(String encodedStr, int shift, boolean useBasicShift) {
-        // ------------------------------
-        if (debugMode) System.out.println("Decrypt_4 activated");
-        // ------------------------------
         String decryptedStr;
         CeaserCypher ceaserCypher = new CeaserCypher();
         if (useBasicShift) {
@@ -243,14 +207,6 @@ public class CeaserCypher {
 
 
     private String shiftString(String inputStr, int shift, boolean shiftSingleLetterWords, boolean reverseShift) {
-        // ------------------------------
-        if (debugMode) {
-            System.out.println("\nshiftString method activated");
-            System.out.println("Shift string: " + inputStr);
-            System.out.println("Shift: " + shift);
-        }
-        // ------------------------------
-
         // Declare variables
         String currentChar;
         int index = 0;
@@ -270,47 +226,25 @@ public class CeaserCypher {
         List <String> lettersList = Arrays.asList(letters);
         List <String> numbersList = Arrays.asList(numbers);
         StringBuilder outputStr = new StringBuilder(inputStr.length());
-        // ------------------------------
-        if (debugMode) System.out.println("Finished declaring variables");
-        // ------------------------------
         // Run if the input string is more than 1 character long
         if (inputStr.length() > 1) {
-            // ------------------------------
-            if (debugMode) System.out.println("Input greater than one character");
-            // ------------------------------
             // Loop through all the characters given
             for (int i = 0; i < inputStr.length(); i++) {
                 // Current character selected
                 currentChar = String.valueOf(inputStr.charAt(i));
-                // ------------------------------
-                if (debugMode) {
-                    if (i + 1 > inputStr.length() - 1) {
-                        System.out.println("current character: " + currentChar);
-                    } else {
-                        System.out.println("current character: " + currentChar + "\nnext character: " + inputStr.charAt(i + 1));
-                    }
-                }
-                // ------------------------------
                 // Continue the loop if the character is a space
                 if (currentChar.equals(" ")) {
                     outputStr.append(" ");
                     continue;
                 // Check if the letters list contains the current alphanumeric character
                 } else if (lettersList.contains(currentChar)) {
-                    // ------------------------------
-                    if (debugMode) System.out.println("Current character is a letter");
-                    // ------------------------------
                     // Find the index position of the letter in the array
                     for (int i2 = 0; i2 < letters.length; i2++) {
-                        if (debugMode) System.out.println(letters[i2] + " : " + currentChar.equals(letters[i2]));
                         if (currentChar.equals(letters[i2])) {
                             index = i2;
                             break;
                         }
                     }
-                    // ------------------------------
-                    if (debugMode) System.out.println("Index: " + index);
-                    // ------------------------------
                     // Check if letter is a single letter word
                     // if so, skip letter
                     if (!shiftSingleLetterWords) {
@@ -318,9 +252,6 @@ public class CeaserCypher {
                             if ((i == 0 && inputStr.charAt(i + 1) == ' ') || (inputStr.charAt(i - 1) == ' ' && inputStr.charAt(i + 1) == ' ')) {
                                 outputStr.append(letters[index] + " ");
                                 i++;
-                                // ------------------------------
-                                if (debugMode) System.out.println("Skipped single letter word");
-                                // ------------------------------
                                 continue;
                             }
                         }
@@ -328,17 +259,11 @@ public class CeaserCypher {
                     // Check if output needs to wrap around
                     if ((index + shift) > (letters.length - 1)) {
                         index -= letters.length;
-                        // ------------------------------
-                        if (debugMode) System.out.println("Wrapped letter");
-                        // ------------------------------
                     }
                     // Set the output
                     outputStr.append(letters[index + shift]);
                 // Check if the numbers list contains the current alphanumeric character
                 } else if (numbersList.contains(String.valueOf(currentChar))) {
-                    // ------------------------------
-                    if (debugMode) System.out.println("Current character is a number");
-                    // ------------------------------
                     // Find the index position of then number in the array
                     for (int i2 = 0; i2 < numbers.length; i2++) {
                         if (currentChar.equals(numbers[i2])) {
@@ -346,30 +271,18 @@ public class CeaserCypher {
                             break;
                         }
                     }
-                    // ------------------------------
-                    if (debugMode) System.out.println("Index: " + index);
-                    // ------------------------------
                     // Check if output needs to wrap around
                     if ((index + shift) > (numbers.length - 1)) {
                         index -= numbers.length;
-                        // ------------------------------
-                        if (debugMode) System.out.println("Wrapped number");
-                        // ------------------------------
                     }
                     // Set the output
                     outputStr.append(numbers[index + shift]);
                 } else {
                     continue;
                 }
-                // ------------------------------
-                if (debugMode) System.out.println("Loop run: " + (i + 1) + "\n");
-                // ------------------------------
             }
         // Run if the input string is only one character long
         } else if (inputStr.length() == 1) {
-            // ------------------------------
-            if (debugMode) System.out.println("Input is one character long");
-            // ------------------------------
             // Check if the letters list contains inputStr
             if (lettersList.contains(inputStr)) {
                 // Find the index position of the letter in the array
