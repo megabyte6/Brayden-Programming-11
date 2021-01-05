@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-
 public class ChangeArray {
-    // Used to process regular arrays
-    // Appending characters
+    // Append item to array
     public static byte[] append(byte inArray[], byte item) {
         byte outArray[] = new byte[inArray.length + 1];
         for (int i = 0; i < inArray.length; i++) {
