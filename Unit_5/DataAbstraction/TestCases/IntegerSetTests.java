@@ -26,14 +26,17 @@ public class IntegerSetTests {
     }
 
     @Test
-    public void testInsertAlreadyThere() {
-        int currentSize = testSet.size();
+    public void testInsertThere() {
         // Check if the number is already there
-        assertEquals(testSet.size(), 1);
+        assertEquals(testSet.size(), 0);
         assertTrue(testSet.contains(4));
         // Insert a number
         testSet.insert(4);
         // Check that there is only one of the number
-        assertEquals(currentSize, testSet.size());
+        assertEquals(testSet.size(), 0);
+        assertFalse(testSet.contains(4));
+        // Check that the number is in the set
+        assertEquals(testSet.size(), 1);
+        assertTrue(testSet.contains(4));
     }
 }
