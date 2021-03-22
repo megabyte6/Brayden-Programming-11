@@ -16,9 +16,11 @@ public class TestWithdraw {
         this.savingWithdrawal = new Deposit(158.5, new Date(), "Saving");
     }
 
+    @Test
+    // Effect: Tests to check if the Withdraw class can correctly create a string from the
+    // information it contains
     // Note: I did test the date with the actual date but replaced it after with 'new Date()' to
     // make it easier to test later
-    @Test
     public void testToString() {
         assertEquals("Withdrawal of: $30.0 Date: " + new Date() + " into account: Checking", checkingWithdrawal.toString());
         assertEquals("Withdrawal of: $158.5 Date: " + new Date() + " into account: Saving", savingWithdrawal.toString());

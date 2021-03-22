@@ -7,7 +7,7 @@ import org.junit.Assert.assertFalse;
 import org.junit.Assert.assertTrue;
 
 public class TestCustomer {
-    // TODO : Create tests for the Customer class
+    // TODO : Run tests for the Customer class
     Customer testCustomer;
 
     @Before
