@@ -3,8 +3,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class TestWithdraw {
     // TODO : Run tests on TestWithdraw to check for errors
@@ -12,8 +10,8 @@ public class TestWithdraw {
 
     @Before
     public void setup() {
-        this.checkingWithdrawal = new Deposit(30.0, new Date(), "Checking");
-        this.savingWithdrawal = new Deposit(158.5, new Date(), "Saving");
+        this.checkingWithdrawal = new Withdraw(30.0, new Date(), "Checking");
+        this.savingWithdrawal = new Withdraw(158.5, new Date(), "Saving");
     }
 
     @Test

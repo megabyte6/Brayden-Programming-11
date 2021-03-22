@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Customer {
     private int accountNumber;
-    private ArrayList<Deposit> deposits;
-    private ArrayList<Withdraw> withdraws;
+    private ArrayList<Deposit> deposits = new ArrayList<Deposit>();
+    private ArrayList<Withdraw> withdraws = new ArrayList<Withdraw>();
     private double checkBalance;
     private double savingBalance;
     private double savingRate;
