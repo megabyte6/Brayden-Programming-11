@@ -12,6 +12,6 @@ public class Withdraw {
     }
 
     public String toString(){
-        return "Deposit of: $" + amount + " Date: " + date + " into account: " + account;
+        return "Withdrawal of: $" + amount + " Date: " + date + " into account: " + account;
     }
 }

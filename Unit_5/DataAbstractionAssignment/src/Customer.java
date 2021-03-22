@@ -14,36 +14,91 @@ public class Customer {
     public static final String SAVING = "Saving";
     private final int OVERDRAFT = -100;
 
-    Customer(){
-        //create default constructor
-    }
-    Customer(String name, int accountNumber, double checkDeposit, double savingDeposit){
-        //constructor code here
+    Customer() {
+        this.name = "Unknown";
+        this.accountNumber = 0;
+        this.checkBalance = 0.0;
+        this.savingBalance = 0.0;
+        this.savingRate = 0.001;
     }
 
-    public double deposit(double amt, Date date, String account){
-        //your code here
-        return 0;
+    Customer(String name, int accountNumber, double checkDeposit, double savingDeposit) {
+        this.name = name;
+        this.accountNumber = accountNumber;
+        this.checkBalance = checkDeposit;
+        this.savingBalance = savingDeposit;
+        this.savingRate = 0.001;
     }
-    public double withdraw(double amt, Date date, String account){
-        //your code here
-        return 0;
+
+    // Requires: double, Date, String
+    // Modifies: this
+    // Effects: Adds a diposit to the list of deposits and adds more money to the account specified
+    public double deposit(double amt, Date date, String account) {
+        double addedToAccount = 0.0;
+        if (account.equals(CHECKING)) {
+            deposits.add(new Deposit(amt, date, CHECKING));
+            checkBalance += amt;
+            addedToAccount = amt;
+        } else if (account.equals(SAVING)) {
+            deposits.add(new Deposit(amt, date, SAVING));
+            savingBalance += amt;
+            addedToAccount = amt;
+        }
+        return addedToAccount;
     }
+
+    // Requires: double, Date, String
+    // Modifies: this
+    // Effects: Adds a withdraw to the list of withdraws and removes money from the account
+    // specified
+    public double withdraw(double amt, Date date, String account) {
+        double removedFromAccount = 0.0;
+        if (account.equals(CHECKING)) {
+            if (checkOverdraft(amt, CHECKING)) {
+                return 0.0;
+            }
+            withdraws.add(new Withdraw(amt, date, CHECKING));
+            checkBalance -= amt;
+            removedFromAccount = amt;
+        } else if (account.equals(SAVING)) {
+            if (checkOverdraft(amt, SAVING)) {
+                return 0.0;
+            }
+            withdraws.add(new Withdraw(amt, date, SAVING));
+            savingBalance -= amt;
+            removedFromAccount = amt;
+        }
+        return removedFromAccount;
+    }
+
+    // Requires: double, String
+    // Effects: Checks if the withdrawal will cause the account number to drop below the overdraft
+    // protection
     private boolean checkOverdraft(double amt, String account){
-        //your code here
-        return false;
+        boolean overdraft = false;
+        if (account.equals(CHECKING)) {
+            if ((checkBalance - amt) < OVERDRAFT) {
+                overdraft = true;
+            }
+        } else if (account.equals(SAVING)) {
+            if ((savingBalance - amt) < OVERDRAFT) {
+                overdraft = true;
+            }
+        }
+        return overdraft;
     }
-    //do not modify
-    public void displayDeposits(){
+
+    // Effects: Prints all of the deposits to the console
+    public void displayDeposits() {
         for(Deposit d : deposits){
             System.out.println(d);
         }
     }
-    //do not modify
-    public void displayWithdraws(){
+
+    // Effects: Prints all of the withdraws to the console
+    public void displayWithdraws() {
         for(Withdraw w : withdraws){
             System.out.println(w);
         }
     }
-
 }
