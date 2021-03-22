@@ -101,4 +101,35 @@ public class Customer {
             System.out.println(w);
         }
     }
+
+    // Getters and setters for most variables
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public double getCheckBalance() {
+        return checkBalance;
+    }
+
+    public double getSavingBalance() {
+        return savingBalance;
+    }
+
+    public double getSavingRate() {
+        return savingRate;
+    }
+
+    public void setSavingRate(double savingRate) {
+        this.savingRate = savingRate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    
 }
