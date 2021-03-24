@@ -1,5 +1,5 @@
 package sample;
 
 public class Controller {
-    // Controller code
+    // Code for controller
 }

@@ -8,15 +8,16 @@
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
+            "vmArgs": "--module-path lib/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml",
             "mainClass": "${file}"
         },
         {
             "type": "java",
             "name": "Launch Main",
             "request": "launch",
-            "vmArgs": "--module-path ./lib/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml",
-            "mainClass": "sample.Main",
-            "projectName": "GuiLesson1_b5783702"
+            "vmArgs": "--module-path lib/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "Main",
+            "projectName": "GuiLesson_502d2b0f"
         }
     ]
 }
