@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+    <children>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+            <children>
+                <Label text="Name:" />
+                <TextField fx:id="textField_name" promptText="Username" />
+            </children>
+        </HBox>
+        <Button fx:id="btn_getName" mnemonicParsing="false" onAction="#printName" text="Print Name" />
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <children>
+                <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                    <children>
+                        <Label text="Add" />
+                        <Label text="Subtract" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                    <children>
+                        <TextField fx:id="textField_add" promptText="Add" />
+                        <TextField fx:id="textField_subtract" promptText="Subtract" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                    <children>
+                        <Button fx:id="btn_add" mnemonicParsing="false" onAction="#add" text="Add" />
+                        <Button fx:id="btn_subtract" mnemonicParsing="false" onAction="#subtract" text="Subtract" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <Label fx:id="label_total" text="0">
+            <font>
+                <Font size="32.0" />
+            </font>
+        </Label>
+    </children>
+</VBox>
