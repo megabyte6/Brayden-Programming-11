@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GuiLesson.iml" filepath="$PROJECT_DIR$/GuiLesson.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GuiLesson_IntelliJ.iml" filepath="$PROJECT_DIR$/GuiLesson_IntelliJ.iml" />
     </modules>
   </component>
 </project>

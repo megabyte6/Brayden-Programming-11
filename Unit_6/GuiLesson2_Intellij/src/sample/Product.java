@@ -1,7 +1,7 @@
 package sample;
 
 public class Product {
-    public String name;
+    private String name;
     private int quantity;
     private double cost;
 
@@ -11,20 +11,32 @@ public class Product {
         this.cost = cost;
     }
 
-    public void addQuantity(int amt) {
-        this.quantity += amt;
-    }
-
     public void purchase() {
-        quantity--;
+        this.quantity--;
     }
 
     public String toString() {
         return name;
     }
 
-    // Getters
-    public int getQuantity() {return this.quantity;}
+    // Getters and setters
+    public String getName() {
+        return name;
+    }
 
-    public double getCost() {return this.cost;}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public double getCost() {
+        return cost;
+    }
 }

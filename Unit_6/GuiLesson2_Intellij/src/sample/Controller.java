@@ -11,28 +11,29 @@ public class Controller {
     public TextField textField_productName;
     public TextField textField_quantity;
     public TextField textField_cost;
-    public ListView<Product> listView_productList = new ListView<>();
+    public ListView<Product> listView_productList = new ListView<Product>();
     public Label label_name;
     public Label label_quantity;
     public Label label_cost;
     public Button btn_purchase;
 
     public void addProduct(ActionEvent actionEvent) {
-        Product temp = new Product(
-                textField_productName.getText(),
+        Product temp = new Product(textField_productName.getText(),
                 Integer.parseInt(textField_quantity.getText()),
                 Double.parseDouble(textField_cost.getText()));
         listView_productList.getItems().add(temp);
         textField_productName.clear();
-        textField_cost.clear();
         textField_quantity.clear();
+        textField_cost.clear();
+        btn_purchase.setDisable(true);
     }
 
     public void displayProductInfo(MouseEvent mouseEvent) {
         Product temp = listView_productList.getSelectionModel().getSelectedItem();
-        label_cost.setText("$" + Double.toString(temp.getCost()));
-        label_name.setText(temp.name);
+        label_name.setText(temp.getName());
         label_quantity.setText(Integer.toString(temp.getQuantity()));
+        label_cost.setText("$" + Double.toString(temp.getCost()));
+        btn_purchase.setDisable(false);
     }
 
     public void purchaseProduct(ActionEvent actionEvent) {

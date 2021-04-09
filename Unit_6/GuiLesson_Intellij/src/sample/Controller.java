@@ -6,10 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class Controller {
-    public TextField textField_name;
-    public Button btn_name;
-    public TextField textField_add;
-    public TextField textField_subtract;
+    public TextField textField_name, textField_add, textField_subtract;
+    public Button btn_getName, btn_add, btn_subtract;
     public Label label_total;
     public double total = 0;
 
