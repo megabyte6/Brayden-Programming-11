@@ -44,6 +44,9 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="button_instructions" mnemonicParsing="false" onAction="#openInstructions" text="?" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="button_instructions" mnemonicParsing="false" onAction="#openInstructions" prefHeight="30.0" prefWidth="30.0" text="?" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>
