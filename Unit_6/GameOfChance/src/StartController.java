@@ -10,23 +10,29 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-public class MainController implements Initializable {
+public class StartController implements Initializable {
+    // Variables represent elements in the UI
     @FXML
     private ComboBox<String> comboBox_gameMode;
     @FXML
     private Button button_play;
+    @FXML
+    private Button button_instructions;
     
+    // This method is run when the stage is initialized
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboBox_gameMode.getItems().addAll(
                 "Single Player",
                 "Multiplayer");
+        comboBox_gameMode.getSelectionModel().selectFirst();
     }
 
+    // Code for play button
     public void play(ActionEvent actionEvent) throws Exception {
         // Close old window
-        Stage oldStage = (Stage) button_play.getScene().getWindow();
-        oldStage.close();
+        Stage currentStage = (Stage) button_play.getScene().getWindow();
+        currentStage.close();
 
         // Try to open new window
         try {
@@ -40,6 +46,22 @@ public class MainController implements Initializable {
                 gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Multiplayer.fxml"))));
             }
             gameStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openInstructions(ActionEvent actionEvent) throws Exception {
+        // Close current window
+        Stage currentStage = (Stage) button_instructions.getScene().getWindow();
+        currentStage.close();
+
+        // Try to open new window
+        try {
+            Stage instructionStage = new Stage();
+            instructionStage.setTitle("Instructions");
+            instructionStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Instructions.fxml"))));
+            instructionStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
