@@ -42,9 +42,11 @@ public class StartController implements Initializable {
 
             // Check if single or multiplayer mode is selected
             if ("Easy".equals(comboBox_gameMode.getValue())) {
-                gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("SinglePlayer.fxml"))));
+                gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("GameUIs.Easy.Easy.fxml"))));
             } else if ("Medium".equals(comboBox_gameMode.getValue())) {
-                gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Multiplayer.fxml"))));
+                gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("GameUIs.Medium.Medium.fxml"))));
+            } else if ("Hard".equals(comboBox_gameMode.getValue())) {
+                gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("GameUIs.Hard.Hard.fxml"))));
             }
             gameStage.show();
         } catch (Exception e) {
