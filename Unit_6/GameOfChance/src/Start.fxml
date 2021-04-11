@@ -25,7 +25,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBox_gameMode" prefWidth="75.0" />
+                  <ComboBox fx:id="comboBox_gameMode" prefWidth="100.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="50.0" top="50.0" />
