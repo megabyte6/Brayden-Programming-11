@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Instructions_Controller">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="button_back" mnemonicParsing="false" onAction="#returnHome" text="&lt;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lacinia pharetra felis, id consectetur ipsum placerat at. Morbi dui lacus, suscipit at consectetur at, molestie ut ante. Mauris fringilla rhoncus arcu ut pulvinar. Sed ac quam est. Nam a elit eu lectus dignissim bibendum. Nam sit amet vulputate velit. Integer in dolor vitae nisl dapibus malesuada. Curabitur pretium finibus lorem ut finibus. Nullam suscipit, felis ac pulvinar accumsan, dui magna mattis dui, quis elementum lectus sapien in sem. Nulla finibus arcu eros, eu gravida felis viverra eget. Fusce in enim ultrices, tempor leo nec, maximus nisi. Morbi eleifend varius dolor eget dignissim. Donec congue ante neque, non condimentum arcu sodales ac." wrapText="true" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+  </content>
+</ScrollPane>
