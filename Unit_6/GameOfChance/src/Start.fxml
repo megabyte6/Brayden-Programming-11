@@ -28,15 +28,15 @@
                   <ComboBox fx:id="comboBox_gameMode" prefWidth="100.0" />
                </children>
                <VBox.margin>
-                  <Insets bottom="50.0" top="50.0" />
+                  <Insets bottom="40.0" top="40.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="button_play" mnemonicParsing="false" onAction="#play" text="Play">
+            <Button fx:id="button_play" mnemonicParsing="false" onAction="#play" prefHeight="50.0" prefWidth="150.0" text="Play">
                <font>
                   <Font size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
                <padding>
                   <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
@@ -48,5 +48,10 @@
          <font>
             <Font size="14.0" />
          </font></Button>
+      <Button mnemonicParsing="false" text="High Scores" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
