@@ -5,15 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameUI.Easy_Controller">
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Easy_Controller">
    <children>
       <Button fx:id="button_back" mnemonicParsing="false" onAction="#returnHome" text="&lt;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="40.0" layoutY="40.0" onMouseClicked="#selectNumber" prefHeight="50.0" prefWidth="50.0" text="5">
+      <Label fx:id="player_1_1" alignment="CENTER" layoutX="40.0" layoutY="40.0" prefHeight="50.0" prefWidth="50.0" text="5">
          <font>
             <Font size="24.0" />
          </font>

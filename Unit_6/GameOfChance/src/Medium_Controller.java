@@ -1,5 +1,3 @@
-package GameUIs.Medium;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

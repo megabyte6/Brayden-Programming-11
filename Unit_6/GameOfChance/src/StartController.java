@@ -40,14 +40,18 @@ public class StartController implements Initializable {
             Stage gameStage = new Stage();
             gameStage.setTitle("Bingo");
 
-            // Check if single or multiplayer mode is selected
+            // Check if easy, medium, or hard mode is selected
             if ("Easy".equals(comboBox_gameMode.getValue())) {
-                gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("GameUIs.Easy.Easy.fxml"))));
+                gameStage.setScene(
+                        new Scene(FXMLLoader.load(getClass().getResource("Easy.fxml"))));
             } else if ("Medium".equals(comboBox_gameMode.getValue())) {
-                gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("GameUIs.Medium.Medium.fxml"))));
+                gameStage.setScene(
+                        new Scene(FXMLLoader.load(getClass().getResource("Medium.fxml"))));
             } else if ("Hard".equals(comboBox_gameMode.getValue())) {
-                gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("GameUIs.Hard.Hard.fxml"))));
+                gameStage.setScene(
+                        new Scene(FXMLLoader.load(getClass().getResource("Hard.fxml"))));
             }
+
             gameStage.show();
         } catch (Exception e) {
             e.printStackTrace();
