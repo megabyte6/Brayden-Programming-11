@@ -17,7 +17,7 @@ public class SinglePlayer_Controller {
         // Try to open new window
         try {
             Stage homeStage = new Stage();
-            homeStage.setTitle("Guess the Number");
+            homeStage.setTitle("Bingo");
             homeStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Start.fxml"))));
             homeStage.show();
         } catch (Exception e) {

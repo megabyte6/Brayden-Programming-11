@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Game Of Chance");
+        primaryStage.setTitle("Bingo");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Start.fxml"))));
         primaryStage.show();
     }

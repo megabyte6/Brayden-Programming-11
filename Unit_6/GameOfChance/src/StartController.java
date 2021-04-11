@@ -23,8 +23,9 @@ public class StartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboBox_gameMode.getItems().addAll(
-                "Single Player",
-                "Multiplayer");
+                "Easy",
+                "Medium",
+                "Hard");
         comboBox_gameMode.getSelectionModel().selectFirst();
     }
 
@@ -37,12 +38,12 @@ public class StartController implements Initializable {
         // Try to open new window
         try {
             Stage gameStage = new Stage();
-            gameStage.setTitle("Guess the Number");
+            gameStage.setTitle("Bingo");
 
             // Check if single or multiplayer mode is selected
-            if ("Single Player".equals(comboBox_gameMode.getValue())) {
+            if ("Easy".equals(comboBox_gameMode.getValue())) {
                 gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("SinglePlayer.fxml"))));
-            } else if ("Multiplayer".equals(comboBox_gameMode.getValue())) {
+            } else if ("Medium".equals(comboBox_gameMode.getValue())) {
                 gameStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Multiplayer.fxml"))));
             }
             gameStage.show();
