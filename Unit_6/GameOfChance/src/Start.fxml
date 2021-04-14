@@ -48,7 +48,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button mnemonicParsing="false" text="High Scores" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Button fx:id="button_scoreBoard" mnemonicParsing="false" onAction="#openScoreBoard" text="High Scores" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font size="14.0" />
          </font>

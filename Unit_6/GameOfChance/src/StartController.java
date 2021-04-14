@@ -18,6 +18,8 @@ public class StartController implements Initializable {
     private Button button_play;
     @FXML
     private Button button_instructions;
+    @FXML
+    private Button button_scoreBoard;
     
     // This method is run when the stage is initialized
     @Override
@@ -29,48 +31,48 @@ public class StartController implements Initializable {
         comboBox_gameMode.getSelectionModel().selectFirst();
     }
 
-    // Code for play button
-    public void play(ActionEvent actionEvent) throws Exception {
+    // Returns 0 if completed successfully else returns 1
+    public int openWindow(String fxmlFile, Stage currentStage, String titleName) {
+        // Create variable for returning error number
+        int errorNum = 0;
+        
         // Close old window
-        Stage currentStage = (Stage) button_play.getScene().getWindow();
         currentStage.close();
 
         // Try to open new window
         try {
-            Stage gameStage = new Stage();
-            gameStage.setTitle("Bingo");
-
-            // Check if easy, medium, or hard mode is selected
-            if ("Easy".equals(comboBox_gameMode.getValue())) {
-                gameStage.setScene(
-                        new Scene(FXMLLoader.load(getClass().getResource("Easy.fxml"))));
-            } else if ("Medium".equals(comboBox_gameMode.getValue())) {
-                gameStage.setScene(
-                        new Scene(FXMLLoader.load(getClass().getResource("Medium.fxml"))));
-            } else if ("Hard".equals(comboBox_gameMode.getValue())) {
-                gameStage.setScene(
-                        new Scene(FXMLLoader.load(getClass().getResource("Hard.fxml"))));
-            }
-
-            gameStage.show();
+            Stage newStage = new Stage();
+            newStage.setTitle(titleName);
+            newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
+            newStage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            errorNum = 1;
+        }
+        return errorNum;
+    }
+
+    // Code for play button
+    public void play(ActionEvent actionEvent) throws Exception {
+        Stage currentStage = (Stage) button_play.getScene().getWindow();
+
+        // Check if easy, medium, or hard mode is selected
+        if ("Easy".equals(comboBox_gameMode.getValue())) {
+            openWindow("Easy.fxml", currentStage, "Bingo");
+        } else if ("Medium".equals(comboBox_gameMode.getValue())) {
+            openWindow("Medium.fxml", currentStage, "Bingo");
+        } else if ("Hard".equals(comboBox_gameMode.getValue())) {
+            openWindow("Hard.fxml", currentStage, "Bingo");
         }
     }
 
     public void openInstructions(ActionEvent actionEvent) throws Exception {
-        // Close current window
         Stage currentStage = (Stage) button_instructions.getScene().getWindow();
-        currentStage.close();
+        openWindow("Instructions.fxml", currentStage, "Instructions");
+    }
 
-        // Try to open new window
-        try {
-            Stage instructionStage = new Stage();
-            instructionStage.setTitle("Instructions");
-            instructionStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Instructions.fxml"))));
-            instructionStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void openScoreBoard(ActionEvent actionEvent) throws Exception {
+        Stage currentStage = (Stage) button_scoreBoard.getScene().getWindow();
+        openWindow("HighScores.fxml", currentStage, "Score Board");
     }
 }
