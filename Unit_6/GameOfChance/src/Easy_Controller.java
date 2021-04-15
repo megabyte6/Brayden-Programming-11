@@ -44,29 +44,37 @@ public class Easy_Controller implements Initializable {
         });
     }
 
-    // Returns 0 if completed successfully else returns 1
-    public int openWindow(String fxmlFile, Stage currentStage, String titleName) {
-        // Create variable for returning error number
-        int errorNum = 0;
-        
-        // Close old window
-        currentStage.close();
-
+    public Stage openWindow(String fxmlFile, String titleName) {
         // Try to open new window
+        Stage newStage = new Stage();
+        newStage.setTitle(titleName);
         try {
-            Stage newStage = new Stage();
-            newStage.setTitle(titleName);
             newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
             newStage.show();
         } catch (Exception e) {
             e.printStackTrace();
-            errorNum = 1;
         }
-        return errorNum;
+        return newStage;
+    }
+
+    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {        
+        // Close old window
+        currentStage.close();
+
+        // Try to open new window
+        Stage newStage = new Stage();
+        newStage.setTitle(titleName);
+        try {
+            newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
+            newStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return newStage;
     }
 
     public void returnHome(ActionEvent actionEvent) {
         Stage currentStage = (Stage) button_back.getScene().getWindow();
-        openWindow("Start.fxml", currentStage, "Bingo");
+        openWindow("Start.fxml", "Bingo", currentStage);
     }
 }
