@@ -47,19 +47,6 @@ public class Easy_Controller implements Initializable {
         });
     }
 
-    public Stage openWindow(String fxmlFile, String titleName) {
-        // Try to open new window
-        Stage newStage = new Stage();
-        newStage.setTitle(titleName);
-        try {
-            newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
-            newStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return newStage;
-    }
-
     public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
