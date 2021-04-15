@@ -12,7 +12,7 @@ public class HighScores_Controller {
     @FXML
     private Button button_back;
 
-    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {        
+    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 

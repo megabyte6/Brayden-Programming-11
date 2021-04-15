@@ -22,7 +22,7 @@ public class Hard_Controller {
         return newStage;
     }
 
-    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {        
+    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 

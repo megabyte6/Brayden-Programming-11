@@ -10,11 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Easy_Controller implements Initializable {
     boolean[][] playerCellStates = new boolean[5][5];
 
+    @FXML
+    private AnchorPane anchorPane_root;
     @FXML
     private Label player_1_1;
     @FXML
@@ -57,7 +60,7 @@ public class Easy_Controller implements Initializable {
         return newStage;
     }
 
-    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {        
+    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 
@@ -71,6 +74,20 @@ public class Easy_Controller implements Initializable {
             e.printStackTrace();
         }
         return newStage;
+    }
+
+    public void setFullScreen() {
+        Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
+        if (currentStage.isFullScreen()) {
+            currentStage.setFullScreen(false);
+        } else {
+            currentStage.setFullScreen(true);
+        }
+    }
+
+    public void setFullScreen(boolean fullScreen) {
+        Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
+        currentStage.setFullScreen(fullScreen);
     }
 
     public void returnHome(ActionEvent actionEvent) {
