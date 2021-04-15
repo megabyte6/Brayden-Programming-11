@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Easy_Controller">
+<AnchorPane fx:id="anchorPane_root" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Easy_Controller">
    <children>
       <Button fx:id="button_back" mnemonicParsing="false" onAction="#returnHome" text="&lt;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
