@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HighScores_Controller">
+<AnchorPane fx:id="anchorPane_root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HighScores_Controller">
    <children>
       <Button fx:id="button_back" mnemonicParsing="false" onAction="#returnHome" text="&lt;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -13,5 +13,6 @@
          </font>
       </Button>
       <ListView layoutX="50.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0" />
+      <Button layoutX="534.0" layoutY="13.0" mnemonicParsing="false" onAction="#setFullScreen" text="Full Screen" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>
