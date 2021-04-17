@@ -13,7 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class StartController implements Initializable {
+public class Start_Controller implements Initializable {
     // Variables represent elements in the UI
     @FXML
     private AnchorPane anchorPane_root;
