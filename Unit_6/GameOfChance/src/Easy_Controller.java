@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,37 +15,73 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Easy_Controller implements Initializable {
-    boolean[][] playerCellStates = new boolean[5][5];
+    // Goes [col][row]
+    private Node[][] playerCells = new Node[5][5];
+    private Node[][] computerCells = new Node[5][5];
+    private boolean[][] playerCellStates = new boolean[5][5];
+    private boolean[][] computerCellStates = new boolean[5][5];
 
     @FXML
     private GridPane gridPane_root;
     @FXML
-    private Label player_1_1;
+    private GridPane gridPane_player;
+    @FXML
+    private GridPane gridPane_computer;
     @FXML
     private Button button_back;
 
     // Run when Easy_Controller.java is initialized
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Create array to store states of cells
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 5; col++) {
-                playerCellStates[row][col] = false;
+        // Initialize a multidimensional array for every node on the player's bingo card
+        for (Node cell : gridPane_player.getChildren()) {
+            System.out.println(cell.toString());
+            playerCells[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = (Label) cell;
+        }
+
+        // Initialize a multidimensional array for every node on the computer's bingo card
+        for (Node cell : gridPane_computer.getChildren()) {
+            computerCells[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = cell;
+        }
+
+        // Create array to store states of the player's and computer's cells
+        for (int col = 0; col < 5; col++) {
+            for (int row = 0; row < 5; row++) {
+                playerCellStates[col][row] = false;
+                computerCellStates[col][row] = false;
+
+                playerCells[col][row].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        if (playerCellStates[1][1] == true) {
+                            ((Label) playerCells[col][row]).setStyle("-fx-border-color: black; -fx-background-color: transparent");
+                            playerCellStates[1][1] = false;
+                        } else {
+                            playerCells[col][row].setStyle("-fx-border-color: black; -fx-background-color: lightgrey");
+                            playerCellStates[1][1] = true;
+                        }
+                    }
+                });
             }
         }
+
         // Add event handlers
-        player_1_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent arg0) {
-                if (playerCellStates[1][1] == true) {
-                    player_1_1.setStyle("-fx-border-color: black; -fx-background-color: transparent");
-                    playerCellStates[1][1] = false;
-                } else {
-                    player_1_1.setStyle("-fx-border-color: black; -fx-background-color: lightgrey");
-                    playerCellStates[1][1] = true;
-                }
-            }
-        });
+        // for (int col = 0; col < 5; col++) {
+        //     for (int row = 0; row < 5; row++) {
+        //         playerCells[col][row].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+        //             @Override
+        //             public void handle(MouseEvent mouseEvent) {
+        //                 if (playerCellStates[1][1] == true) {
+        //                     playerCells[col][row].setStyle("-fx-border-color: black; -fx-background-color: transparent");
+        //                     playerCellStates[1][1] = false;
+        //                 } else {
+        //                     playerCells[col][row].setStyle("-fx-border-color: black; -fx-background-color: lightgrey");
+        //                     playerCellStates[1][1] = true;
+        //                 }
+        //             }
+        //         });
+        //     }
+        // }
     }
 
     public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
