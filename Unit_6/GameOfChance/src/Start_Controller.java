@@ -16,15 +16,15 @@ import javafx.stage.Stage;
 public class Start_Controller implements Initializable {
     // Variables represent elements in the UI
     @FXML
-    private AnchorPane anchorPane_root;
+    AnchorPane anchorPane_root;
     @FXML
-    private ComboBox<String> comboBox_gameMode;
+    ComboBox<String> comboBox_gameMode;
     @FXML
-    private Button button_play;
+    Button button_play;
     @FXML
-    private Button button_instructions;
+    Button button_instructions;
     @FXML
-    private Button button_scoreBoard;
+    Button button_scoreBoard;
     
     // This method is run when the stage is initialized
     @Override
