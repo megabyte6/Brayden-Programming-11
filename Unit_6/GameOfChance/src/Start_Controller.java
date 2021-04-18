@@ -20,6 +20,8 @@ public class Start_Controller implements Initializable {
     @FXML
     ComboBox<String> comboBox_gameMode;
     @FXML
+    ComboBox<String> comboBox_timerLength;
+    @FXML
     Button button_play;
     @FXML
     Button button_instructions;
@@ -29,29 +31,39 @@ public class Start_Controller implements Initializable {
     // This method is run when the stage is initialized
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Add items to the ComboBox for different game difficulties and select the first one
         comboBox_gameMode.getItems().addAll(
                 "Easy",
                 "Medium",
                 "Hard");
         comboBox_gameMode.getSelectionModel().selectFirst();
+        // Add items to the ComboBox for different timer lengths and select the second item
+        comboBox_timerLength.getItems().addAll(
+                "5",
+                "10",
+                "15");
+        comboBox_timerLength.getSelectionModel().select(1);;
     }
 
+    // Use to open a new window
     public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 
-        // Try to open new window
+        // Create a new stage
         Stage newStage = new Stage();
         newStage.setTitle(titleName);
+        // Try to get fxml file for UI
         try {
             newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
-            newStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        newStage.show();
         return newStage;
     }
 
+    // Process key events in the root container
     public void processKey(KeyEvent key) {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
 
@@ -65,6 +77,7 @@ public class Start_Controller implements Initializable {
         }
     }
 
+    // Toggle full screen state
     public void setFullScreen() {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
         if (currentStage.isFullScreen()) {
@@ -74,6 +87,7 @@ public class Start_Controller implements Initializable {
         }
     }
 
+    // Set full screen state
     public void setFullScreen(boolean fullScreen) {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
         currentStage.setFullScreen(fullScreen);
@@ -93,6 +107,7 @@ public class Start_Controller implements Initializable {
         }
     }
 
+    // Open the instructions window
     public void openInstructions(ActionEvent actionEvent) throws Exception {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
         Stage newStage = openWindow("Instructions.fxml", "Instructions", currentStage);
@@ -101,6 +116,7 @@ public class Start_Controller implements Initializable {
         }
     }
 
+    // Open the score board window
     public void openScoreBoard(ActionEvent actionEvent) throws Exception {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
         openWindow("HighScores.fxml", "Score Board", currentStage);
