@@ -9,22 +9,25 @@ public class Instructions_Controller {
     @FXML
     private Button button_back;
 
+    // Use to open a new window
     public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 
-        // Try to open new window
+        // Create a new stage
         Stage newStage = new Stage();
         newStage.setTitle(titleName);
+        // Try to get fxml file for UI
         try {
             newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
-            newStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        newStage.show();
         return newStage;
     }
 
+    // This is called when the user clicks the back button
     public void returnHome(ActionEvent actionEvent) {
         Stage currentStage = (Stage) button_back.getScene().getWindow();
         openWindow("Start.fxml", "Bingo", currentStage);

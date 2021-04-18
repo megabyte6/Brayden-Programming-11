@@ -9,32 +9,21 @@ public class Medium_Controller {
     @FXML
     private Button button_back;
 
-    public Stage openWindow(String fxmlFile, String titleName) {
-        // Try to open new window
-        Stage newStage = new Stage();
-        newStage.setTitle(titleName);
-        try {
-            newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
-            newStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return newStage;
-    }
-
+    // Use to open a new window
     public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 
-        // Try to open new window
+        // Create a new stage
         Stage newStage = new Stage();
         newStage.setTitle(titleName);
+        // Try to get fxml file for UI
         try {
             newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
-            newStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        newStage.show();
         return newStage;
     }
 
