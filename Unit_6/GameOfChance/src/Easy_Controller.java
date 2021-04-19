@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Easy_Controller {
+    private boolean gameInitialized = false;
     // Goes [column][row]
     private Node[][] playerCells = new Node[5][5];
     private Node[][] computerCells = new Node[5][5];
@@ -69,47 +70,53 @@ public class Easy_Controller {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     // Initialize game board when user starts the game
-    public void initializeGameBoard() {
-        // Initialize a multidimensional array for every node on the player's bingo card
-        for (Node cell : gridPane_player.getChildren()) {
-            playerCells[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = (Label) cell;
-        }
-
-        // Initialize a multidimensional array for every node on the computer's bingo card
-        for (Node cell : gridPane_computer.getChildren()) {
-            computerCells[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = cell;
-        }
-
-        // Create array to store states of the player's and computer's cells
-        for (int col = 0; col < 5; col++) {
-            for (int row = 0; row < 5; row++) {
-                playerCellStates[col][row] = false;
-                computerCellStates[col][row] = false;
+    public void overlayFunction() {
+        if (!gameInitialized) {
+            // Initialize a multidimensional array for every node on the player's bingo card
+            for (Node cell : gridPane_player.getChildren()) {
+                System.out.println(cell.toString());
+                System.out.println(GridPane.getColumnIndex(cell));
+                playerCells[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = (Label) cell;
             }
-        }
+/*
+            // Initialize a multidimensional array for every node on the computer's bingo card
+            for (Node cell : gridPane_computer.getChildren()) {
+                computerCells[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = cell;
+            }
 
-        // Add event handlers for each cell
-        for (int col = 0; col < 5; col++) {
-            for (int row = 0; row < 5; row++) {
-                // Create final variables for the event handler
-                final int tempCol = col;
-                final int tempRow = row;
+            // Create array to store states of the player's and computer's cells
+            for (int col = 0; col < 5; col++) {
+                for (int row = 0; row < 5; row++) {
+                    playerCellStates[col][row] = false;
+                    computerCellStates[col][row] = false;
+                }
+            }
 
-                playerCells[col][row].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        if (playerCellStates[1][1] == true) {
-                            ((Label) playerCells[tempCol][tempRow]).setStyle(
-                                    "-fx-border-color: black; -fx-background-color: transparent");
-                            playerCellStates[1][1] = false;
-                        } else {
-                            playerCells[tempCol][tempRow].setStyle(
-                                    "-fx-border-color: black; -fx-background-color: lightgrey");
-                            playerCellStates[1][1] = true;
+            // Add event handlers for each cell
+            for (int col = 0; col < 5; col++) {
+                for (int row = 0; row < 5; row++) {
+                    // Create final variables for the event handler
+                    final int tempCol = col;
+                    final int tempRow = row;
+
+                    playerCells[col][row].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            if (playerCellStates[1][1] == true) {
+                                ((Label) playerCells[tempCol][tempRow]).setStyle(
+                                        "-fx-border-color: black; -fx-background-color: transparent");
+                                playerCellStates[1][1] = false;
+                            } else {
+                                playerCells[tempCol][tempRow].setStyle(
+                                        "-fx-border-color: black; -fx-background-color: lightgrey");
+                                playerCellStates[1][1] = true;
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
+*/
+            gameInitialized = false;
         }
     }
 
