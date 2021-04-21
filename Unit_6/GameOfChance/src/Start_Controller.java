@@ -42,7 +42,7 @@ public class Start_Controller implements Initializable {
                 "5",
                 "10",
                 "15");
-        comboBox_timerLength.getSelectionModel().select(1);;
+        comboBox_timerLength.getSelectionModel().select(1);
     }
 
     // Use to open a new window
