@@ -1,3 +1,7 @@
+// I know that this is not following typical coding conventions but when I
+// tried to use a for loop, the GridPane.getChildren() kept giving me an
+// ObservableList of null nodes
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,7 +34,7 @@ public class Easy_Controller {
     Button button_overlay;
 
     // All of the cells in the GridPane
-    // See line 177 for more information
+    // See line 1 for more information
     @FXML
     Label player_0_0;
     @FXML
@@ -176,14 +180,9 @@ public class Easy_Controller {
     // Methods for processing user interactions with the game
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    // I know that this is not following typical coding conventions but when I
-    // tried to use a for loop, the GridPane.getChildren() kept giving me an
-    // ObservableList of null nodes
-
     // Initialize game board when user starts the game
     public void overlayFunction() {
         if (!gameInitialized) {
-            // Initialize a multidimensional array for every node on the computer's bingo card
             // Create array to store states of the player's and computer's cells
             for (int col = 0; col < 5; col++) {
                 for (int row = 0; row < 5; col++) {
@@ -197,8 +196,9 @@ public class Easy_Controller {
                 }
             }
 
-            // Add an event handler to every cell
-            // See line 177 for more information
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // Add an event handler to every cell in the player's bingo card
+            // See line 1 for more information
             player_0_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -283,6 +283,259 @@ public class Easy_Controller {
                     }
                 }
             });
+            player_1_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[1][1] == true) {
+                        player_1_1.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[1][1] = false;
+                    } else {
+                        player_1_1.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[1][1] = true;
+                    }
+                }
+            });
+            player_1_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[1][2] == true) {
+                        player_1_2.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[1][2] = false;
+                    } else {
+                        player_1_2.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[1][2] = true;
+                    }
+                }
+            });
+            player_1_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[1][3] == true) {
+                        player_1_3.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[1][3] = false;
+                    } else {
+                        player_1_3.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[1][3] = true;
+                    }
+                }
+            });
+            player_1_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[1][4] == true) {
+                        player_1_4.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[1][4] = false;
+                    } else {
+                        player_1_4.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[1][4] = true;
+                    }
+                }
+            });
+            player_2_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[2][0] == true) {
+                        player_2_0.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[2][0] = false;
+                    } else {
+                        player_2_0.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[2][0] = true;
+                    }
+                }
+            });
+            player_2_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[2][1] == true) {
+                        player_2_1.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[2][1] = false;
+                    } else {
+                        player_2_1.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[2][1] = true;
+                    }
+                }
+            });
+            player_2_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[2][3] == true) {
+                        player_2_3.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[2][3] = false;
+                    } else {
+                        player_2_3.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[2][3] = true;
+                    }
+                }
+            });
+            player_2_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[2][4] == true) {
+                        player_2_4.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[2][4] = false;
+                    } else {
+                        player_2_4.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[2][4] = true;
+                    }
+                }
+            });
+            player_3_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[3][0] == true) {
+                        player_3_0.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[3][0] = false;
+                    } else {
+                        player_3_0.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[3][0] = true;
+                    }
+                }
+            });
+            player_3_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[3][1] == true) {
+                        player_3_1.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[3][1] = false;
+                    } else {
+                        player_3_1.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[3][1] = true;
+                    }
+                }
+            });
+            player_3_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[3][2] == true) {
+                        player_3_2.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[3][2] = false;
+                    } else {
+                        player_3_2.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[3][2] = true;
+                    }
+                }
+            });
+            player_3_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[3][3] == true) {
+                        player_3_3.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[3][3] = false;
+                    } else {
+                        player_3_3.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[3][3] = true;
+                    }
+                }
+            });
+            player_3_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[3][4] == true) {
+                        player_3_4.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[3][4] = false;
+                    } else {
+                        player_3_4.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[3][4] = true;
+                    }
+                }
+            });
+            player_4_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[4][0] == true) {
+                        player_4_0.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[4][0] = false;
+                    } else {
+                        player_4_0.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[4][0] = true;
+                    }
+                }
+            });
+            player_4_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[4][1] == true) {
+                        player_4_1.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[4][1] = false;
+                    } else {
+                        player_4_1.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[4][1] = true;
+                    }
+                }
+            });
+            player_4_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[4][2] == true) {
+                        player_4_2.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[4][2] = false;
+                    } else {
+                        player_4_2.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[4][2] = true;
+                    }
+                }
+            });
+            player_4_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[4][3] == true) {
+                        player_4_3.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[4][3] = false;
+                    } else {
+                        player_4_3.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[4][3] = true;
+                    }
+                }
+            });
+            player_4_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (playerCellStates[4][4] == true) {
+                        player_4_4.setStyle(
+                                "-fx-border-color: black; -fx-background-color: transparent");
+                        playerCellStates[4][4] = false;
+                    } else {
+                        player_4_4.setStyle(
+                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                        playerCellStates[4][4] = true;
+                    }
+                }
+            });
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             /*
             for (int col = 0; col < 5; col++) {
