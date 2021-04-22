@@ -2,6 +2,8 @@
 // tried to use a for loop, the GridPane.getChildren() kept giving me an
 // ObservableList of null nodes
 
+import java.util.Random;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Easy_Controller {
+    Random random = new Random();
     private boolean gameInitialized = false;
     public int timerDuration = 10;
     // Goes [column][row]
@@ -23,13 +26,20 @@ public class Easy_Controller {
 
     // Components in the UI
     @FXML
-    AnchorPane anchorPane_root;
-    @FXML
-    GridPane gridPane_root;
-    @FXML
     Button button_back;
     @FXML
     Button button_overlay;
+    @FXML
+    AnchorPane anchorPane_root;
+    @FXML
+    GridPane gridPane_root;
+
+    @FXML
+    Label label_letter;
+    @FXML
+    Label label_number;
+    @FXML
+    Label label_timer;
 
     // All of the cells in the GridPane
     // See line 1 for more information
@@ -172,6 +182,36 @@ public class Easy_Controller {
     // Set the timer duration
     public void setTimerDuration(int duration) {
         this.timerDuration = duration;
+    }
+
+    public int randomNum(int min, int max) {
+        return random.nextInt(max - min) + min;
+    }
+
+    // Generate random values for letter and number
+    // Returns a letter and a number separated by a space
+    public String generateRandomNumberLetter() {
+        String result = "";
+
+        switch (random.nextInt(5)) {
+            case 0:
+                result += "B " + randomNum(1, 20);
+                break;
+            case 1:
+                result += "I " + randomNum(20, 40);
+                break;
+            case 2:
+                result += "N " +randomNum(40, 60);
+                break;
+            case 3:
+                result += "G " + randomNum(60, 80);
+                break;
+            case 4:
+                result += "O " + randomNum(80, 99);
+                break;
+        }
+
+        return result;
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -535,6 +575,71 @@ public class Easy_Controller {
             });
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+            // Generate random numbers for cards
+            // B: 1 - 20
+            // I: 20 - 40
+            // N: 40 - 60
+            // G: 60 - 80
+            // O: 80 - 99
+
+            // Randomly generate numbers for player's card
+            player_0_0.setText("" + randomNum(1, 20));
+            player_0_1.setText("" + randomNum(1, 20));
+            player_0_2.setText("" + randomNum(1, 20));
+            player_0_3.setText("" + randomNum(1, 20));
+            player_0_4.setText("" + randomNum(1, 20));
+            player_1_0.setText("" + randomNum(20, 40));
+            player_1_1.setText("" + randomNum(20, 40));
+            player_1_2.setText("" + randomNum(20, 40));
+            player_1_3.setText("" + randomNum(20, 40));
+            player_1_4.setText("" + randomNum(20, 40));
+            player_2_0.setText("" + randomNum(40, 60));
+            player_2_1.setText("" + randomNum(40, 60));
+            player_2_3.setText("" + randomNum(40, 60));
+            player_2_4.setText("" + randomNum(40, 60));
+            player_3_0.setText("" + randomNum(60, 80));
+            player_3_1.setText("" + randomNum(60, 80));
+            player_3_2.setText("" + randomNum(60, 80));
+            player_3_3.setText("" + randomNum(60, 80));
+            player_3_4.setText("" + randomNum(60, 80));
+            player_4_0.setText("" + randomNum(80, 99));
+            player_4_1.setText("" + randomNum(80, 99));
+            player_4_2.setText("" + randomNum(80, 99));
+            player_4_3.setText("" + randomNum(80, 99));
+            player_4_4.setText("" + randomNum(80, 99));
+
+            // Randomly generate numbers for computer's card
+            computer_0_0.setText("" + randomNum(1, 20));
+            computer_0_1.setText("" + randomNum(1, 20));
+            computer_0_2.setText("" + randomNum(1, 20));
+            computer_0_3.setText("" + randomNum(1, 20));
+            computer_0_4.setText("" + randomNum(1, 20));
+            computer_1_0.setText("" + randomNum(20, 40));
+            computer_1_1.setText("" + randomNum(20, 40));
+            computer_1_2.setText("" + randomNum(20, 40));
+            computer_1_3.setText("" + randomNum(20, 40));
+            computer_1_4.setText("" + randomNum(20, 40));
+            computer_2_0.setText("" + randomNum(40, 60));
+            computer_2_1.setText("" + randomNum(40, 60));
+            computer_2_3.setText("" + randomNum(40, 60));
+            computer_2_4.setText("" + randomNum(40, 60));
+            computer_3_0.setText("" + randomNum(60, 80));
+            computer_3_1.setText("" + randomNum(60, 80));
+            computer_3_2.setText("" + randomNum(60, 80));
+            computer_3_3.setText("" + randomNum(60, 80));
+            computer_3_4.setText("" + randomNum(60, 80));
+            computer_4_0.setText("" + randomNum(80, 99));
+            computer_4_1.setText("" + randomNum(80, 99));
+            computer_4_2.setText("" + randomNum(80, 99));
+            computer_4_3.setText("" + randomNum(80, 99));
+            computer_4_4.setText("" + randomNum(80, 99));
+
+            // Randomly generate a letter and a number
+            String[] temp = generateRandomNumberLetter().split(" ");
+            label_letter.setText(temp[0]);
+            label_number.setText(temp[1]);
+
+            // Remove overlay and enable the UI
             gridPane_root.setDisable(false);
             button_overlay.setVisible(false);
             button_overlay.setDisable(true);
@@ -547,5 +652,12 @@ public class Easy_Controller {
     public void returnHome(ActionEvent actionEvent) {
         Stage currentStage = (Stage) button_back.getScene().getWindow();
         openWindow("Start.fxml", "Bingo", currentStage);
+    }
+
+
+
+    // Main game loop
+    public void play() {
+
     }
 }

@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane_root" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Easy_Controller">
@@ -18,7 +19,7 @@
       <GridPane fx:id="gridPane_root" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -84,127 +85,127 @@
                      <children>
                         <Label fx:id="player_0_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_0_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_0_2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_0_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_0_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_1_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_1_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_1_2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_1_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_1_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_2_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_2_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_free" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: lightgrey;" text="Free Space" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_2_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_2_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_3_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_3_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_3_2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_3_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_3_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_4_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_4_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_4_2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_4_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="player_4_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                      </children>
@@ -216,6 +217,25 @@
                   </Button>
                </children>
             </AnchorPane>
+            <VBox alignment="CENTER" GridPane.columnIndex="1">
+               <children>
+                  <Label fx:id="label_timer" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="label_letter" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="label_number" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
                   <GridPane prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
@@ -275,127 +295,127 @@
                      <children>
                         <Label fx:id="computer_0_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_0_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_0_2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_0_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_0_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_1_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_1_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_1_2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_1_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_1_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_2_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_2_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_free" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: lightgrey;" text="Free Space" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_2_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_2_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_3_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_3_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_3_2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_3_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_3_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_4_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_4_1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_4_2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_4_3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="3">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                         <Label fx:id="computer_4_4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.rowIndex="4">
                            <font>
-                              <Font size="48.0" />
+                              <Font size="36.0" />
                            </font>
                         </Label>
                      </children>
