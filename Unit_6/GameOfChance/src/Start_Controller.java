@@ -39,10 +39,10 @@ public class Start_Controller implements Initializable {
         comboBox_gameMode.getSelectionModel().selectFirst();
         // Add items to the ComboBox for different timer lengths and select the second item
         comboBox_timerLength.getItems().addAll(
+                "3",
                 "5",
-                "10",
-                "15");
-        comboBox_timerLength.getSelectionModel().select(1);
+                "10");
+        comboBox_timerLength.getSelectionModel().selectLast();
     }
 
     // Use to open a new window
