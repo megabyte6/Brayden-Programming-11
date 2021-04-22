@@ -25,9 +25,7 @@ public class Easy_Controller {
     @FXML
     AnchorPane anchorPane_root;
     @FXML
-    GridPane gridPane_player;
-    @FXML
-    GridPane gridPane_computer;
+    GridPane gridPane_root;
     @FXML
     Button button_back;
     @FXML
@@ -185,7 +183,7 @@ public class Easy_Controller {
         if (!gameInitialized) {
             // Create array to store states of the player's and computer's cells
             for (int col = 0; col < 5; col++) {
-                for (int row = 0; row < 5; col++) {
+                for (int row = 0; row < 5; row++) {
                     if (col == 5 && row == 5) {
                         playerCellStates[col][row] = true;
                         computerCellStates[col][row] = true;
@@ -204,11 +202,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[0][0] == true) {
                         player_0_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[0][0] = false;
                     } else {
                         player_0_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[0][0] = true;
                     }
                 }
@@ -218,11 +216,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[0][1] == true) {
                         player_0_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[0][1] = false;
                     } else {
                         player_0_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[0][1] = true;
                     }
                 }
@@ -232,11 +230,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[0][2] == true) {
                         player_0_2.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[0][2] = false;
                     } else {
                         player_0_2.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[0][2] = true;
                     }
                 }
@@ -246,11 +244,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[0][3] == true) {
                         player_0_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[0][3] = false;
                     } else {
                         player_0_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[0][3] = true;
                     }
                 }
@@ -260,11 +258,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[0][4] == true) {
                         player_0_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[0][4] = false;
                     } else {
                         player_0_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[0][4] = true;
                     }
                 }
@@ -274,11 +272,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[1][0] == true) {
                         player_1_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[1][0] = false;
                     } else {
                         player_1_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[1][0] = true;
                     }
                 }
@@ -288,11 +286,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[1][1] == true) {
                         player_1_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[1][1] = false;
                     } else {
                         player_1_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[1][1] = true;
                     }
                 }
@@ -302,11 +300,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[1][2] == true) {
                         player_1_2.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[1][2] = false;
                     } else {
                         player_1_2.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[1][2] = true;
                     }
                 }
@@ -316,11 +314,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[1][3] == true) {
                         player_1_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[1][3] = false;
                     } else {
                         player_1_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[1][3] = true;
                     }
                 }
@@ -330,11 +328,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[1][4] == true) {
                         player_1_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[1][4] = false;
                     } else {
                         player_1_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[1][4] = true;
                     }
                 }
@@ -344,11 +342,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[2][0] == true) {
                         player_2_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[2][0] = false;
                     } else {
                         player_2_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[2][0] = true;
                     }
                 }
@@ -358,11 +356,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[2][1] == true) {
                         player_2_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[2][1] = false;
                     } else {
                         player_2_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[2][1] = true;
                     }
                 }
@@ -372,11 +370,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[2][3] == true) {
                         player_2_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[2][3] = false;
                     } else {
                         player_2_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[2][3] = true;
                     }
                 }
@@ -386,11 +384,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[2][4] == true) {
                         player_2_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[2][4] = false;
                     } else {
                         player_2_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[2][4] = true;
                     }
                 }
@@ -400,11 +398,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[3][0] == true) {
                         player_3_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[3][0] = false;
                     } else {
                         player_3_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[3][0] = true;
                     }
                 }
@@ -414,11 +412,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[3][1] == true) {
                         player_3_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[3][1] = false;
                     } else {
                         player_3_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[3][1] = true;
                     }
                 }
@@ -428,11 +426,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[3][2] == true) {
                         player_3_2.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[3][2] = false;
                     } else {
                         player_3_2.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[3][2] = true;
                     }
                 }
@@ -442,11 +440,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[3][3] == true) {
                         player_3_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[3][3] = false;
                     } else {
                         player_3_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[3][3] = true;
                     }
                 }
@@ -456,11 +454,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[3][4] == true) {
                         player_3_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[3][4] = false;
                     } else {
                         player_3_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[3][4] = true;
                     }
                 }
@@ -470,11 +468,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[4][0] == true) {
                         player_4_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[4][0] = false;
                     } else {
                         player_4_0.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[4][0] = true;
                     }
                 }
@@ -484,11 +482,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[4][1] == true) {
                         player_4_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[4][1] = false;
                     } else {
                         player_4_1.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[4][1] = true;
                     }
                 }
@@ -498,11 +496,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[4][2] == true) {
                         player_4_2.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[4][2] = false;
                     } else {
                         player_4_2.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[4][2] = true;
                     }
                 }
@@ -512,11 +510,11 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[4][3] == true) {
                         player_4_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[4][3] = false;
                     } else {
                         player_4_3.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[4][3] = true;
                     }
                 }
@@ -526,68 +524,21 @@ public class Easy_Controller {
                 public void handle(MouseEvent mouseEvent) {
                     if (playerCellStates[4][4] == true) {
                         player_4_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: transparent");
+                                "-fx-background-color: transparent");
                         playerCellStates[4][4] = false;
                     } else {
                         player_4_4.setStyle(
-                                "-fx-border-color: black; -fx-background-color: lightgrey");
+                                "-fx-background-color: lightgrey");
                         playerCellStates[4][4] = true;
                     }
                 }
             });
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            /*
-            for (int col = 0; col < 5; col++) {
-                for (int row = 0; row < 5; row++) {
-                    playerCells[col][row] = getNodeByRowColumnIndex(row, col, gridPane_player);
-                }
-            }
+            gridPane_root.setDisable(false);
+            button_overlay.setVisible(false);
+            button_overlay.setDisable(true);
 
-            // Initialize a multidimensional array for every node on the player's bingo card
-            for (Node cell : gridPane_player.getChildren()) {
-                System.out.println(cell.toString());
-                System.out.println(GridPane.getColumnIndex(cell));
-                playerCells[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = (Label) cell;
-            }
-
-            // Initialize a multidimensional array for every node on the computer's bingo card
-            for (Node cell : gridPane_computer.getChildren()) {
-                computerCells[GridPane.getColumnIndex(cell)][GridPane.getRowIndex(cell)] = cell;
-            }
-
-            // Create array to store states of the player's and computer's cells
-            for (int col = 0; col < 5; col++) {
-                for (int row = 0; row < 5; row++) {
-                    playerCellStates[col][row] = false;
-                    computerCellStates[col][row] = false;
-                }
-            }
-
-            // Add event handlers for each cell
-            for (int col = 0; col < 5; col++) {
-                for (int row = 0; row < 5; row++) {
-                    // Create final variables for the event handler
-                    final int tempCol = col;
-                    final int tempRow = row;
-
-                    playerCells[col][row].addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
-                        @Override
-                        public void handle(MouseEvent mouseEvent) {
-                            if (playerCellStates[1][1] == true) {
-                                ((Label) playerCells[tempCol][tempRow]).setStyle(
-                                        "-fx-border-color: black; -fx-background-color: transparent");
-                                playerCellStates[1][1] = false;
-                            } else {
-                                playerCells[tempCol][tempRow].setStyle(
-                                        "-fx-border-color: black; -fx-background-color: lightgrey");
-                                playerCellStates[1][1] = true;
-                            }
-                        }
-                    });
-                }
-            }
-*/
             gameInitialized = false;
         }
     }
