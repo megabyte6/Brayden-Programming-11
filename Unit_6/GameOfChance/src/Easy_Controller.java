@@ -266,6 +266,8 @@ public class Easy_Controller implements Runnable {
 
     private void play() {
         // TODO : Add code to play method
+        Thread timerThread = new Thread(new Easy_Controller());
+        timerThread.start();
     }
 
     public void run() {
