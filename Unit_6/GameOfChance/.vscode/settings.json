@@ -9,5 +9,8 @@
         "..\\javafx-sdk-16\\lib\\javafx.swing.jar",
         "..\\javafx-sdk-16\\lib\\javafx.web.jar",
         "..\\javafx-sdk-16\\lib\\javafx-swt.jar"
+    ],
+    "java.project.sourcePaths": [
+        "src"
     ]
 }
