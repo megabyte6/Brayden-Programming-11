@@ -288,8 +288,8 @@ public class Easy_Controller {
                         e.printStackTrace();
                     }
                     
-                    // If it has been 10 seconds, generate a new letter and number and
-                    // set seconds to 0
+                    // If it has been 10 seconds, generate a new letter and number,
+                    // set seconds to 0, and add 1 to turnsTaken
                     if (seconds >= timerDuration) {
                         Platform.runLater(new Runnable(){
                             @Override
@@ -297,6 +297,8 @@ public class Easy_Controller {
                                 label_number.setText(generateRandomNumberLetter());
                             }
                         });
+
+                        turnsTaken++;
                         seconds = 0;
                     }
                     
