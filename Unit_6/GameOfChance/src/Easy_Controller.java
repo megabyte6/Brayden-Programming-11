@@ -297,6 +297,9 @@ public class Easy_Controller {
                                 label_number.setText(generateRandomNumberLetter());
                             }
                         });
+                        
+                        // Computer takes a turn
+                        computerTurn();
 
                         turnsTaken++;
                         seconds = 0;
@@ -319,6 +322,104 @@ public class Easy_Controller {
             }
         });
         timer.start();
+    }
+
+
+
+    // Check computer's card for matches
+    private void computerTurn() {
+        String[] drawnValue = (label_number.getText()).split(" ");
+        String letter = drawnValue[0];
+        int number = Integer.parseInt(drawnValue[1]);
+
+        // Select the one that matches (if any)
+        if (letter.equals("B")) {
+            if (computerCellValues[0][0] == number) {
+                computer_0_0.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[0][0] = true;
+            } else if (computerCellValues[0][1] == number) {
+                computer_0_1.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[0][1] = true;
+            } else if (computerCellValues[0][2] == number) {
+                computer_0_2.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[0][2] = true;
+            } else if (computerCellValues[0][3] == number) {
+                computer_0_3.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[0][3] = true;
+            } else if (computerCellValues[0][4] == number) {
+                computer_0_4.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[0][4] = true;
+            }
+
+        } else if (letter.equals("I")) {
+            if (computerCellValues[1][0] == number) {
+                computer_1_0.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[1][0] = true;
+            } else if (computerCellValues[1][1] == number) {
+                computer_1_1.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[1][1] = true;
+            } else if (computerCellValues[1][2] == number) {
+                computer_1_2.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[1][2] = true;
+            } else if (computerCellValues[1][3] == number) {
+                computer_1_3.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[1][3] = true;
+            } else if (computerCellValues[1][4] == number) {
+                computer_1_4.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[1][4] = true;
+            }
+
+        } else if (letter.equals("N")) {
+            if (computerCellValues[2][0] == number) {
+                computer_2_0.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[2][0] = true;
+            } else if (computerCellValues[2][1] == number) {
+                computer_2_1.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[2][1] = true;
+            } else if (computerCellValues[2][3] == number) {
+                computer_2_3.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[2][3] = true;
+            } else if (computerCellValues[2][4] == number) {
+                computer_2_4.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[2][4] = true;
+            }
+
+        } else if (letter.equals("G")) {
+            if (computerCellValues[3][0] == number) {
+                computer_3_0.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[3][0] = true;
+            } else if (computerCellValues[3][1] == number) {
+                computer_3_1.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[3][1] = true;
+            } else if (computerCellValues[3][2] == number) {
+                computer_3_2.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[3][2] = true;
+            } else if (computerCellValues[3][3] == number) {
+                computer_3_3.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[3][3] = true;
+            } else if (computerCellValues[3][4] == number) {
+                computer_3_4.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[3][4] = true;
+            }
+
+        } else if (letter.equals("O")) {
+            if (computerCellValues[4][0] == number) {
+                computer_4_0.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[4][0] = true;
+            } else if (computerCellValues[4][1] == number) {
+                computer_4_1.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[4][1] = true;
+            } else if (computerCellValues[4][2] == number) {
+                computer_4_2.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[4][2] = true;
+            } else if (computerCellValues[4][3] == number) {
+                computer_4_3.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[4][3] = true;
+            } else if (computerCellValues[4][4] == number) {
+                computer_4_4.setStyle("-fx-background-color: lightgrey");
+                computerCellStates[4][4] = true;
+            }
+        }
     }
 
 
@@ -787,6 +888,9 @@ public class Easy_Controller {
 
             // Randomly generate a letter and a number
             label_number.setText(generateRandomNumberLetter());
+
+            // Computer takes it's first turn
+            computerTurn();
 
             // Remove overlay and enable the UI
             setPause(false);
