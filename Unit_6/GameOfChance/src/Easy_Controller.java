@@ -5,6 +5,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,11 +18,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class Easy_Controller implements Runnable {
+public class Easy_Controller {
+    // Set to true for debugging info
     private Random random = new Random();
 
     private boolean gameInitialized = false;
-    private boolean gamePaused = true;
+    volatile boolean gamePaused = true;
     public int timerDuration = 10;
     private int turnsTaken = 0;
 
@@ -47,7 +49,7 @@ public class Easy_Controller implements Runnable {
     @FXML
     Label label_number;
     @FXML
-    Label label_timer;
+    volatile Label label_timer;
 
     // All of the cells in the GridPane
     // See line 1 for more information
@@ -202,7 +204,7 @@ public class Easy_Controller implements Runnable {
             button_overlay.setDisable(true);
             button_overlay.setVisible(false);
         }
-        gamePaused = pause;
+        this.gamePaused = pause;
     }
 
     private int randomNum(int min, int max) {
@@ -265,37 +267,56 @@ public class Easy_Controller implements Runnable {
 
 
     private void play() {
-        // TODO : Add code to play method
-        Thread timerThread = new Thread(new Easy_Controller());
-        timerThread.start();
-    }
+        // Create a new timer thread so the timer won't freeze the UI
+        Thread timer = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                // Create a variable to count seconds
+                int seconds = 0;
 
-    public void run() {
-        // Create a seconds variable to count seconds
-        int seconds = 0;
+                // Timer loop
+                while (!gamePaused) {
+                    // Add 1 to the number of seconds
+                    seconds++;
+                    
+                    // Try to sleep for 1 second
+                    // Account for the drift of seconds while the code is running
+                    try {
+                        Thread.sleep(995);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        e.printStackTrace();
+                    }
+                    
+                    // If it has been 10 seconds, generate a new letter and number and
+                    // set seconds to 0
+                    if (seconds >= timerDuration) {
+                        Platform.runLater(new Runnable(){
+                            @Override
+                            public void run() {
+                                label_number.setText(generateRandomNumberLetter());
+                            }
+                        });
+                        seconds = 0;
+                    }
+                    
+                    // Create a final variable to use in Platform.runLater()
+                    final int SECONDS = 10 - seconds;
 
-        while (!gamePaused) {
-            // Try to sleep for 10 seconds
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                e.printStackTrace();
+                    // Update the timer label to show seconds left using
+                    // Platform.runLater() so the timer thread can change
+                    // label_timer
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            // Update the time display on the UI
+                            label_timer.setText("Seconds left:\n" + SECONDS);
+                        }
+                    });
+                }
             }
-
-            // Add 1 to the number of seconds
-            seconds++;
-
-            // Update the time display on the UI
-            label_timer.setText("" + seconds);
-
-            // If it has been 10 seconds, generate a new letter and number and
-            // set seconds to 0
-            if (seconds == timerDuration) {
-                label_number.setText(generateRandomNumberLetter());
-                seconds = 0;
-            }
-        }
+        });
+        timer.start();
     }
 
 
@@ -305,7 +326,8 @@ public class Easy_Controller implements Runnable {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     // Initialize game board when user starts the game
-    public void overlayFunction() {
+    // Returns: 1 on success, -1 on error, or 0 on no result
+    public int overlayFunction() {
         if (!gameInitialized) {
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Add an event handler to every cell in the player's bingo card
@@ -769,7 +791,12 @@ public class Easy_Controller implements Runnable {
 
             gameInitialized = true;
             play();
+
+            return 1;
+        } else if (gamePaused = true) {
         }
+
+        return 0;
     }
 
     // This is called when the user clicks the back button
