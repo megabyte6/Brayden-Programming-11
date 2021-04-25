@@ -96,11 +96,16 @@ public class Start_Controller implements Initializable {
     public void setFullScreen(boolean fullScreen) {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
         currentStage.setFullScreen(fullScreen);
+        DataStore.addBoolean("fullScreen", fullScreen);
     }
 
     // Code for play button
     public void play(ActionEvent actionEvent) throws Exception {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
+        
+        // Store the timer length selected
+        DataStore.addInteger("timerDuration",
+                Integer.parseInt(comboBox_timerLength.getValue()));
 
         // Check if easy, medium, or hard mode is selected
         if ("Easy".equals(comboBox_gameMode.getValue())) {
@@ -110,9 +115,6 @@ public class Start_Controller implements Initializable {
         } else if ("Hard".equals(comboBox_gameMode.getValue())) {
             openWindow("Hard.fxml", "Bingo", currentStage);
         }
-
-        // Store the timer length selected
-        DataStore.timerDuration = Integer.parseInt(comboBox_timerLength.getValue());
     }
 
     // Open the instructions window
