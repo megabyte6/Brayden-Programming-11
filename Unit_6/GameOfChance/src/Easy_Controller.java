@@ -3,6 +3,7 @@
 // ObservableList of null nodes
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import javafx.application.Platform;
@@ -28,7 +29,8 @@ public class Easy_Controller {
     private int turnsTaken = 0;
 
     // Keeps a list of numbers called to check player's choices later
-    private ArrayList<Integer> numbersCalled = new ArrayList<Integer>();
+    // store as an ArrayList of Strings for comparisons later
+    private ArrayList<String> numbersCalled = new ArrayList<String>();
 
     // Goes [column][row]
     private int[][] playerCellValues = new int[5][5];
@@ -42,6 +44,8 @@ public class Easy_Controller {
     @FXML
     Button button_overlay;
     @FXML
+    Button button_bingo;
+    @FXML
     AnchorPane anchorPane_root;
     @FXML
     GridPane gridPane_root;
@@ -49,7 +53,7 @@ public class Easy_Controller {
     @FXML
     Label label_number;
     @FXML
-    volatile Label label_timer;
+    Label label_timer;
 
     // All of the cells in the GridPane
     // See line 1 for more information
@@ -156,20 +160,24 @@ public class Easy_Controller {
     Label computer_4_4;
 
     // Use to open a new window
-    private Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
+    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 
         // Create a new stage
         Stage newStage = new Stage();
         newStage.setTitle(titleName);
+
         // Try to get fxml file for UI
         try {
             newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Show the new stage
         newStage.show();
+
         return newStage;
     }
 
@@ -215,38 +223,47 @@ public class Easy_Controller {
     // Returns a letter and a number separated by a space
     private String generateRandomNumberLetter() {
         String result = "";
-        int randomNumber;
+        int letter = 0;
+        int randomNumber = 0;
 
-        // Generate random number
-        // add it to the list of called numbers
-        // return the letter-number combo
-        switch (random.nextInt(5)) {
-            case 0:
-                randomNumber = randomNum(1, 20);
-                numbersCalled.add(randomNumber);
-                result += "B " + randomNumber;
-                break;
-            case 1:
-                randomNumber = randomNum(20, 40);
-                numbersCalled.add(randomNumber);
-                result += "I " + randomNumber;
-                break;
-            case 2:
-                randomNumber = randomNum(40, 60);
-                numbersCalled.add(randomNumber);
-                result += "N " + randomNumber;
-                break;
-            case 3:
-                randomNumber = randomNum(60, 80);
-                numbersCalled.add(randomNumber);
-                result += "G " + randomNumber;
-                break;
-            case 4:
-                randomNumber = randomNum(80, 99);
-                numbersCalled.add(randomNumber);
-                result += "O " + randomNumber;
-                break;
-        }
+        // Loop until new number
+        do {
+            // Generate random number
+            // add it to the list of called numbers
+            // return the letter-number combo
+            switch (random.nextInt(5)) {
+                case 0:
+                    letter = 0;
+                    randomNumber = randomNum(1, 20);
+                    numbersCalled.add(0 + " " + randomNumber);
+                    result += "B " + randomNumber;
+                    break;
+                case 1:
+                    letter = 1;
+                    randomNumber = randomNum(20, 40);
+                    numbersCalled.add(1 + " " + randomNumber);
+                    result += "I " + randomNumber;
+                    break;
+                case 2:
+                    letter = 2;
+                    randomNumber = randomNum(40, 60);
+                    numbersCalled.add(2 + " " + randomNumber);
+                    result += "N " + randomNumber;
+                    break;
+                case 3:
+                    letter = 3;
+                    randomNumber = randomNum(60, 80);
+                    numbersCalled.add(3 + " " + randomNumber);
+                    result += "G " + randomNumber;
+                    break;
+                case 4:
+                    letter = 4;
+                    randomNumber = randomNum(80, 99);
+                    numbersCalled.add(4 + " " + randomNumber);
+                    result += "O " + randomNumber;
+                    break;
+            }
+        } while (numbersCalled.contains(letter + " " + randomNumber));
 
         return result;
     }
@@ -262,6 +279,151 @@ public class Easy_Controller {
             }
         }
         return numOfOccurrences;
+    }
+
+    // Check the user's choices
+    // Returns: 1 if user won, otherwise return 0
+    private int checkCard(String player) {
+        /*
+        Table of IDs in each card
+
+        00|10|20|30|40
+        01|11|21|31|41
+        02|12|22|32|42
+        03|13|23|33|34
+        04|14|24|34|44
+        */
+
+        // List of coordinates
+        // store as an ArrayList of Strings for comparisons later
+        ArrayList<String> coordinates = new ArrayList<String>();
+
+        // Create a HashMap to store the occurences of each number
+        HashMap<String, Integer> occurrences = new HashMap<String, Integer>();
+        occurrences.put("sumToFour", 0);
+        occurrences.put("doubleNum", 0);
+        occurrences.put("col_0", 0);
+        occurrences.put("col_1", 0);
+        occurrences.put("col_2", 0);
+        occurrences.put("col_3", 0);
+        occurrences.put("col_4", 0);
+        occurrences.put("row_0", 0);
+        occurrences.put("row_1", 0);
+        occurrences.put("row_2", 0);
+        occurrences.put("row_3", 0);
+        occurrences.put("row_4", 0);
+        
+        for (int col = 0; col < 5; col++) {
+            for (int row = 0; row < 5; row++) {
+                // If current cell is selected, add its position to the list of
+                // selected cells
+                if (player.equals("player")) {
+                    if (playerCellStates[col][row] == true) {
+                        // Add selected cells to a list of positions
+                        coordinates.add(col + " " + row);
+
+                        if (col == row) {
+                            occurrences.put("doubleNum", occurrences.get("doubleNum") + 1);
+                        } else if (col + row == 4) {
+                            occurrences.put("sumToFour", occurrences.get("sumToFour") + 1);
+                        }
+                        
+                        // Check col
+                        switch (col) {
+                            case 0:
+                                occurrences.put("col_0", occurrences.get("col_0") + 1);
+                                break;
+                            case 1:
+                                occurrences.put("col_1", occurrences.get("col_1") + 1);
+                                break;
+                            case 2:
+                                occurrences.put("col_2", occurrences.get("col_2") + 1);
+                                break;
+                            case 3:
+                                occurrences.put("col_3", occurrences.get("col_3") + 1);
+                                break;
+                            case 4:
+                                occurrences.put("col_4", occurrences.get("col_4") + 1);
+                        }
+
+                        // Check row
+                        switch (row) {
+                            case 0:
+                                occurrences.put("row_0", occurrences.get("row_0") + 1);
+                                break;
+                            case 1:
+                                occurrences.put("row_1", occurrences.get("row_1") + 1);
+                                break;
+                            case 2:
+                                occurrences.put("row_2", occurrences.get("row_2") + 1);
+                                break;
+                            case 3:
+                                occurrences.put("row_3", occurrences.get("row_3") + 1);
+                                break;
+                            case 4:
+                                occurrences.put("row_4", occurrences.get("row_4") + 1);
+                        }
+                    }
+
+                } else if (player.equals("computer")) {
+                    if (computerCellStates[col][row] == true) {
+                        // Add selected cells to a list of positions
+                        coordinates.add(col + " " + row);
+
+                        if (col == row) {
+                            occurrences.put("doubleNum", occurrences.get("doubleNum") + 1);
+                        } else if (col + row == 4) {
+                            occurrences.put("sumToFour", occurrences.get("sumToFour") + 1);
+                        }
+                        
+                        // Check col
+                        switch (col) {
+                            case 0:
+                                occurrences.put("col_0", occurrences.get("col_0") + 1);
+                                break;
+                            case 1:
+                                occurrences.put("col_1", occurrences.get("col_1") + 1);
+                                break;
+                            case 2:
+                                occurrences.put("col_2", occurrences.get("col_2") + 1);
+                                break;
+                            case 3:
+                                occurrences.put("col_3", occurrences.get("col_3") + 1);
+                                break;
+                            case 4:
+                                occurrences.put("col_4", occurrences.get("col_4") + 1);
+                        }
+
+                        // Check row
+                        switch (row) {
+                            case 0:
+                                occurrences.put("row_0", occurrences.get("row_0") + 1);
+                                break;
+                            case 1:
+                                occurrences.put("row_1", occurrences.get("row_1") + 1);
+                                break;
+                            case 2:
+                                occurrences.put("row_2", occurrences.get("row_2") + 1);
+                                break;
+                            case 3:
+                                occurrences.put("row_3", occurrences.get("row_3") + 1);
+                                break;
+                            case 4:
+                                occurrences.put("row_4", occurrences.get("row_4") + 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Check if the user had selected cells that were not called
+        for (String coords : coordinates) {
+            if (!numbersCalled.contains(coords)) {
+                return 0;
+            }
+        }
+        
+        return 1;
     }
 
 
@@ -301,12 +463,15 @@ public class Easy_Controller {
                         // Computer takes a turn
                         computerTurn();
 
+                        // Check the computer's card to see if it won
+                        checkCard("computer");
+
                         turnsTaken++;
                         seconds = 0;
                     }
                     
                     // Create a final variable to use in Platform.runLater()
-                    final int SECONDS = 10 - seconds;
+                    final int SECONDS = timerDuration - seconds;
 
                     // Update the timer label to show seconds left using
                     // Platform.runLater() so the timer thread can change
@@ -321,6 +486,8 @@ public class Easy_Controller {
                 }
             }
         });
+
+        // Start the timer
         timer.start();
     }
 
@@ -824,7 +991,7 @@ public class Easy_Controller {
                         }
                     }
 
-                    if (col == 5 && row == 5) {
+                    if (col == 2 && row == 2) {
                         playerCellStates[col][row] = true;
                         computerCellStates[col][row] = true;
                     } else {
@@ -900,6 +1067,7 @@ public class Easy_Controller {
 
             return 1;
         } else if (gamePaused = true) {
+            // TODO : Add code to unpause the game
         }
 
         return 0;
@@ -909,5 +1077,23 @@ public class Easy_Controller {
     public void returnHome(ActionEvent actionEvent) {
         Stage currentStage = (Stage) button_back.getScene().getWindow();
         openWindow("Start.fxml", "Bingo", currentStage);
+    }
+
+    // Pause game
+    public void pause() {
+        // TODO : Create a pause function
+    }
+
+    // Check user choices when the bingo button is pressed
+    public void bingo() {
+        switch (checkCard("player")) {
+            case 0:
+                // TODO : Show user's incorrect choices
+                System.out.println("User lost");
+                break;
+            case 1:
+                // TODO : Show user won
+                System.out.println("User won");
+        }
     }
 }

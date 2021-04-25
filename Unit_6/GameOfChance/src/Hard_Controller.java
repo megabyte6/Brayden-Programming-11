@@ -17,13 +17,17 @@ public class Hard_Controller {
         // Create a new stage
         Stage newStage = new Stage();
         newStage.setTitle(titleName);
+
         // Try to get fxml file for UI
         try {
             newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Show the new stage
         newStage.show();
+
         return newStage;
     }
 

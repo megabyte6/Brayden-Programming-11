@@ -37,6 +37,7 @@ public class Start_Controller implements Initializable {
                 "Medium",
                 "Hard");
         comboBox_gameMode.getSelectionModel().selectFirst();
+
         // Add items to the ComboBox for different timer lengths and select the second item
         comboBox_timerLength.getItems().addAll(
                 "3",
@@ -53,13 +54,17 @@ public class Start_Controller implements Initializable {
         // Create a new stage
         Stage newStage = new Stage();
         newStage.setTitle(titleName);
+
         // Try to get fxml file for UI
         try {
             newStage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlFile))));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Show the new stage
         newStage.show();
+
         return newStage;
     }
 
@@ -105,6 +110,9 @@ public class Start_Controller implements Initializable {
         } else if ("Hard".equals(comboBox_gameMode.getValue())) {
             openWindow("Hard.fxml", "Bingo", currentStage);
         }
+
+        // Store the timer length selected
+        DataStore.timerDuration = Integer.parseInt(comboBox_timerLength.getValue());
     }
 
     // Open the instructions window
