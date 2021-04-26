@@ -3,17 +3,17 @@
 // ObservableList of null nodes
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -24,12 +24,22 @@ public class Easy_Controller {
     private Random random = new Random();
 
     private boolean gameInitialized = false;
-    volatile boolean gamePaused = true;
-    public int timerDuration = 10;
+    private boolean gamePaused = true;
+    private int timerDuration = 1; // DataStore.getInteger("timerDuration");
     private int turnsTaken = 0;
+    
+    // Record the state of the game
+    //  1: Player won
+    //  0: No winner yet
+    // -1: Player lost
+    private int gameState = 0;
+
+    // Variable to count seconds
+    private int seconds = 0;
 
     // Keeps a list of numbers called to check player's choices later
     // store as an ArrayList of Strings for comparisons later
+    // Format: "B 10"
     private ArrayList<String> numbersCalled = new ArrayList<String>();
 
     // Goes [column][row]
@@ -40,15 +50,20 @@ public class Easy_Controller {
 
     // Components in the UI
     @FXML
-    Button button_back;
-    @FXML
-    Button button_overlay;
-    @FXML
-    Button button_bingo;
-    @FXML
     AnchorPane anchorPane_root;
     @FXML
     GridPane gridPane_root;
+
+    @FXML
+    Button button_back;
+    @FXML
+    Button button_fullScreen;
+    @FXML
+    Button button_overlay;
+    @FXML
+    Button button_pause;
+    @FXML
+    Button button_bingo;
 
     @FXML
     Label label_number;
@@ -160,7 +175,7 @@ public class Easy_Controller {
     Label computer_4_4;
 
     // Use to open a new window
-    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
+    private Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 
@@ -179,27 +194,6 @@ public class Easy_Controller {
         newStage.show();
 
         return newStage;
-    }
-
-    // Toggle full screen state
-    public void setFullScreen() {
-        Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
-        if (currentStage.isFullScreen()) {
-            currentStage.setFullScreen(false);
-        } else {
-            currentStage.setFullScreen(true);
-        }
-    }
-
-    // Set full screen state
-    public void setFullScreen(boolean fullScreen) {
-        Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
-        currentStage.setFullScreen(fullScreen);
-    }
-
-    // Set the timer duration
-    public void setTimerDuration(int duration) {
-        this.timerDuration = duration;
     }
 
     private void setPause(boolean pause) {
@@ -223,47 +217,48 @@ public class Easy_Controller {
     // Returns a letter and a number separated by a space
     private String generateRandomNumberLetter() {
         String result = "";
-        int letter = 0;
+        String letter;
         int randomNumber = 0;
 
         // Loop until new number
         do {
+            // Set result to "" at the beginning of each loop
+            result = "";
+
             // Generate random number
             // add it to the list of called numbers
             // return the letter-number combo
             switch (random.nextInt(5)) {
                 case 0:
-                    letter = 0;
+                    letter = "B ";
                     randomNumber = randomNum(1, 20);
-                    numbersCalled.add(0 + " " + randomNumber);
-                    result += "B " + randomNumber;
+                    result += letter + randomNumber;
                     break;
                 case 1:
-                    letter = 1;
+                    letter = "I ";
                     randomNumber = randomNum(20, 40);
-                    numbersCalled.add(1 + " " + randomNumber);
-                    result += "I " + randomNumber;
+                    result += letter + randomNumber;
                     break;
                 case 2:
-                    letter = 2;
+                    letter = "N ";
                     randomNumber = randomNum(40, 60);
-                    numbersCalled.add(2 + " " + randomNumber);
-                    result += "N " + randomNumber;
+                    result += letter + randomNumber;
                     break;
                 case 3:
-                    letter = 3;
+                    letter = "G ";
                     randomNumber = randomNum(60, 80);
-                    numbersCalled.add(3 + " " + randomNumber);
-                    result += "G " + randomNumber;
+                    result += letter + randomNumber;
                     break;
-                case 4:
-                    letter = 4;
+                default:
+                    letter = "O ";
                     randomNumber = randomNum(80, 99);
-                    numbersCalled.add(4 + " " + randomNumber);
-                    result += "O " + randomNumber;
+                    result += letter + randomNumber;
                     break;
             }
-        } while (numbersCalled.contains(letter + " " + randomNumber));
+        } while (numbersCalled.contains(letter + randomNumber));
+
+        // Add the new number to the list of numbers drawn
+        numbersCalled.add(letter + randomNumber);
 
         return result;
     }
@@ -282,8 +277,14 @@ public class Easy_Controller {
     }
 
     // Check the user's choices
-    // Returns: 1 if user won, otherwise return 0
-    private int checkCard(String player) {
+    // Returns: true if no errors, otherwise return false
+
+    // player can be:
+    // "player" for the player
+    // "computer" for the computer
+    private boolean checkCard(String player) {
+        String currentLetter;
+        
         /*
         Table of IDs in each card
 
@@ -294,136 +295,121 @@ public class Easy_Controller {
         04|14|24|34|44
         */
 
-        // List of coordinates
-        // store as an ArrayList of Strings for comparisons later
-        ArrayList<String> coordinates = new ArrayList<String>();
-
-        // Create a HashMap to store the occurences of each number
-        HashMap<String, Integer> occurrences = new HashMap<String, Integer>();
-        occurrences.put("sumToFour", 0);
-        occurrences.put("doubleNum", 0);
-        occurrences.put("col_0", 0);
-        occurrences.put("col_1", 0);
-        occurrences.put("col_2", 0);
-        occurrences.put("col_3", 0);
-        occurrences.put("col_4", 0);
-        occurrences.put("row_0", 0);
-        occurrences.put("row_1", 0);
-        occurrences.put("row_2", 0);
-        occurrences.put("row_3", 0);
-        occurrences.put("row_4", 0);
+        // Create an array to store the occurrences of each number
         
+        // doubleNum, sumToFour,
+        // col_0, col_1, col_2, col_3, col_4,
+        // row_0, row_1, row_2, row_3, row_4
+        int[] occurrences = new int[]{
+                0, // Two of the same number
+                0, // Sums to 4
+                0, // Starts with 0
+                0, // Starts with 1
+                0, // Starts with 2
+                0, // Starts with 3
+                0, // Starts with 4
+                0, // Ends with 0
+                0, // Ends with 1
+                0, // Ends with 2
+                0, // Ends with 3
+                0};// Ends with 4
+        
+        // Loop through every cell on the card
         for (int col = 0; col < 5; col++) {
             for (int row = 0; row < 5; row++) {
-                // If current cell is selected, add its position to the list of
-                // selected cells
                 if (player.equals("player")) {
+                    // If the cell has been selected
                     if (playerCellStates[col][row] == true) {
-                        // Add selected cells to a list of positions
-                        coordinates.add(col + " " + row);
-
-                        if (col == row) {
-                            occurrences.put("doubleNum", occurrences.get("doubleNum") + 1);
-                        } else if (col + row == 4) {
-                            occurrences.put("sumToFour", occurrences.get("sumToFour") + 1);
-                        }
-                        
-                        // Check col
                         switch (col) {
                             case 0:
-                                occurrences.put("col_0", occurrences.get("col_0") + 1);
+                                currentLetter = "B";
                                 break;
                             case 1:
-                                occurrences.put("col_1", occurrences.get("col_1") + 1);
+                                currentLetter = "I";
                                 break;
                             case 2:
-                                occurrences.put("col_2", occurrences.get("col_2") + 1);
+                                currentLetter = "N";
                                 break;
                             case 3:
-                                occurrences.put("col_3", occurrences.get("col_3") + 1);
+                                currentLetter = "G";
                                 break;
                             case 4:
-                                occurrences.put("col_4", occurrences.get("col_4") + 1);
+                                currentLetter = "O";
+                                break;
+                            default:
+                                currentLetter = "";
                         }
 
-                        // Check row
-                        switch (row) {
-                            case 0:
-                                occurrences.put("row_0", occurrences.get("row_0") + 1);
-                                break;
-                            case 1:
-                                occurrences.put("row_1", occurrences.get("row_1") + 1);
-                                break;
-                            case 2:
-                                occurrences.put("row_2", occurrences.get("row_2") + 1);
-                                break;
-                            case 3:
-                                occurrences.put("row_3", occurrences.get("row_3") + 1);
-                                break;
-                            case 4:
-                                occurrences.put("row_4", occurrences.get("row_4") + 1);
+                        // Check if the player selected a cell that was not
+                        // called
+                        if (!numbersCalled.contains(
+                                currentLetter + " " + playerCellValues[col][row]) &&
+                                !(col == 2 && row == 2)) {
+                            return false;
                         }
+
+                        if (col == row) {
+                            occurrences[0]++;
+                        }
+                        if (col + row == 4) {
+                            occurrences[1]++;
+                        }
+                        occurrences[col + 2]++;
+                        occurrences[row + 7]++;
                     }
 
                 } else if (player.equals("computer")) {
+                    // If the cell has been selected
                     if (computerCellStates[col][row] == true) {
-                        // Add selected cells to a list of positions
-                        coordinates.add(col + " " + row);
-
                         if (col == row) {
-                            occurrences.put("doubleNum", occurrences.get("doubleNum") + 1);
-                        } else if (col + row == 4) {
-                            occurrences.put("sumToFour", occurrences.get("sumToFour") + 1);
+                            occurrences[0]++;
                         }
-                        
-                        // Check col
-                        switch (col) {
-                            case 0:
-                                occurrences.put("col_0", occurrences.get("col_0") + 1);
-                                break;
-                            case 1:
-                                occurrences.put("col_1", occurrences.get("col_1") + 1);
-                                break;
-                            case 2:
-                                occurrences.put("col_2", occurrences.get("col_2") + 1);
-                                break;
-                            case 3:
-                                occurrences.put("col_3", occurrences.get("col_3") + 1);
-                                break;
-                            case 4:
-                                occurrences.put("col_4", occurrences.get("col_4") + 1);
+                        if (col + row == 4) {
+                            occurrences[1]++;
                         }
-
-                        // Check row
-                        switch (row) {
-                            case 0:
-                                occurrences.put("row_0", occurrences.get("row_0") + 1);
-                                break;
-                            case 1:
-                                occurrences.put("row_1", occurrences.get("row_1") + 1);
-                                break;
-                            case 2:
-                                occurrences.put("row_2", occurrences.get("row_2") + 1);
-                                break;
-                            case 3:
-                                occurrences.put("row_3", occurrences.get("row_3") + 1);
-                                break;
-                            case 4:
-                                occurrences.put("row_4", occurrences.get("row_4") + 1);
-                        }
+                        occurrences[col + 2]++;
+                        occurrences[row + 7]++;
                     }
                 }
             }
         }
 
-        // Check if the user had selected cells that were not called
-        for (String coords : coordinates) {
-            if (!numbersCalled.contains(coords)) {
-                return 0;
+        // Check if there is a 5 in a row
+        for (int i = 0; i < occurrences.length; i++) {
+            // If there is 5 in a row, return true
+            if (occurrences[i] == 5) {
+                return true;
             }
         }
-        
-        return 1;
+
+        return false;
+    }
+
+    private void gameOver() {
+        // gameState == 1 means that the player won
+        if (gameState == 1) {
+            System.out.println("Player wins");
+            
+            // Pause the UI
+            setPause(true);
+
+            // Change the overlay's text
+            // button_overlay.setText("You Win! Press r to play again or ESC to go back home");
+
+        // gameState == -1 means that the computer won
+        } else if (gameState == -1) {
+            // TODO : Show the player's incorrect choices
+            System.out.println("Player loses");
+
+            // If the user has 5 in a row, show the player's incorrect choices
+            // Otherwise, computer must have won. So stop the game and show
+            // options to play again or exit
+
+        // Anything else means that there was an unknown error
+        } else {
+            System.out.println("Error: No winner");
+            System.exit(-1);
+        }
     }
 
 
@@ -434,23 +420,11 @@ public class Easy_Controller {
             @Override
             public void run() {
                 // Create a variable to count seconds
-                int seconds = 0;
+                // int seconds = 0;
 
                 // Timer loop
                 while (!gamePaused) {
-                    // Add 1 to the number of seconds
-                    seconds++;
-                    
-                    // Try to sleep for 1 second
-                    // Account for the drift of seconds while the code is running
-                    try {
-                        Thread.sleep(995);
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        e.printStackTrace();
-                    }
-                    
-                    // If it has been 10 seconds, generate a new letter and number,
+                    // If the time is up, generate a new letter and number,
                     // set seconds to 0, and add 1 to turnsTaken
                     if (seconds >= timerDuration) {
                         Platform.runLater(new Runnable(){
@@ -459,19 +433,29 @@ public class Easy_Controller {
                                 label_number.setText(generateRandomNumberLetter());
                             }
                         });
-                        
-                        // Computer takes a turn
-                        computerTurn();
-
-                        // Check the computer's card to see if it won
-                        checkCard("computer");
 
                         turnsTaken++;
                         seconds = 0;
                     }
+
+                    // When the timer is halfway through, the computer will
+                    // take its turn
+                    if (seconds >= (timerDuration / 2)) {
+                        // Computer takes a turn
+                        computerTurn();
+
+                        // Check the computer's card to see if it won
+                        if (checkCard("computer")) {
+                            gameState = -1;
+                            gameOver();
+                        }
+                    }
                     
                     // Create a final variable to use in Platform.runLater()
-                    final int SECONDS = timerDuration - seconds;
+
+                    // -1 is for showing seconds left because when you have 0.5
+                    // seconds left, you should show 0 instead of 1
+                    final int SECONDS = timerDuration - seconds - 1;
 
                     // Update the timer label to show seconds left using
                     // Platform.runLater() so the timer thread can change
@@ -480,9 +464,21 @@ public class Easy_Controller {
                         @Override
                         public void run() {
                             // Update the time display on the UI
-                            label_timer.setText("Seconds left:\n" + SECONDS);
+                            label_timer.setText("Timer: " + SECONDS);
                         }
                     });
+
+                    // Try to sleep for 1 second
+                    // Account for the drift of seconds while the code is running
+                    try {
+                        Thread.sleep(990);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        e.printStackTrace();
+                    }
+
+                    // Add 1 to the number of seconds
+                    seconds++;
                 }
             }
         });
@@ -495,6 +491,7 @@ public class Easy_Controller {
 
     // Check computer's card for matches
     private void computerTurn() {
+        // Get the current drawn value
         String[] drawnValue = (label_number.getText()).split(" ");
         String letter = drawnValue[0];
         int number = Integer.parseInt(drawnValue[1]);
@@ -596,8 +593,7 @@ public class Easy_Controller {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     // Initialize game board when user starts the game
-    // Returns: 1 on success, -1 on error, or 0 on no result
-    public int overlayFunction() {
+    public void overlayFunction() {
         if (!gameInitialized) {
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Add an event handler to every cell in the player's bingo card
@@ -991,6 +987,7 @@ public class Easy_Controller {
                         }
                     }
 
+                    // Set the states of each cell
                     if (col == 2 && row == 2) {
                         playerCellStates[col][row] = true;
                         computerCellStates[col][row] = true;
@@ -1001,7 +998,7 @@ public class Easy_Controller {
                 }
             }
 
-            // Randomly generate numbers for player's card
+            // Set the randomly generated values for the player's card
             player_0_0.setText("" + playerCellValues[0][0]);
             player_0_1.setText("" + playerCellValues[0][1]);
             player_0_2.setText("" + playerCellValues[0][2]);
@@ -1027,7 +1024,7 @@ public class Easy_Controller {
             player_4_3.setText("" + playerCellValues[4][3]);
             player_4_4.setText("" + playerCellValues[4][4]);
 
-            // Randomly generate numbers for computer's card
+            // Set the randomly generated values for the computer's card
             computer_0_0.setText("" + computerCellValues[0][0]);
             computer_0_1.setText("" + computerCellValues[0][1]);
             computer_0_2.setText("" + computerCellValues[0][2]);
@@ -1056,44 +1053,194 @@ public class Easy_Controller {
             // Randomly generate a letter and a number
             label_number.setText(generateRandomNumberLetter());
 
-            // Computer takes it's first turn
-            computerTurn();
+            // Set the full screen state
+            if (DataStore.getBoolean("fullScreenState")) {
+                Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
+                currentStage.setFullScreen(DataStore.getBoolean("fullScreenState"));
+            }
 
             // Remove overlay and enable the UI
             setPause(false);
 
             gameInitialized = true;
+
+            // Start game
             play();
 
-            return 1;
-        } else if (gamePaused = true) {
-            // TODO : Add code to unpause the game
-        }
+        } else if (gamePaused == true) {
+            setPause(false);
 
-        return 0;
+            // Show the cards
+            player_0_0.setText(String.valueOf(playerCellValues[0][0]));
+            player_0_1.setText(String.valueOf(playerCellValues[0][1]));
+            player_0_2.setText(String.valueOf(playerCellValues[0][2]));
+            player_0_3.setText(String.valueOf(playerCellValues[0][3]));
+            player_0_4.setText(String.valueOf(playerCellValues[0][4]));
+            player_1_0.setText(String.valueOf(playerCellValues[1][0]));
+            player_1_1.setText(String.valueOf(playerCellValues[1][1]));
+            player_1_2.setText(String.valueOf(playerCellValues[1][2]));
+            player_1_3.setText(String.valueOf(playerCellValues[1][3]));
+            player_1_4.setText(String.valueOf(playerCellValues[1][4]));
+            player_2_0.setText(String.valueOf(playerCellValues[2][0]));
+            player_2_1.setText(String.valueOf(playerCellValues[2][1]));
+            player_2_3.setText(String.valueOf(playerCellValues[2][3]));
+            player_2_4.setText(String.valueOf(playerCellValues[2][4]));
+            player_3_0.setText(String.valueOf(playerCellValues[3][0]));
+            player_3_1.setText(String.valueOf(playerCellValues[3][1]));
+            player_3_2.setText(String.valueOf(playerCellValues[3][2]));
+            player_3_3.setText(String.valueOf(playerCellValues[3][3]));
+            player_3_4.setText(String.valueOf(playerCellValues[3][4]));
+            player_4_0.setText(String.valueOf(playerCellValues[4][0]));
+            player_4_1.setText(String.valueOf(playerCellValues[4][1]));
+            player_4_2.setText(String.valueOf(playerCellValues[4][2]));
+            player_4_3.setText(String.valueOf(playerCellValues[4][3]));
+            player_4_4.setText(String.valueOf(playerCellValues[4][4]));
+
+            computer_0_0.setText(String.valueOf(computerCellValues[0][0]));
+            computer_0_1.setText(String.valueOf(computerCellValues[0][1]));
+            computer_0_2.setText(String.valueOf(computerCellValues[0][2]));
+            computer_0_3.setText(String.valueOf(computerCellValues[0][3]));
+            computer_0_4.setText(String.valueOf(computerCellValues[0][4]));
+            computer_1_0.setText(String.valueOf(computerCellValues[1][0]));
+            computer_1_1.setText(String.valueOf(computerCellValues[1][1]));
+            computer_1_2.setText(String.valueOf(computerCellValues[1][2]));
+            computer_1_3.setText(String.valueOf(computerCellValues[1][3]));
+            computer_1_4.setText(String.valueOf(computerCellValues[1][4]));
+            computer_2_0.setText(String.valueOf(computerCellValues[2][0]));
+            computer_2_1.setText(String.valueOf(computerCellValues[2][1]));
+            computer_2_3.setText(String.valueOf(computerCellValues[2][3]));
+            computer_2_4.setText(String.valueOf(computerCellValues[2][4]));
+            computer_3_0.setText(String.valueOf(computerCellValues[3][0]));
+            computer_3_1.setText(String.valueOf(computerCellValues[3][1]));
+            computer_3_2.setText(String.valueOf(computerCellValues[3][2]));
+            computer_3_3.setText(String.valueOf(computerCellValues[3][3]));
+            computer_3_4.setText(String.valueOf(computerCellValues[3][4]));
+            computer_4_0.setText(String.valueOf(computerCellValues[4][0]));
+            computer_4_1.setText(String.valueOf(computerCellValues[4][1]));
+            computer_4_2.setText(String.valueOf(computerCellValues[4][2]));
+            computer_4_3.setText(String.valueOf(computerCellValues[4][3]));
+            computer_4_4.setText(String.valueOf(computerCellValues[4][4]));
+
+            // Show the current drawn number
+            label_number.setText(numbersCalled.get(numbersCalled.size() - 1));
+
+            play();
+        }
+    }
+
+    // Process key events in the root container
+    public void processKey(KeyEvent key) {
+        Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
+
+        // Full screen window when F11 is pressed
+        if (key.getCode() == KeyCode.F11) {
+            if (currentStage.isFullScreen()) {
+                currentStage.setFullScreen(false);
+            } else {
+                currentStage.setFullScreen(true);
+            }
+
+        } else if (gameState != 0 && key.getCode() == KeyCode.ESCAPE) {
+            returnHome();
+
+        } else if (gameState != 0 && key.getCode() == KeyCode.R) {
+            // TODO : Add code to restart game and save score
+        }
     }
 
     // This is called when the user clicks the back button
-    public void returnHome(ActionEvent actionEvent) {
+    public void returnHome() {
         Stage currentStage = (Stage) button_back.getScene().getWindow();
         openWindow("Start.fxml", "Bingo", currentStage);
     }
 
+    // Toggle full screen state
+    public void setFullScreen() {
+        Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
+        if (currentStage.isFullScreen()) {
+            currentStage.setFullScreen(false);
+        } else {
+            currentStage.setFullScreen(true);
+        }
+    }
+
     // Pause game
     public void pause() {
-        // TODO : Create a pause function
+        // Pause the UI
+        setPause(true);
+
+        // Change overlay text
+        button_overlay.setText("Press a key to unpause");
+        
+        // Make sure that the player can't see the cards
+
+        // Cannot only make the overlay opaque because the UI is on the topmost
+        // layer
+
+        // Clear the text showing the current drawn number
+        label_number.setText("");
+
+        // Clear all of the text on the player's card
+        player_0_0.setText("");
+        player_0_1.setText("");
+        player_0_2.setText("");
+        player_0_3.setText("");
+        player_0_4.setText("");
+        player_1_0.setText("");
+        player_1_1.setText("");
+        player_1_2.setText("");
+        player_1_3.setText("");
+        player_1_4.setText("");
+        player_2_0.setText("");
+        player_2_1.setText("");
+        player_2_3.setText("");
+        player_2_4.setText("");
+        player_3_0.setText("");
+        player_3_1.setText("");
+        player_3_2.setText("");
+        player_3_3.setText("");
+        player_3_4.setText("");
+        player_4_0.setText("");
+        player_4_1.setText("");
+        player_4_2.setText("");
+        player_4_3.setText("");
+        player_4_4.setText("");
+
+        // Clear all of the text on the computer's card
+        computer_0_0.setText("");
+        computer_0_1.setText("");
+        computer_0_2.setText("");
+        computer_0_3.setText("");
+        computer_0_4.setText("");
+        computer_1_0.setText("");
+        computer_1_1.setText("");
+        computer_1_2.setText("");
+        computer_1_3.setText("");
+        computer_1_4.setText("");
+        computer_2_0.setText("");
+        computer_2_1.setText("");
+        computer_2_3.setText("");
+        computer_2_4.setText("");
+        computer_3_0.setText("");
+        computer_3_1.setText("");
+        computer_3_2.setText("");
+        computer_3_3.setText("");
+        computer_3_4.setText("");
+        computer_4_0.setText("");
+        computer_4_1.setText("");
+        computer_4_2.setText("");
+        computer_4_3.setText("");
+        computer_4_4.setText("");
     }
 
     // Check user choices when the bingo button is pressed
     public void bingo() {
-        switch (checkCard("player")) {
-            case 0:
-                // TODO : Show user's incorrect choices
-                System.out.println("User lost");
-                break;
-            case 1:
-                // TODO : Show user won
-                System.out.println("User won");
+        if (checkCard("player")) {
+            gameState = 1;
+            gameOver();
+        } else {
+            gameState = -1;
+            gameOver();
         }
     }
 }
