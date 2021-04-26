@@ -107,6 +107,9 @@ public class Start_Controller implements Initializable {
         DataStore.addInteger("timerDuration",
                 Integer.parseInt(comboBox_timerLength.getValue()));
 
+        // Store the full screen state of the application
+        DataStore.addBoolean("fullScreenState", currentStage.isFullScreen());
+
         // Check if easy, medium, or hard mode is selected
         if ("Easy".equals(comboBox_gameMode.getValue())) {
             openWindow("Easy.fxml", "Bingo", currentStage);
