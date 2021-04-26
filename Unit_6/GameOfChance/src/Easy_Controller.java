@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,6 +29,8 @@ public class Easy_Controller {
     private boolean gamePaused = true;
     private int timerDuration = 1; // DataStore.getInteger("timerDuration");
     private int turnsTaken = 0;
+
+    private boolean autopilotMode = false;
     
     // Record the state of the game
     //  1: Player won
@@ -449,6 +453,14 @@ public class Easy_Controller {
                             gameState = -1;
                             gameOver();
                         }
+
+                        if (autopilotMode) {
+                            playerTurn();
+                            if (checkCard("player")) {
+                                gameState = 1;
+                                gameOver();
+                            }
+                        }
                     }
                     
                     // Create a final variable to use in Platform.runLater()
@@ -464,7 +476,12 @@ public class Easy_Controller {
                         @Override
                         public void run() {
                             // Update the time display on the UI
-                            label_timer.setText("Timer: " + SECONDS);
+                            // Check if autopilot mode is enabled
+                            if (autopilotMode) {
+                                label_timer.setText("Timer: " + SECONDS + "\nAutopilot: enabled");
+                            } else {
+                                label_timer.setText("Timer: " + SECONDS);
+                            }
                         }
                     });
 
@@ -586,6 +603,103 @@ public class Easy_Controller {
         }
     }
 
+    // Check player's card for matches
+    private void playerTurn() {
+        // Get the current drawn value
+        String[] drawnValue = (label_number.getText()).split(" ");
+        String letter = drawnValue[0];
+        int number = Integer.parseInt(drawnValue[1]);
+
+        // Select the one that matches (if any)
+        if (letter.equals("B")) {
+            if (playerCellValues[0][0] == number) {
+                player_0_0.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[0][0] = true;
+            } else if (playerCellValues[0][1] == number) {
+                player_0_1.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[0][1] = true;
+            } else if (playerCellValues[0][2] == number) {
+                player_0_2.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[0][2] = true;
+            } else if (playerCellValues[0][3] == number) {
+                player_0_3.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[0][3] = true;
+            } else if (playerCellValues[0][4] == number) {
+                player_0_4.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[0][4] = true;
+            }
+
+        } else if (letter.equals("I")) {
+            if (playerCellValues[1][0] == number) {
+                player_1_0.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[1][0] = true;
+            } else if (playerCellValues[1][1] == number) {
+                player_1_1.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[1][1] = true;
+            } else if (playerCellValues[1][2] == number) {
+                player_1_2.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[1][2] = true;
+            } else if (playerCellValues[1][3] == number) {
+                player_1_3.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[1][3] = true;
+            } else if (playerCellValues[1][4] == number) {
+                player_1_4.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[1][4] = true;
+            }
+
+        } else if (letter.equals("N")) {
+            if (playerCellValues[2][0] == number) {
+                player_2_0.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[2][0] = true;
+            } else if (playerCellValues[2][1] == number) {
+                player_2_1.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[2][1] = true;
+            } else if (playerCellValues[2][3] == number) {
+                player_2_3.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[2][3] = true;
+            } else if (playerCellValues[2][4] == number) {
+                player_2_4.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[2][4] = true;
+            }
+
+        } else if (letter.equals("G")) {
+            if (playerCellValues[3][0] == number) {
+                player_3_0.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[3][0] = true;
+            } else if (playerCellValues[3][1] == number) {
+                player_3_1.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[3][1] = true;
+            } else if (playerCellValues[3][2] == number) {
+                player_3_2.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[3][2] = true;
+            } else if (playerCellValues[3][3] == number) {
+                player_3_3.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[3][3] = true;
+            } else if (playerCellValues[3][4] == number) {
+                player_3_4.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[3][4] = true;
+            }
+
+        } else if (letter.equals("O")) {
+            if (playerCellValues[4][0] == number) {
+                player_4_0.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[4][0] = true;
+            } else if (playerCellValues[4][1] == number) {
+                player_4_1.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[4][1] = true;
+            } else if (playerCellValues[4][2] == number) {
+                player_4_2.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[4][2] = true;
+            } else if (playerCellValues[4][3] == number) {
+                player_4_3.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[4][3] = true;
+            } else if (playerCellValues[4][4] == number) {
+                player_4_4.setStyle("-fx-background-color: lightgrey");
+                playerCellStates[4][4] = true;
+            }
+        }
+    }
+
 
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -595,6 +709,25 @@ public class Easy_Controller {
     // Initialize game board when user starts the game
     public void overlayFunction() {
         if (!gameInitialized) {
+            // Key combination to activate the autopilot mode for the player
+            final KeyCombination autopilotKeyCombo = new KeyCodeCombination(
+                    KeyCode.A,
+                    KeyCombination.CONTROL_DOWN,
+                    KeyCombination.ALT_DOWN,
+                    KeyCombination.SHIFT_DOWN);
+            anchorPane_root.getScene().addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    if (autopilotKeyCombo.match(event)) {
+                        if (autopilotMode) {
+                            autopilotMode = false;
+                        } else {
+                            autopilotMode = true;
+                        }
+                    }
+                }
+            });
+            
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Add an event handler to every cell in the player's bingo card
             // See line 1 for more information
