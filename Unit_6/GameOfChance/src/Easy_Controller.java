@@ -290,15 +290,13 @@ public class Easy_Controller {
     // "player" for the player
     // "computer" for the computer
     private boolean fiveInARow(String player) {
-        /*
-        Table of IDs in each card
+        // Table of IDs in each card
 
-        00|10|20|30|40
-        01|11|21|31|41
-        02|12|22|32|42
-        03|13|23|33|34
-        04|14|24|34|44
-        */
+        // 00|10|20|30|40
+        // 01|11|21|31|41
+        // 02|12|22|32|42
+        // 03|13|23|33|34
+        // 04|14|24|34|44
 
         // Create an array to store the occurrences of each number
         int[] occurrences = new int[]{
@@ -350,7 +348,7 @@ public class Easy_Controller {
     private boolean checkPlayerCard() {
         // Create a variable to store the current letter
         String currentLetter;
-        
+
         if (fiveInARow("player")) {
             // Loop through every cell on the player's card
             for (int col = 0; col < 5; col++) {
@@ -376,7 +374,7 @@ public class Easy_Controller {
                             default:
                                 currentLetter = "";
                         }
-                        
+
                         // Check if the cell that the player selected was not
                         // called
                         if (!numbersCalled.contains(
@@ -401,7 +399,7 @@ public class Easy_Controller {
         // gameState == 1 means that the player won
         if (gameState == 1) {
             System.out.println("Player wins");
-            
+
             // Pause the UI
             setPause(true);
 
@@ -450,7 +448,7 @@ public class Easy_Controller {
                             if (!numbersCalled.contains(
                                     currentLetter + " " + playerCellValues[col][row]) &&
                                     !(col == 2 && row == 2)) {
-                                
+
                                 // Change that cell's background color
                                 if (col == 0 && row == 0) {
                                     player_0_0.setStyle("-fx-background-color: red");
@@ -553,7 +551,16 @@ public class Easy_Controller {
                         // Check the computer's card to see if it won
                         if (fiveInARow("computer")) {
                             gameState = -1;
-                            gameOver();
+
+                            // Use Platform.runLater() to ensure that the
+                            // commands are running on the application
+                            // thread
+                            Platform.runLater(new Runnable(){
+                                @Override
+                                public void run() {
+                                    gameOver();
+                                };
+                            });
                         }
 
                         // Check if the autopilot feature is on
@@ -1367,10 +1374,27 @@ public class Easy_Controller {
     public void bingo() {
         if (checkPlayerCard()) {
             gameState = 1;
-            gameOver();
+
+            // Use Platform.runLater() to ensure that gameOver() is running on
+            // the application thread
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    gameOver();
+                }
+            });
+
         } else {
             gameState = -1;
-            gameOver();
+
+            // Use Platform.runLater() to ensure that gameOver() is running on
+            // the application thread
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    gameOver();
+                }
+            });
         }
     }
 }
