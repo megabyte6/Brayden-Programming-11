@@ -556,11 +556,21 @@ public class Easy_Controller {
                             gameOver();
                         }
 
+                        // Check if the autopilot feature is on
                         if (autopilotMode) {
                             playerTurn();
                             if (checkPlayerCard()) {
                                 gameState = 1;
-                                gameOver();
+
+                                // Use Platform.runLater() to ensure that the
+                                // commands are running on the application
+                                // thread
+                                Platform.runLater(new Runnable(){
+                                    @Override
+                                    public void run() {
+                                        gameOver();
+                                    };
+                                });
                             }
                         }
                     }
@@ -580,7 +590,7 @@ public class Easy_Controller {
                             // Update the time display on the UI
                             // Check if autopilot mode is enabled
                             if (autopilotMode) {
-                                label_timer.setText("Timer: " + SECONDS + "\nAutopilot: enabled");
+                                label_timer.setText("Timer: " + SECONDS + "\n\nAutopilot: enabled");
                             } else {
                                 label_timer.setText("Timer: " + SECONDS);
                             }
