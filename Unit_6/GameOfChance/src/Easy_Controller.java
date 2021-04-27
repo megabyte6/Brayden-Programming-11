@@ -205,10 +205,12 @@ public class Easy_Controller {
             gridPane_root.setDisable(true);
             button_overlay.setDisable(false);
             button_overlay.setVisible(true);
+            button_overlay.toFront();
         } else {
             gridPane_root.setDisable(false);
             button_overlay.setDisable(true);
             button_overlay.setVisible(false);
+            button_overlay.toBack();
         }
         this.gamePaused = pause;
     }
@@ -280,15 +282,14 @@ public class Easy_Controller {
         return numOfOccurrences;
     }
 
-    // Check the user's choices
-    // Returns: true if no errors, otherwise return false
+    // Check if the card has 5 in a row
+    // Returns: true if the given player's card has 5 in a row
+    // otherwise returns false
 
     // player can be:
     // "player" for the player
     // "computer" for the computer
-    private boolean checkCard(String player) {
-        String currentLetter;
-        
+    private boolean fiveInARow(String player) {
         /*
         Table of IDs in each card
 
@@ -300,10 +301,6 @@ public class Easy_Controller {
         */
 
         // Create an array to store the occurrences of each number
-        
-        // doubleNum, sumToFour,
-        // col_0, col_1, col_2, col_3, col_4,
-        // row_0, row_1, row_2, row_3, row_4
         int[] occurrences = new int[]{
                 0, // Two of the same number
                 0, // Sums to 4
@@ -317,13 +314,115 @@ public class Easy_Controller {
                 0, // Ends with 2
                 0, // Ends with 3
                 0};// Ends with 4
-        
+
         // Loop through every cell on the card
         for (int col = 0; col < 5; col++) {
             for (int row = 0; row < 5; row++) {
-                if (player.equals("player")) {
-                    // If the cell has been selected
+                // Check if the current cell has been selected
+                if (player.equals("player")
+                        ? playerCellStates[col][row] == true
+                        : computerCellStates[col][row] == true) {
+                    if (col == row) {
+                        occurrences[0]++;
+                    }
+                    if (col + row == 4) {
+                        occurrences[1]++;
+                    }
+                    occurrences[col + 2]++;
+                    occurrences[row + 7]++;
+                }
+            }
+        }
+
+        // Check if there is a 5 in a row
+        for (int i = 0; i < occurrences.length; i++) {
+            // If there is 5 in a row, return true
+            if (occurrences[i] == 5) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Check the player's choices
+    // Returns: true if no errors, otherwise return false
+    private boolean checkPlayerCard() {
+        // Create a variable to store the current letter
+        String currentLetter;
+        
+        if (fiveInARow("player")) {
+            // Loop through every cell on the player's card
+            for (int col = 0; col < 5; col++) {
+                for (int row = 0; row < 5; row++) {
                     if (playerCellStates[col][row] == true) {
+                        // Get the current letter
+                        switch (col) {
+                            case 0:
+                                currentLetter = "B";
+                                break;
+                            case 1:
+                                currentLetter = "I";
+                                break;
+                            case 2:
+                                currentLetter = "N";
+                                break;
+                            case 3:
+                                currentLetter = "G";
+                                break;
+                            case 4:
+                                currentLetter = "O";
+                                break;
+                            default:
+                                currentLetter = "";
+                        }
+                        
+                        // Check if the cell that the player selected was not
+                        // called
+                        if (!numbersCalled.contains(
+                                currentLetter + " " + playerCellValues[col][row]) &&
+                                !(col == 2 && row == 2)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            // If it looped through every cell without error, the player's card
+            // must be accurate
+            return true;
+        }
+
+        // If the player didn't get 5 in a row, the player cannot possibly win
+        return false;
+    }
+
+    private void gameOver() {
+        // gameState == 1 means that the player won
+        if (gameState == 1) {
+            System.out.println("Player wins");
+            
+            // Pause the UI
+            setPause(true);
+
+            // Change the overlay's text
+            // button_overlay.setText("You Win! Press r to play again or ESC to go back home");
+
+        // gameState == -1 means that the computer won
+        } else if (gameState == -1) {
+            // TODO : Show the player's incorrect choices
+            // Create a variable to store the current letter
+            String currentLetter;
+
+            // If the user has 5 in a row, show the player's incorrect choices
+            // Otherwise, computer must have won. So stop the game and show
+            // options to play again or exit
+
+            if (fiveInARow("player")) {
+                // Find cells that the player selected that were never drawn
+                for (int col = 0; col < 5; col++) {
+                    for (int row = 0; row < 5; row++) {
+                        // Get the current letter
                         switch (col) {
                             case 0:
                                 currentLetter = "B";
@@ -344,70 +443,73 @@ public class Easy_Controller {
                                 currentLetter = "";
                         }
 
-                        // Check if the player selected a cell that was not
-                        // called
-                        if (!numbersCalled.contains(
-                                currentLetter + " " + playerCellValues[col][row]) &&
-                                !(col == 2 && row == 2)) {
-                            return false;
+                        // Find selected cells
+                        if (playerCellStates[col][row] == true) {
+                            // Check if the cell that the player selected was
+                            // never called
+                            if (!numbersCalled.contains(
+                                    currentLetter + " " + playerCellValues[col][row]) &&
+                                    !(col == 2 && row == 2)) {
+                                
+                                // Change that cell's background color
+                                if (col == 0 && row == 0) {
+                                    player_0_0.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 1) {
+                                    player_0_1.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 2) {
+                                    player_0_2.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 3) {
+                                    player_0_3.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 4) {
+                                    player_0_4.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 0) {
+                                    player_1_0.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 1) {
+                                    player_1_1.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 2) {
+                                    player_1_2.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 3) {
+                                    player_1_3.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 4) {
+                                    player_1_4.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 0) {
+                                    player_2_0.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 1) {
+                                    player_2_1.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 3) {
+                                    player_2_3.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 4) {
+                                    player_2_4.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 0) {
+                                    player_3_0.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 1) {
+                                    player_3_1.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 2) {
+                                    player_3_2.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 3) {
+                                    player_3_3.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 4) {
+                                    player_3_4.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 0) {
+                                    player_4_0.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 1) {
+                                    player_4_1.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 2) {
+                                    player_4_2.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 3) {
+                                    player_4_3.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 4) {
+                                    player_4_4.setStyle("-fx-background-color: red");
+                                }
+                            }
                         }
-
-                        if (col == row) {
-                            occurrences[0]++;
-                        }
-                        if (col + row == 4) {
-                            occurrences[1]++;
-                        }
-                        occurrences[col + 2]++;
-                        occurrences[row + 7]++;
-                    }
-
-                } else if (player.equals("computer")) {
-                    // If the cell has been selected
-                    if (computerCellStates[col][row] == true) {
-                        if (col == row) {
-                            occurrences[0]++;
-                        }
-                        if (col + row == 4) {
-                            occurrences[1]++;
-                        }
-                        occurrences[col + 2]++;
-                        occurrences[row + 7]++;
                     }
                 }
+
+            } else {
+                // TODO : no 5 in a row
+                System.out.println("Player loses");
             }
-        }
-
-        // Check if there is a 5 in a row
-        for (int i = 0; i < occurrences.length; i++) {
-            // If there is 5 in a row, return true
-            if (occurrences[i] == 5) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void gameOver() {
-        // gameState == 1 means that the player won
-        if (gameState == 1) {
-            System.out.println("Player wins");
-            
-            // Pause the UI
-            setPause(true);
-
-            // Change the overlay's text
-            // button_overlay.setText("You Win! Press r to play again or ESC to go back home");
-
-        // gameState == -1 means that the computer won
-        } else if (gameState == -1) {
-            // TODO : Show the player's incorrect choices
-            System.out.println("Player loses");
-
-            // If the user has 5 in a row, show the player's incorrect choices
-            // Otherwise, computer must have won. So stop the game and show
-            // options to play again or exit
 
         // Anything else means that there was an unknown error
         } else {
@@ -449,14 +551,14 @@ public class Easy_Controller {
                         computerTurn();
 
                         // Check the computer's card to see if it won
-                        if (checkCard("computer")) {
+                        if (fiveInARow("computer")) {
                             gameState = -1;
                             gameOver();
                         }
 
                         if (autopilotMode) {
                             playerTurn();
-                            if (checkCard("player")) {
+                            if (checkPlayerCard()) {
                                 gameState = 1;
                                 gameOver();
                             }
@@ -1202,61 +1304,6 @@ public class Easy_Controller {
 
         } else if (gamePaused == true) {
             setPause(false);
-
-            // Show the cards
-            player_0_0.setText(String.valueOf(playerCellValues[0][0]));
-            player_0_1.setText(String.valueOf(playerCellValues[0][1]));
-            player_0_2.setText(String.valueOf(playerCellValues[0][2]));
-            player_0_3.setText(String.valueOf(playerCellValues[0][3]));
-            player_0_4.setText(String.valueOf(playerCellValues[0][4]));
-            player_1_0.setText(String.valueOf(playerCellValues[1][0]));
-            player_1_1.setText(String.valueOf(playerCellValues[1][1]));
-            player_1_2.setText(String.valueOf(playerCellValues[1][2]));
-            player_1_3.setText(String.valueOf(playerCellValues[1][3]));
-            player_1_4.setText(String.valueOf(playerCellValues[1][4]));
-            player_2_0.setText(String.valueOf(playerCellValues[2][0]));
-            player_2_1.setText(String.valueOf(playerCellValues[2][1]));
-            player_2_3.setText(String.valueOf(playerCellValues[2][3]));
-            player_2_4.setText(String.valueOf(playerCellValues[2][4]));
-            player_3_0.setText(String.valueOf(playerCellValues[3][0]));
-            player_3_1.setText(String.valueOf(playerCellValues[3][1]));
-            player_3_2.setText(String.valueOf(playerCellValues[3][2]));
-            player_3_3.setText(String.valueOf(playerCellValues[3][3]));
-            player_3_4.setText(String.valueOf(playerCellValues[3][4]));
-            player_4_0.setText(String.valueOf(playerCellValues[4][0]));
-            player_4_1.setText(String.valueOf(playerCellValues[4][1]));
-            player_4_2.setText(String.valueOf(playerCellValues[4][2]));
-            player_4_3.setText(String.valueOf(playerCellValues[4][3]));
-            player_4_4.setText(String.valueOf(playerCellValues[4][4]));
-
-            computer_0_0.setText(String.valueOf(computerCellValues[0][0]));
-            computer_0_1.setText(String.valueOf(computerCellValues[0][1]));
-            computer_0_2.setText(String.valueOf(computerCellValues[0][2]));
-            computer_0_3.setText(String.valueOf(computerCellValues[0][3]));
-            computer_0_4.setText(String.valueOf(computerCellValues[0][4]));
-            computer_1_0.setText(String.valueOf(computerCellValues[1][0]));
-            computer_1_1.setText(String.valueOf(computerCellValues[1][1]));
-            computer_1_2.setText(String.valueOf(computerCellValues[1][2]));
-            computer_1_3.setText(String.valueOf(computerCellValues[1][3]));
-            computer_1_4.setText(String.valueOf(computerCellValues[1][4]));
-            computer_2_0.setText(String.valueOf(computerCellValues[2][0]));
-            computer_2_1.setText(String.valueOf(computerCellValues[2][1]));
-            computer_2_3.setText(String.valueOf(computerCellValues[2][3]));
-            computer_2_4.setText(String.valueOf(computerCellValues[2][4]));
-            computer_3_0.setText(String.valueOf(computerCellValues[3][0]));
-            computer_3_1.setText(String.valueOf(computerCellValues[3][1]));
-            computer_3_2.setText(String.valueOf(computerCellValues[3][2]));
-            computer_3_3.setText(String.valueOf(computerCellValues[3][3]));
-            computer_3_4.setText(String.valueOf(computerCellValues[3][4]));
-            computer_4_0.setText(String.valueOf(computerCellValues[4][0]));
-            computer_4_1.setText(String.valueOf(computerCellValues[4][1]));
-            computer_4_2.setText(String.valueOf(computerCellValues[4][2]));
-            computer_4_3.setText(String.valueOf(computerCellValues[4][3]));
-            computer_4_4.setText(String.valueOf(computerCellValues[4][4]));
-
-            // Show the current drawn number
-            label_number.setText(numbersCalled.get(numbersCalled.size() - 1));
-
             play();
         }
     }
@@ -1304,71 +1351,11 @@ public class Easy_Controller {
 
         // Change overlay text
         button_overlay.setText("Press a key to unpause");
-        
-        // Make sure that the player can't see the cards
-
-        // Cannot only make the overlay opaque because the UI is on the topmost
-        // layer
-
-        // Clear the text showing the current drawn number
-        label_number.setText("");
-
-        // Clear all of the text on the player's card
-        player_0_0.setText("");
-        player_0_1.setText("");
-        player_0_2.setText("");
-        player_0_3.setText("");
-        player_0_4.setText("");
-        player_1_0.setText("");
-        player_1_1.setText("");
-        player_1_2.setText("");
-        player_1_3.setText("");
-        player_1_4.setText("");
-        player_2_0.setText("");
-        player_2_1.setText("");
-        player_2_3.setText("");
-        player_2_4.setText("");
-        player_3_0.setText("");
-        player_3_1.setText("");
-        player_3_2.setText("");
-        player_3_3.setText("");
-        player_3_4.setText("");
-        player_4_0.setText("");
-        player_4_1.setText("");
-        player_4_2.setText("");
-        player_4_3.setText("");
-        player_4_4.setText("");
-
-        // Clear all of the text on the computer's card
-        computer_0_0.setText("");
-        computer_0_1.setText("");
-        computer_0_2.setText("");
-        computer_0_3.setText("");
-        computer_0_4.setText("");
-        computer_1_0.setText("");
-        computer_1_1.setText("");
-        computer_1_2.setText("");
-        computer_1_3.setText("");
-        computer_1_4.setText("");
-        computer_2_0.setText("");
-        computer_2_1.setText("");
-        computer_2_3.setText("");
-        computer_2_4.setText("");
-        computer_3_0.setText("");
-        computer_3_1.setText("");
-        computer_3_2.setText("");
-        computer_3_3.setText("");
-        computer_3_4.setText("");
-        computer_4_0.setText("");
-        computer_4_1.setText("");
-        computer_4_2.setText("");
-        computer_4_3.setText("");
-        computer_4_4.setText("");
     }
 
     // Check user choices when the bingo button is pressed
     public void bingo() {
-        if (checkCard("player")) {
+        if (checkPlayerCard()) {
             gameState = 1;
             gameOver();
         } else {
