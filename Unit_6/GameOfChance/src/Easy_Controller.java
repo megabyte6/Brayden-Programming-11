@@ -27,8 +27,7 @@ public class Easy_Controller {
 
     private boolean gameInitialized = false;
     private boolean gamePaused = true;
-    private int timerDuration = 1; // DataStore.getInteger("timerDuration");
-    private int turnsTaken = 0;
+    private int timerDuration = DataStore.getInteger("timerDuration");
 
     private boolean autopilotMode = false;
     
@@ -202,15 +201,32 @@ public class Easy_Controller {
 
     private void setPause(boolean pause) {
         if (pause) {
+            // Disable the game UI
             gridPane_root.setDisable(true);
+
+            // Enable overylay
             button_overlay.setDisable(false);
             button_overlay.setVisible(true);
+
+            // Bring the overlay to the front
             button_overlay.toFront();
+
+            // Change the font size of the overlay
+            button_overlay.setStyle("-fx-font-size: 48");
+
         } else {
+            // Disable the game UI
             gridPane_root.setDisable(false);
+
+            // Enable overylay
             button_overlay.setDisable(true);
             button_overlay.setVisible(false);
+
+            // Bring the overlay to the front
             button_overlay.toBack();
+
+            // Change the font size of the overlay
+            button_overlay.setStyle("-fx-font-size: 48");
         }
         this.gamePaused = pause;
     }
@@ -398,17 +414,17 @@ public class Easy_Controller {
     private void gameOver() {
         // gameState == 1 means that the player won
         if (gameState == 1) {
-            System.out.println("Player wins");
-
             // Pause the UI
             setPause(true);
 
             // Change the overlay's text
-            // button_overlay.setText("You Win! Press r to play again or ESC to go back home");
+            button_overlay.setText("You Win!\n\nPress r to play again or ESC to go back home");
+
+            // Change the overlay's text size
+            button_overlay.setStyle("-fx-font-size: 36");
 
         // gameState == -1 means that the computer won
         } else if (gameState == -1) {
-            // TODO : Show the player's incorrect choices
             // Create a variable to store the current letter
             String currentLetter;
 
@@ -505,8 +521,14 @@ public class Easy_Controller {
                 }
 
             } else {
-                // TODO : no 5 in a row
-                System.out.println("Player loses");
+                // Pause the UI
+                setPause(true);
+
+                // Change the overlay's text
+                button_overlay.setText("You Lost!\n\nPress r to play again or ESC to go back home");
+
+                // Change the overlay's text size
+                button_overlay.setStyle("-fx-font-size: 36");
             }
 
         // Anything else means that there was an unknown error
@@ -538,7 +560,6 @@ public class Easy_Controller {
                             }
                         });
 
-                        turnsTaken++;
                         seconds = 0;
                     }
 
@@ -1341,7 +1362,9 @@ public class Easy_Controller {
             returnHome();
 
         } else if (gameState != 0 && key.getCode() == KeyCode.R) {
-            // TODO : Add code to restart game and save score
+            gameInitialized = false;
+            setPause(true);
+            button_overlay.setText("Press a key to start");
         }
     }
 

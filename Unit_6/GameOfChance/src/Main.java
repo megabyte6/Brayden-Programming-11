@@ -14,10 +14,4 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Start.fxml"))));
         primaryStage.show();
     }
-
-    // Save file when application is terminated
-    // @Override
-    // public void stop() {
-        
-    // }
 }
