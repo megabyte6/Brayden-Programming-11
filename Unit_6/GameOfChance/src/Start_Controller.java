@@ -25,8 +25,6 @@ public class Start_Controller implements Initializable {
     Button button_play;
     @FXML
     Button button_instructions;
-    @FXML
-    Button button_scoreBoard;
     
     // This method is run when the stage is initialized
     @Override
@@ -127,11 +125,5 @@ public class Start_Controller implements Initializable {
         if (currentStage.isFullScreen()) {
             newStage.setFullScreen(true);
         }
-    }
-
-    // Open the score board window
-    public void openScoreBoard(ActionEvent actionEvent) throws Exception {
-        Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
-        openWindow("HighScores.fxml", "Score Board", currentStage);
     }
 }

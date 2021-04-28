@@ -61,11 +61,6 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="button_scoreBoard" mnemonicParsing="false" onAction="#openScoreBoard" text="High Scores" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#setFullScreen" prefHeight="30.0" text="Full Screen" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0" />
+      <Button mnemonicParsing="false" onAction="#setFullScreen" prefHeight="30.0" text="Full Screen" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>
