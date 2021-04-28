@@ -1362,9 +1362,7 @@ public class Easy_Controller {
             returnHome();
 
         } else if (gameState != 0 && key.getCode() == KeyCode.R) {
-            gameInitialized = false;
-            setPause(true);
-            button_overlay.setText("Press a key to start");
+            openWindow("Easy.fxml", "Bingo", currentStage);
         }
     }
 
