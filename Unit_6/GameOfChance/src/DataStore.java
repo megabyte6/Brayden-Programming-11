@@ -30,7 +30,7 @@ public class DataStore {
     }
 
     // Return ID
-    public static String setInteger(String id, int value) {
+    public static String addInteger(String id, int value) {
         DataStore.integers.put(id, value);
         return id;
     }
@@ -40,7 +40,7 @@ public class DataStore {
     }
 
     // Return ID
-    public static String setFloat(String id, float value) {
+    public static String addFloat(String id, float value) {
         DataStore.floats.put(id, value);
         return id;
     }
@@ -50,7 +50,7 @@ public class DataStore {
     }
 
     // Return ID
-    public static String setDouble(String id, double value) {
+    public static String addDouble(String id, double value) {
         DataStore.doubles.put(id, value);
         return id;
     }
@@ -60,7 +60,7 @@ public class DataStore {
     }
 
     // Return ID
-    public static String setBoolean(String id, boolean value) {
+    public static String addBoolean(String id, boolean value) {
         DataStore.booleans.put(id, value);
         return id;
     }
@@ -70,7 +70,7 @@ public class DataStore {
     }
 
     // Return ID
-    public static String setChar(String id, char value) {
+    public static String addChar(String id, char value) {
         DataStore.chars.put(id, value);
         return id;
     }
@@ -80,7 +80,7 @@ public class DataStore {
     }
 
     // Return ID
-    public static String setString(String id, String value) {
+    public static String addString(String id, String value) {
         DataStore.strings.put(id, value);
         return id;
     }
@@ -92,7 +92,7 @@ public class DataStore {
     // Return ID
     // Can only accept a value of type Integer instead of int because ArrayList
     // will only accept a value of type Integer
-    public static String setIntegerArray(String id, Integer[] value) {
+    public static String addIntegerArray(String id, Integer[] value) {
         DataStore.integerArray.put(id, value);
         return id;
     }
@@ -104,7 +104,7 @@ public class DataStore {
     // Return ID
     // Can only accept a value of type Float instead of float because ArrayList
     // will only accept a value of type Float
-    public static String setFloatArray(String id, Float[] value) {
+    public static String addFloatArray(String id, Float[] value) {
         DataStore.floatArray.put(id, value);
         return id;
     }
@@ -116,7 +116,7 @@ public class DataStore {
     // Return ID
     // Can only accept a value of type Double instead of double because
     // ArrayList will only accept a value of type Double
-    public static String setDoubleArray(String id, Double[] value) {
+    public static String addDoubleArray(String id, Double[] value) {
         DataStore.doubleArray.put(id, value);
         return id;
     }
@@ -128,7 +128,7 @@ public class DataStore {
     // Return ID
     // Can only accept a value of type Boolean instead of boolean because
     // ArrayList will only accept a value of type Boolean
-    public static String setBooleanArray(String id, Boolean[] value) {
+    public static String addBooleanArray(String id, Boolean[] value) {
         DataStore.booleanArray.put(id, value);
         return id;
     }
@@ -140,7 +140,7 @@ public class DataStore {
     // Return ID
     // Can only accept a value of type Character instead of char because
     // ArrayList will only accept a value of type Character
-    public static String setCharArray(String id, Character[] value) {
+    public static String addCharArray(String id, Character[] value) {
         DataStore.charArray.put(id, value);
         return id;
     }
@@ -150,7 +150,7 @@ public class DataStore {
     }
 
     // Return ID
-    public static String setStringArray(String id, String[] value) {
+    public static String addStringArray(String id, String[] value) {
         DataStore.stringArray.put(id, value);
         return id;
     }
