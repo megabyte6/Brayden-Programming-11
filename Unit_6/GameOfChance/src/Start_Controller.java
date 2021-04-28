@@ -96,7 +96,7 @@ public class Start_Controller implements Initializable {
     public void setFullScreen(boolean fullScreen) {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
         currentStage.setFullScreen(fullScreen);
-        DataStore.setBoolean("fullScreen", fullScreen);
+        DataStore.addBoolean("fullScreen", fullScreen);
     }
 
     // Code for play button
@@ -104,11 +104,11 @@ public class Start_Controller implements Initializable {
         Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
         
         // Store the timer length selected
-        DataStore.setInteger("timerDuration",
+        DataStore.addInteger("timerDuration",
                 Integer.parseInt(comboBox_timerLength.getValue()));
 
         // Store the full screen state of the application
-        DataStore.setBoolean("fullScreenState", currentStage.isFullScreen());
+        DataStore.addBoolean("fullScreenState", currentStage.isFullScreen());
 
         // Check if easy, medium, or hard mode is selected
         if ("Easy".equals(comboBox_gameMode.getValue())) {
