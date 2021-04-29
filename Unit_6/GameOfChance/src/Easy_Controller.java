@@ -225,9 +225,15 @@ public class Easy_Controller {
             // Bring the overlay to the front
             button_overlay.toBack();
 
-            // Change the font size of the overlay
-            button_overlay.setStyle("-fx-font-size: 48");
+            
         }
+
+        // Set the opacity
+        button_overlay.setOpacity(1);
+
+        // Change the font size of the overlay
+        button_overlay.setStyle("-fx-font-size: 48");
+
         this.gamePaused = pause;
     }
 
@@ -423,6 +429,9 @@ public class Easy_Controller {
             // Change the overlay's text size
             button_overlay.setStyle("-fx-font-size: 36");
 
+            // Change the overlay's opacity to show the UI behind it
+            button_overlay.setOpacity(0.75);
+
         // gameState == -1 means that the computer won
         } else if (gameState == -1) {
             // Create a variable to store the current letter
@@ -529,6 +538,9 @@ public class Easy_Controller {
 
                 // Change the overlay's text size
                 button_overlay.setStyle("-fx-font-size: 36");
+
+                // Change the overlay's opacity to show the UI behind it
+                button_overlay.setOpacity(0.75);
             }
 
         // Anything else means that there was an unknown error
