@@ -520,7 +520,7 @@ public class Easy_Controller {
                     }
                 }
 
-            } else {
+            } else if (fiveInARow("computer")) {
                 // Pause the UI
                 setPause(true);
 
