@@ -833,7 +833,7 @@ public class Medium_Controller {
                             // Update the time display on the UI
                             // Check if autopilot mode is enabled
                             if (autopilotMode) {
-                                label_timer.setText("Timer: " + SECONDS + "\n\nAutopilot: enabled");
+                                label_timer.setText("Timer: " + SECONDS + "\n\nAutopilot:\nenabled");
                             } else {
                                 label_timer.setText("Timer: " + SECONDS);
                             }
