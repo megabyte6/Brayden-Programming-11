@@ -537,7 +537,6 @@ public class Medium_Controller {
                                 !(col == 2 && row == 2)) {
                             return false;
                         }
-
                     }
 
                     if (player2CellStates[col][row] == true) {
