@@ -27,9 +27,9 @@ public class Medium_Controller {
 
     private boolean gameInitialized = false;
     private boolean gamePaused = true;
-    private int timerDuration = 1; // DataStore.getInteger("timerDuration");
+    private int timerDuration = DataStore.getInteger("timerDuration");
 
-    private boolean autopilotMode = true;
+    private boolean autopilotMode = false;
     
     // Record the state of the game
     //  1: Player won
