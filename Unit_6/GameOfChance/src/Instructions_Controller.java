@@ -10,7 +10,7 @@ public class Instructions_Controller {
     private Button button_back;
 
     // Use to open a new window
-    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
+    private Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 

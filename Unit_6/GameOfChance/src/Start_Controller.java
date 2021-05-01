@@ -45,7 +45,7 @@ public class Start_Controller implements Initializable {
     }
 
     // Use to open a new window
-    public Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
+    private Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
         // Close old window
         currentStage.close();
 
