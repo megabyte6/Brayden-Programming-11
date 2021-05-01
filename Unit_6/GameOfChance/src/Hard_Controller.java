@@ -27,9 +27,9 @@ public class Hard_Controller {
 
     private boolean gameInitialized = false;
     private boolean gamePaused = true;
-    private int timerDuration = DataStore.getInteger("timerDuration");
+    private int timerDuration = 1; // DataStore.getInteger("timerDuration");
 
-    private boolean autopilotMode = false;
+    private boolean autopilotMode = true;
     
     // Record the state of the game
     //  1: Player won
@@ -48,12 +48,23 @@ public class Hard_Controller {
     // Goes [column][row]
     private int[][] player1CellValues = new int[5][5];
     private int[][] player2CellValues = new int[5][5];
+    private int[][] player3CellValues = new int[5][5];
+    private int[][] player4CellValues = new int[5][5];
+
     private int[][] computer1CellValues = new int[5][5];
     private int[][] computer2CellValues = new int[5][5];
+    private int[][] computer3CellValues = new int[5][5];
+    private int[][] computer4CellValues = new int[5][5];
+
     private boolean[][] player1CellStates = new boolean[5][5];
     private boolean[][] player2CellStates = new boolean[5][5];
+    private boolean[][] player3CellStates = new boolean[5][5];
+    private boolean[][] player4CellStates = new boolean[5][5];
+
     private boolean[][] computer1CellStates = new boolean[5][5];
     private boolean[][] computer2CellStates = new boolean[5][5];
+    private boolean[][] computer3CellStates = new boolean[5][5];
+    private boolean[][] computer4CellStates = new boolean[5][5];
 
     // Components in the UI
     @FXML
@@ -182,6 +193,108 @@ public class Hard_Controller {
     Label player2_4_4;
 
     @FXML
+    Label player3_0_0;
+    @FXML
+    Label player3_0_1;
+    @FXML
+    Label player3_0_2;
+    @FXML
+    Label player3_0_3;
+    @FXML
+    Label player3_0_4;
+    @FXML
+    Label player3_1_0;
+    @FXML
+    Label player3_1_1;
+    @FXML
+    Label player3_1_2;
+    @FXML
+    Label player3_1_3;
+    @FXML
+    Label player3_1_4;
+    @FXML
+    Label player3_2_0;
+    @FXML
+    Label player3_2_1;
+    @FXML
+    Label player3_free;
+    @FXML
+    Label player3_2_3;
+    @FXML
+    Label player3_2_4;
+    @FXML
+    Label player3_3_0;
+    @FXML
+    Label player3_3_1;
+    @FXML
+    Label player3_3_2;
+    @FXML
+    Label player3_3_3;
+    @FXML
+    Label player3_3_4;
+    @FXML
+    Label player3_4_0;
+    @FXML
+    Label player3_4_1;
+    @FXML
+    Label player3_4_2;
+    @FXML
+    Label player3_4_3;
+    @FXML
+    Label player3_4_4;
+
+    @FXML
+    Label player4_0_0;
+    @FXML
+    Label player4_0_1;
+    @FXML
+    Label player4_0_2;
+    @FXML
+    Label player4_0_3;
+    @FXML
+    Label player4_0_4;
+    @FXML
+    Label player4_1_0;
+    @FXML
+    Label player4_1_1;
+    @FXML
+    Label player4_1_2;
+    @FXML
+    Label player4_1_3;
+    @FXML
+    Label player4_1_4;
+    @FXML
+    Label player4_2_0;
+    @FXML
+    Label player4_2_1;
+    @FXML
+    Label player4_free;
+    @FXML
+    Label player4_2_3;
+    @FXML
+    Label player4_2_4;
+    @FXML
+    Label player4_3_0;
+    @FXML
+    Label player4_3_1;
+    @FXML
+    Label player4_3_2;
+    @FXML
+    Label player4_3_3;
+    @FXML
+    Label player4_3_4;
+    @FXML
+    Label player4_4_0;
+    @FXML
+    Label player4_4_1;
+    @FXML
+    Label player4_4_2;
+    @FXML
+    Label player4_4_3;
+    @FXML
+    Label player4_4_4;
+
+    @FXML
     Label computer1_0_0;
     @FXML
     Label computer1_0_1;
@@ -282,6 +395,108 @@ public class Hard_Controller {
     Label computer2_4_3;
     @FXML
     Label computer2_4_4;
+
+    @FXML
+    Label computer3_0_0;
+    @FXML
+    Label computer3_0_1;
+    @FXML
+    Label computer3_0_2;
+    @FXML
+    Label computer3_0_3;
+    @FXML
+    Label computer3_0_4;
+    @FXML
+    Label computer3_1_0;
+    @FXML
+    Label computer3_1_1;
+    @FXML
+    Label computer3_1_2;
+    @FXML
+    Label computer3_1_3;
+    @FXML
+    Label computer3_1_4;
+    @FXML
+    Label computer3_2_0;
+    @FXML
+    Label computer3_2_1;
+    @FXML
+    Label computer3_free;
+    @FXML
+    Label computer3_2_3;
+    @FXML
+    Label computer3_2_4;
+    @FXML
+    Label computer3_3_0;
+    @FXML
+    Label computer3_3_1;
+    @FXML
+    Label computer3_3_2;
+    @FXML
+    Label computer3_3_3;
+    @FXML
+    Label computer3_3_4;
+    @FXML
+    Label computer3_4_0;
+    @FXML
+    Label computer3_4_1;
+    @FXML
+    Label computer3_4_2;
+    @FXML
+    Label computer3_4_3;
+    @FXML
+    Label computer3_4_4;
+
+    @FXML
+    Label computer4_0_0;
+    @FXML
+    Label computer4_0_1;
+    @FXML
+    Label computer4_0_2;
+    @FXML
+    Label computer4_0_3;
+    @FXML
+    Label computer4_0_4;
+    @FXML
+    Label computer4_1_0;
+    @FXML
+    Label computer4_1_1;
+    @FXML
+    Label computer4_1_2;
+    @FXML
+    Label computer4_1_3;
+    @FXML
+    Label computer4_1_4;
+    @FXML
+    Label computer4_2_0;
+    @FXML
+    Label computer4_2_1;
+    @FXML
+    Label computer4_free;
+    @FXML
+    Label computer4_2_3;
+    @FXML
+    Label computer4_2_4;
+    @FXML
+    Label computer4_3_0;
+    @FXML
+    Label computer4_3_1;
+    @FXML
+    Label computer4_3_2;
+    @FXML
+    Label computer4_3_3;
+    @FXML
+    Label computer4_3_4;
+    @FXML
+    Label computer4_4_0;
+    @FXML
+    Label computer4_4_1;
+    @FXML
+    Label computer4_4_2;
+    @FXML
+    Label computer4_4_3;
+    @FXML
+    Label computer4_4_4;
 
     // Use to open a new window
     private Stage openWindow(String fxmlFile, String titleName, Stage currentStage) {
@@ -464,6 +679,26 @@ public class Hard_Controller {
                     occurrences[col + 2]++;
                     occurrences[row + 7]++;
 
+                } else if (player.equals("player3") && player3CellStates[col][row] == true) {
+                    if (col == row) {
+                        occurrences[0]++;
+                    }
+                    if (col + row == 4) {
+                        occurrences[1]++;
+                    }
+                    occurrences[col + 2]++;
+                    occurrences[row + 7]++;
+
+                } else if (player.equals("player4") && player4CellStates[col][row] == true) {
+                    if (col == row) {
+                        occurrences[0]++;
+                    }
+                    if (col + row == 4) {
+                        occurrences[1]++;
+                    }
+                    occurrences[col + 2]++;
+                    occurrences[row + 7]++;
+
                 } else if (player.equals("computer1") && computer1CellStates[col][row] == true) {
                     if (col == row) {
                         occurrences[0]++;
@@ -475,6 +710,26 @@ public class Hard_Controller {
                     occurrences[row + 7]++;
 
                 } else if (player.equals("computer2") && computer2CellStates[col][row] == true) {
+                    if (col == row) {
+                        occurrences[0]++;
+                    }
+                    if (col + row == 4) {
+                        occurrences[1]++;
+                    }
+                    occurrences[col + 2]++;
+                    occurrences[row + 7]++;
+
+                } else if (player.equals("computer3") && computer3CellStates[col][row] == true) {
+                    if (col == row) {
+                        occurrences[0]++;
+                    }
+                    if (col + row == 4) {
+                        occurrences[1]++;
+                    }
+                    occurrences[col + 2]++;
+                    occurrences[row + 7]++;
+
+                } else if (player.equals("computer4") && computer4CellStates[col][row] == true) {
                     if (col == row) {
                         occurrences[0]++;
                     }
@@ -504,7 +759,12 @@ public class Hard_Controller {
         // Create a variable to store the current letter
         String currentLetter;
 
-        if (fiveInARow("player1") || fiveInARow("player2")) {
+        if (
+                fiveInARow("player1") ||
+                fiveInARow("player2") ||
+                fiveInARow("player3") ||
+                fiveInARow("player4")) {
+
             // Loop through every cell on the player's cards
             for (int col = 0; col < 5; col++) {
                 for (int row = 0; row < 5; row++) {
@@ -537,7 +797,6 @@ public class Hard_Controller {
                                 !(col == 2 && row == 2)) {
                             return false;
                         }
-
                     }
 
                     if (player2CellStates[col][row] == true) {
@@ -545,6 +804,26 @@ public class Hard_Controller {
                         // called
                         if (!numbersCalled.contains(
                                 currentLetter + " " + player2CellValues[col][row]) &&
+                                !(col == 2 && row == 2)) {
+                            return false;
+                        }
+                    }
+
+                    if (player3CellStates[col][row] == true) {
+                        // Check if the cell that the player selected was not
+                        // called
+                        if (!numbersCalled.contains(
+                                currentLetter + " " + player3CellValues[col][row]) &&
+                                !(col == 2 && row == 2)) {
+                            return false;
+                        }
+                    }
+
+                    if (player4CellStates[col][row] == true) {
+                        // Check if the cell that the player selected was not
+                        // called
+                        if (!numbersCalled.contains(
+                                currentLetter + " " + player4CellValues[col][row]) &&
                                 !(col == 2 && row == 2)) {
                             return false;
                         }
@@ -585,7 +864,11 @@ public class Hard_Controller {
             // Otherwise, computer must have won. So stop the game and show
             // options to play again or exit
 
-            if (fiveInARow("player1") || fiveInARow("player2")) {
+            if (
+                    fiveInARow("player1") ||
+                    fiveInARow("player2") ||
+                    fiveInARow("player3") ||
+                    fiveInARow("player4")) {
                 // Find cells that the player selected that were never drawn
                 for (int col = 0; col < 5; col++) {
                     for (int row = 0; row < 5; row++) {
@@ -728,11 +1011,133 @@ public class Hard_Controller {
                                     player2_4_4.setStyle("-fx-background-color: red");
                                 }
                             }
+
+                        } else if (player3CellStates[col][row] == true) {
+                            // Check if the cell that the player selected was
+                            // never called
+                            if (!numbersCalled.contains(
+                                    currentLetter + " " + player3CellValues[col][row]) &&
+                                    !(col == 2 && row == 2)) {
+
+                                // Change that cell's background color
+                                if (col == 0 && row == 0) {
+                                    player3_0_0.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 1) {
+                                    player3_0_1.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 2) {
+                                    player3_0_2.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 3) {
+                                    player3_0_3.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 4) {
+                                    player3_0_4.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 0) {
+                                    player3_1_0.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 1) {
+                                    player3_1_1.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 2) {
+                                    player3_1_2.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 3) {
+                                    player3_1_3.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 4) {
+                                    player3_1_4.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 0) {
+                                    player3_2_0.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 1) {
+                                    player3_2_1.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 3) {
+                                    player3_2_3.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 4) {
+                                    player3_2_4.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 0) {
+                                    player3_3_0.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 1) {
+                                    player3_3_1.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 2) {
+                                    player3_3_2.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 3) {
+                                    player3_3_3.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 4) {
+                                    player3_3_4.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 0) {
+                                    player3_4_0.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 1) {
+                                    player3_4_1.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 2) {
+                                    player3_4_2.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 3) {
+                                    player3_4_3.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 4) {
+                                    player3_4_4.setStyle("-fx-background-color: red");
+                                }
+                            }
+
+                        } else if (player4CellStates[col][row] == true) {
+                            // Check if the cell that the player selected was
+                            // never called
+                            if (!numbersCalled.contains(
+                                    currentLetter + " " + player4CellValues[col][row]) &&
+                                    !(col == 2 && row == 2)) {
+
+                                // Change that cell's background color
+                                if (col == 0 && row == 0) {
+                                    player4_0_0.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 1) {
+                                    player4_0_1.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 2) {
+                                    player4_0_2.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 3) {
+                                    player4_0_3.setStyle("-fx-background-color: red");
+                                } else if (col == 0 && row == 4) {
+                                    player4_0_4.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 0) {
+                                    player4_1_0.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 1) {
+                                    player4_1_1.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 2) {
+                                    player4_1_2.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 3) {
+                                    player4_1_3.setStyle("-fx-background-color: red");
+                                } else if (col == 1 && row == 4) {
+                                    player4_1_4.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 0) {
+                                    player4_2_0.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 1) {
+                                    player4_2_1.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 3) {
+                                    player4_2_3.setStyle("-fx-background-color: red");
+                                } else if (col == 2 && row == 4) {
+                                    player4_2_4.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 0) {
+                                    player4_3_0.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 1) {
+                                    player4_3_1.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 2) {
+                                    player4_3_2.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 3) {
+                                    player4_3_3.setStyle("-fx-background-color: red");
+                                } else if (col == 3 && row == 4) {
+                                    player4_3_4.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 0) {
+                                    player4_4_0.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 1) {
+                                    player4_4_1.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 2) {
+                                    player4_4_2.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 3) {
+                                    player4_4_3.setStyle("-fx-background-color: red");
+                                } else if (col == 4 && row == 4) {
+                                    player4_4_4.setStyle("-fx-background-color: red");
+                                }
+                            }
                         }
                     }
                 }
 
-            } else if (fiveInARow("computer1") || fiveInARow("computer2")) {
+            } else if (
+                    fiveInARow("computer1") ||
+                    fiveInARow("computer2") ||
+                    fiveInARow("computer3") ||
+                    fiveInARow("computer4")) {
                 // Pause the UI
                 setPause(true);
 
@@ -785,7 +1190,11 @@ public class Hard_Controller {
                         computerTurn();
 
                         // Check the computer's cards to see if it won
-                        if (fiveInARow("computer1") || fiveInARow("computer2")) {
+                        if (
+                                fiveInARow("computer1") ||
+                                fiveInARow("computer2") ||
+                                fiveInARow("computer3") ||
+                                fiveInARow("computer4")) {
                             gameState = -1;
 
                             // Use Platform.runLater() to ensure that the
@@ -833,7 +1242,7 @@ public class Hard_Controller {
                             // Update the time display on the UI
                             // Check if autopilot mode is enabled
                             if (autopilotMode) {
-                                label_timer.setText("Timer: " + SECONDS + "\n\nAutopilot: enabled");
+                                label_timer.setText("Timer: " + SECONDS + "\n\nAutopilot:\nenabled");
                             } else {
                                 label_timer.setText("Timer: " + SECONDS);
                             }
@@ -904,6 +1313,40 @@ public class Hard_Controller {
                 computer2CellStates[0][4] = true;
             }
 
+            if (computer3CellValues[0][0] == number) {
+                computer3_0_0.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[0][0] = true;
+            } else if (computer3CellValues[0][1] == number) {
+                computer3_0_1.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[0][1] = true;
+            } else if (computer3CellValues[0][2] == number) {
+                computer3_0_2.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[0][2] = true;
+            } else if (computer3CellValues[0][3] == number) {
+                computer3_0_3.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[0][3] = true;
+            } else if (computer3CellValues[0][4] == number) {
+                computer3_0_4.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[0][4] = true;
+            }
+
+            if (computer4CellValues[0][0] == number) {
+                computer4_0_0.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[0][0] = true;
+            } else if (computer4CellValues[0][1] == number) {
+                computer4_0_1.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[0][1] = true;
+            } else if (computer4CellValues[0][2] == number) {
+                computer4_0_2.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[0][2] = true;
+            } else if (computer4CellValues[0][3] == number) {
+                computer4_0_3.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[0][3] = true;
+            } else if (computer4CellValues[0][4] == number) {
+                computer4_0_4.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[0][4] = true;
+            }
+
         } else if (letter.equals("I")) {
             if (computer1CellValues[1][0] == number) {
                 computer1_1_0.setStyle("-fx-background-color: lightgrey");
@@ -939,6 +1382,40 @@ public class Hard_Controller {
                 computer2CellStates[1][4] = true;
             }
 
+            if (computer3CellValues[1][0] == number) {
+                computer3_1_0.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[1][0] = true;
+            } else if (computer3CellValues[1][1] == number) {
+                computer3_1_1.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[1][1] = true;
+            } else if (computer3CellValues[1][2] == number) {
+                computer3_1_2.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[1][2] = true;
+            } else if (computer3CellValues[1][3] == number) {
+                computer3_1_3.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[1][3] = true;
+            } else if (computer3CellValues[1][4] == number) {
+                computer3_1_4.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[1][4] = true;
+            }
+
+            if (computer4CellValues[1][0] == number) {
+                computer4_1_0.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[1][0] = true;
+            } else if (computer4CellValues[1][1] == number) {
+                computer4_1_1.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[1][1] = true;
+            } else if (computer4CellValues[1][2] == number) {
+                computer4_1_2.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[1][2] = true;
+            } else if (computer4CellValues[1][3] == number) {
+                computer4_1_3.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[1][3] = true;
+            } else if (computer4CellValues[1][4] == number) {
+                computer4_1_4.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[1][4] = true;
+            }
+
         } else if (letter.equals("N")) {
             if (computer1CellValues[2][0] == number) {
                 computer1_2_0.setStyle("-fx-background-color: lightgrey");
@@ -966,6 +1443,34 @@ public class Hard_Controller {
             } else if (computer2CellValues[2][4] == number) {
                 computer2_2_4.setStyle("-fx-background-color: lightgrey");
                 computer2CellStates[2][4] = true;
+            }
+
+            if (computer3CellValues[2][0] == number) {
+                computer3_2_0.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[2][0] = true;
+            } else if (computer3CellValues[2][1] == number) {
+                computer3_2_1.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[2][1] = true;
+            } else if (computer3CellValues[2][3] == number) {
+                computer3_2_3.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[2][3] = true;
+            } else if (computer3CellValues[2][4] == number) {
+                computer3_2_4.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[2][4] = true;
+            }
+
+            if (computer4CellValues[2][0] == number) {
+                computer4_2_0.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[2][0] = true;
+            } else if (computer4CellValues[2][1] == number) {
+                computer4_2_1.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[2][1] = true;
+            } else if (computer4CellValues[2][3] == number) {
+                computer4_2_3.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[2][3] = true;
+            } else if (computer4CellValues[2][4] == number) {
+                computer4_2_4.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[2][4] = true;
             }
 
         } else if (letter.equals("G")) {
@@ -1003,6 +1508,40 @@ public class Hard_Controller {
                 computer2CellStates[3][4] = true;
             }
 
+            if (computer3CellValues[3][0] == number) {
+                computer3_3_0.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[3][0] = true;
+            } else if (computer3CellValues[3][1] == number) {
+                computer3_3_1.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[3][1] = true;
+            } else if (computer3CellValues[3][2] == number) {
+                computer3_3_2.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[3][2] = true;
+            } else if (computer3CellValues[3][3] == number) {
+                computer3_3_3.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[3][3] = true;
+            } else if (computer3CellValues[3][4] == number) {
+                computer3_3_4.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[3][4] = true;
+            }
+
+            if (computer4CellValues[3][0] == number) {
+                computer4_3_0.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[3][0] = true;
+            } else if (computer4CellValues[3][1] == number) {
+                computer4_3_1.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[3][1] = true;
+            } else if (computer4CellValues[3][2] == number) {
+                computer4_3_2.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[3][2] = true;
+            } else if (computer4CellValues[3][3] == number) {
+                computer4_3_3.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[3][3] = true;
+            } else if (computer4CellValues[3][4] == number) {
+                computer4_3_4.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[3][4] = true;
+            }
+
         } else if (letter.equals("O")) {
             if (computer1CellValues[4][0] == number) {
                 computer1_4_0.setStyle("-fx-background-color: lightgrey");
@@ -1036,6 +1575,40 @@ public class Hard_Controller {
             } else if (computer2CellValues[4][4] == number) {
                 computer2_4_4.setStyle("-fx-background-color: lightgrey");
                 computer2CellStates[4][4] = true;
+            }
+
+            if (computer3CellValues[4][0] == number) {
+                computer3_4_0.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[4][0] = true;
+            } else if (computer3CellValues[4][1] == number) {
+                computer3_4_1.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[4][1] = true;
+            } else if (computer3CellValues[4][2] == number) {
+                computer3_4_2.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[4][2] = true;
+            } else if (computer3CellValues[4][3] == number) {
+                computer3_4_3.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[4][3] = true;
+            } else if (computer3CellValues[4][4] == number) {
+                computer3_4_4.setStyle("-fx-background-color: lightgrey");
+                computer3CellStates[4][4] = true;
+            }
+
+            if (computer4CellValues[4][0] == number) {
+                computer4_4_0.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[4][0] = true;
+            } else if (computer4CellValues[4][1] == number) {
+                computer4_4_1.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[4][1] = true;
+            } else if (computer4CellValues[4][2] == number) {
+                computer4_4_2.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[4][2] = true;
+            } else if (computer4CellValues[4][3] == number) {
+                computer4_4_3.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[4][3] = true;
+            } else if (computer4CellValues[4][4] == number) {
+                computer4_4_4.setStyle("-fx-background-color: lightgrey");
+                computer4CellStates[4][4] = true;
             }
         }
     }
@@ -1085,6 +1658,40 @@ public class Hard_Controller {
                 player2CellStates[0][4] = true;
             }
 
+            if (player3CellValues[0][0] == number) {
+                player3_0_0.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[0][0] = true;
+            } else if (player3CellValues[0][1] == number) {
+                player3_0_1.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[0][1] = true;
+            } else if (player3CellValues[0][2] == number) {
+                player3_0_2.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[0][2] = true;
+            } else if (player3CellValues[0][3] == number) {
+                player3_0_3.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[0][3] = true;
+            } else if (player3CellValues[0][4] == number) {
+                player3_0_4.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[0][4] = true;
+            }
+
+            if (player4CellValues[0][0] == number) {
+                player4_0_0.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[0][0] = true;
+            } else if (player4CellValues[0][1] == number) {
+                player4_0_1.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[0][1] = true;
+            } else if (player4CellValues[0][2] == number) {
+                player4_0_2.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[0][2] = true;
+            } else if (player4CellValues[0][3] == number) {
+                player4_0_3.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[0][3] = true;
+            } else if (player4CellValues[0][4] == number) {
+                player4_0_4.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[0][4] = true;
+            }
+
         } else if (letter.equals("I")) {
             if (player1CellValues[1][0] == number) {
                 player1_1_0.setStyle("-fx-background-color: lightgrey");
@@ -1120,6 +1727,40 @@ public class Hard_Controller {
                 player2CellStates[1][4] = true;
             }
 
+            if (player3CellValues[1][0] == number) {
+                player3_1_0.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[1][0] = true;
+            } else if (player3CellValues[1][1] == number) {
+                player3_1_1.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[1][1] = true;
+            } else if (player3CellValues[1][2] == number) {
+                player3_1_2.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[1][2] = true;
+            } else if (player3CellValues[1][3] == number) {
+                player3_1_3.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[1][3] = true;
+            } else if (player3CellValues[1][4] == number) {
+                player3_1_4.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[1][4] = true;
+            }
+
+            if (player4CellValues[1][0] == number) {
+                player4_1_0.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[1][0] = true;
+            } else if (player4CellValues[1][1] == number) {
+                player4_1_1.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[1][1] = true;
+            } else if (player4CellValues[1][2] == number) {
+                player4_1_2.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[1][2] = true;
+            } else if (player4CellValues[1][3] == number) {
+                player4_1_3.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[1][3] = true;
+            } else if (player4CellValues[1][4] == number) {
+                player4_1_4.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[1][4] = true;
+            }
+
         } else if (letter.equals("N")) {
             if (player1CellValues[2][0] == number) {
                 player1_2_0.setStyle("-fx-background-color: lightgrey");
@@ -1147,6 +1788,34 @@ public class Hard_Controller {
             } else if (player2CellValues[2][4] == number) {
                 player2_2_4.setStyle("-fx-background-color: lightgrey");
                 player2CellStates[2][4] = true;
+            }
+
+            if (player3CellValues[2][0] == number) {
+                player3_2_0.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[2][0] = true;
+            } else if (player3CellValues[2][1] == number) {
+                player3_2_1.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[2][1] = true;
+            } else if (player3CellValues[2][3] == number) {
+                player3_2_3.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[2][3] = true;
+            } else if (player3CellValues[2][4] == number) {
+                player3_2_4.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[2][4] = true;
+            }
+
+            if (player4CellValues[2][0] == number) {
+                player4_2_0.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[2][0] = true;
+            } else if (player4CellValues[2][1] == number) {
+                player4_2_1.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[2][1] = true;
+            } else if (player4CellValues[2][3] == number) {
+                player4_2_3.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[2][3] = true;
+            } else if (player4CellValues[2][4] == number) {
+                player4_2_4.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[2][4] = true;
             }
 
         } else if (letter.equals("G")) {
@@ -1184,6 +1853,40 @@ public class Hard_Controller {
                 player2CellStates[3][4] = true;
             }
 
+            if (player3CellValues[3][0] == number) {
+                player3_3_0.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[3][0] = true;
+            } else if (player3CellValues[3][1] == number) {
+                player3_3_1.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[3][1] = true;
+            } else if (player3CellValues[3][2] == number) {
+                player3_3_2.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[3][2] = true;
+            } else if (player3CellValues[3][3] == number) {
+                player3_3_3.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[3][3] = true;
+            } else if (player3CellValues[3][4] == number) {
+                player3_3_4.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[3][4] = true;
+            }
+
+            if (player4CellValues[3][0] == number) {
+                player4_3_0.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[3][0] = true;
+            } else if (player4CellValues[3][1] == number) {
+                player4_3_1.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[3][1] = true;
+            } else if (player4CellValues[3][2] == number) {
+                player4_3_2.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[3][2] = true;
+            } else if (player4CellValues[3][3] == number) {
+                player4_3_3.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[3][3] = true;
+            } else if (player4CellValues[3][4] == number) {
+                player4_3_4.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[3][4] = true;
+            }
+
         } else if (letter.equals("O")) {
             if (player1CellValues[4][0] == number) {
                 player1_4_0.setStyle("-fx-background-color: lightgrey");
@@ -1217,6 +1920,40 @@ public class Hard_Controller {
             } else if (player2CellValues[4][4] == number) {
                 player2_4_4.setStyle("-fx-background-color: lightgrey");
                 player2CellStates[4][4] = true;
+            }
+
+            if (player3CellValues[4][0] == number) {
+                player3_4_0.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[4][0] = true;
+            } else if (player3CellValues[4][1] == number) {
+                player3_4_1.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[4][1] = true;
+            } else if (player3CellValues[4][2] == number) {
+                player3_4_2.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[4][2] = true;
+            } else if (player3CellValues[4][3] == number) {
+                player3_4_3.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[4][3] = true;
+            } else if (player3CellValues[4][4] == number) {
+                player3_4_4.setStyle("-fx-background-color: lightgrey");
+                player3CellStates[4][4] = true;
+            }
+
+            if (player4CellValues[4][0] == number) {
+                player4_4_0.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[4][0] = true;
+            } else if (player4CellValues[4][1] == number) {
+                player4_4_1.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[4][1] = true;
+            } else if (player4CellValues[4][2] == number) {
+                player4_4_2.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[4][2] = true;
+            } else if (player4CellValues[4][3] == number) {
+                player4_4_3.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[4][3] = true;
+            } else if (player4CellValues[4][4] == number) {
+                player4_4_4.setStyle("-fx-background-color: lightgrey");
+                player4CellStates[4][4] = true;
             }
         }
     }
@@ -1927,6 +2664,684 @@ public class Hard_Controller {
                     }
                 }
             });
+
+
+
+            player3_0_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[0][0] == true) {
+                        player3_0_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[0][0] = false;
+                    } else {
+                        player3_0_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[0][0] = true;
+                    }
+                }
+            });
+            player3_0_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[0][1] == true) {
+                        player3_0_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[0][1] = false;
+                    } else {
+                        player3_0_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[0][1] = true;
+                    }
+                }
+            });
+            player3_0_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[0][2] == true) {
+                        player3_0_2.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[0][2] = false;
+                    } else {
+                        player3_0_2.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[0][2] = true;
+                    }
+                }
+            });
+            player3_0_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[0][3] == true) {
+                        player3_0_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[0][3] = false;
+                    } else {
+                        player3_0_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[0][3] = true;
+                    }
+                }
+            });
+            player3_0_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[0][4] == true) {
+                        player3_0_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[0][4] = false;
+                    } else {
+                        player3_0_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[0][4] = true;
+                    }
+                }
+            });
+            player3_1_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[1][0] == true) {
+                        player3_1_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[1][0] = false;
+                    } else {
+                        player3_1_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[1][0] = true;
+                    }
+                }
+            });
+            player3_1_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[1][1] == true) {
+                        player3_1_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[1][1] = false;
+                    } else {
+                        player3_1_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[1][1] = true;
+                    }
+                }
+            });
+            player3_1_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[1][2] == true) {
+                        player3_1_2.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[1][2] = false;
+                    } else {
+                        player3_1_2.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[1][2] = true;
+                    }
+                }
+            });
+            player3_1_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[1][3] == true) {
+                        player3_1_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[1][3] = false;
+                    } else {
+                        player3_1_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[1][3] = true;
+                    }
+                }
+            });
+            player3_1_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[1][4] == true) {
+                        player3_1_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[1][4] = false;
+                    } else {
+                        player3_1_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[1][4] = true;
+                    }
+                }
+            });
+            player3_2_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[2][0] == true) {
+                        player3_2_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[2][0] = false;
+                    } else {
+                        player3_2_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[2][0] = true;
+                    }
+                }
+            });
+            player3_2_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[2][1] == true) {
+                        player3_2_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[2][1] = false;
+                    } else {
+                        player3_2_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[2][1] = true;
+                    }
+                }
+            });
+            player3_2_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[2][3] == true) {
+                        player3_2_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[2][3] = false;
+                    } else {
+                        player3_2_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[2][3] = true;
+                    }
+                }
+            });
+            player3_2_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[2][4] == true) {
+                        player3_2_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[2][4] = false;
+                    } else {
+                        player3_2_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[2][4] = true;
+                    }
+                }
+            });
+            player3_3_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[3][0] == true) {
+                        player3_3_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[3][0] = false;
+                    } else {
+                        player3_3_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[3][0] = true;
+                    }
+                }
+            });
+            player3_3_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[3][1] == true) {
+                        player3_3_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[3][1] = false;
+                    } else {
+                        player3_3_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[3][1] = true;
+                    }
+                }
+            });
+            player3_3_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[3][2] == true) {
+                        player3_3_2.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[3][2] = false;
+                    } else {
+                        player3_3_2.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[3][2] = true;
+                    }
+                }
+            });
+            player3_3_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[3][3] == true) {
+                        player3_3_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[3][3] = false;
+                    } else {
+                        player3_3_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[3][3] = true;
+                    }
+                }
+            });
+            player3_3_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[3][4] == true) {
+                        player3_3_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[3][4] = false;
+                    } else {
+                        player3_3_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[3][4] = true;
+                    }
+                }
+            });
+            player3_4_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[4][0] == true) {
+                        player3_4_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[4][0] = false;
+                    } else {
+                        player3_4_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[4][0] = true;
+                    }
+                }
+            });
+            player3_4_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[4][1] == true) {
+                        player3_4_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[4][1] = false;
+                    } else {
+                        player3_4_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[4][1] = true;
+                    }
+                }
+            });
+            player3_4_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[4][2] == true) {
+                        player3_4_2.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[4][2] = false;
+                    } else {
+                        player3_4_2.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[4][2] = true;
+                    }
+                }
+            });
+            player3_4_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[4][3] == true) {
+                        player3_4_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[4][3] = false;
+                    } else {
+                        player3_4_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[4][3] = true;
+                    }
+                }
+            });
+            player3_4_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player3CellStates[4][4] == true) {
+                        player3_4_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player3CellStates[4][4] = false;
+                    } else {
+                        player3_4_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player3CellStates[4][4] = true;
+                    }
+                }
+            });
+
+
+
+            player4_0_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[0][0] == true) {
+                        player4_0_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[0][0] = false;
+                    } else {
+                        player4_0_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[0][0] = true;
+                    }
+                }
+            });
+            player4_0_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[0][1] == true) {
+                        player4_0_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[0][1] = false;
+                    } else {
+                        player4_0_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[0][1] = true;
+                    }
+                }
+            });
+            player4_0_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[0][2] == true) {
+                        player4_0_2.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[0][2] = false;
+                    } else {
+                        player4_0_2.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[0][2] = true;
+                    }
+                }
+            });
+            player4_0_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[0][3] == true) {
+                        player4_0_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[0][3] = false;
+                    } else {
+                        player4_0_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[0][3] = true;
+                    }
+                }
+            });
+            player4_0_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[0][4] == true) {
+                        player4_0_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[0][4] = false;
+                    } else {
+                        player4_0_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[0][4] = true;
+                    }
+                }
+            });
+            player4_1_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[1][0] == true) {
+                        player4_1_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[1][0] = false;
+                    } else {
+                        player4_1_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[1][0] = true;
+                    }
+                }
+            });
+            player4_1_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[1][1] == true) {
+                        player4_1_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[1][1] = false;
+                    } else {
+                        player4_1_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[1][1] = true;
+                    }
+                }
+            });
+            player4_1_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[1][2] == true) {
+                        player4_1_2.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[1][2] = false;
+                    } else {
+                        player4_1_2.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[1][2] = true;
+                    }
+                }
+            });
+            player4_1_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[1][3] == true) {
+                        player4_1_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[1][3] = false;
+                    } else {
+                        player4_1_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[1][3] = true;
+                    }
+                }
+            });
+            player4_1_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[1][4] == true) {
+                        player4_1_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[1][4] = false;
+                    } else {
+                        player4_1_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[1][4] = true;
+                    }
+                }
+            });
+            player4_2_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[2][0] == true) {
+                        player4_2_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[2][0] = false;
+                    } else {
+                        player4_2_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[2][0] = true;
+                    }
+                }
+            });
+            player4_2_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[2][1] == true) {
+                        player4_2_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[2][1] = false;
+                    } else {
+                        player4_2_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[2][1] = true;
+                    }
+                }
+            });
+            player4_2_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[2][3] == true) {
+                        player4_2_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[2][3] = false;
+                    } else {
+                        player4_2_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[2][3] = true;
+                    }
+                }
+            });
+            player4_2_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[2][4] == true) {
+                        player4_2_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[2][4] = false;
+                    } else {
+                        player4_2_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[2][4] = true;
+                    }
+                }
+            });
+            player4_3_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[3][0] == true) {
+                        player4_3_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[3][0] = false;
+                    } else {
+                        player4_3_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[3][0] = true;
+                    }
+                }
+            });
+            player4_3_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[3][1] == true) {
+                        player4_3_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[3][1] = false;
+                    } else {
+                        player4_3_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[3][1] = true;
+                    }
+                }
+            });
+            player4_3_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[3][2] == true) {
+                        player4_3_2.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[3][2] = false;
+                    } else {
+                        player4_3_2.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[3][2] = true;
+                    }
+                }
+            });
+            player4_3_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[3][3] == true) {
+                        player4_3_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[3][3] = false;
+                    } else {
+                        player4_3_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[3][3] = true;
+                    }
+                }
+            });
+            player4_3_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[3][4] == true) {
+                        player4_3_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[3][4] = false;
+                    } else {
+                        player4_3_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[3][4] = true;
+                    }
+                }
+            });
+            player4_4_0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[4][0] == true) {
+                        player4_4_0.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[4][0] = false;
+                    } else {
+                        player4_4_0.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[4][0] = true;
+                    }
+                }
+            });
+            player4_4_1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[4][1] == true) {
+                        player4_4_1.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[4][1] = false;
+                    } else {
+                        player4_4_1.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[4][1] = true;
+                    }
+                }
+            });
+            player4_4_2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[4][2] == true) {
+                        player4_4_2.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[4][2] = false;
+                    } else {
+                        player4_4_2.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[4][2] = true;
+                    }
+                }
+            });
+            player4_4_3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[4][3] == true) {
+                        player4_4_3.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[4][3] = false;
+                    } else {
+                        player4_4_3.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[4][3] = true;
+                    }
+                }
+            });
+            player4_4_4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player4CellStates[4][4] == true) {
+                        player4_4_4.setStyle(
+                                "-fx-background-color: transparent");
+                        player4CellStates[4][4] = false;
+                    } else {
+                        player4_4_4.setStyle(
+                                "-fx-background-color: lightgrey");
+                        player4CellStates[4][4] = true;
+                    }
+                }
+            });
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // Create array to store states of the player's and computer's cells
@@ -1946,11 +3361,24 @@ public class Hard_Controller {
                         while (existsInArray(player2CellValues, player2CellValues[col][row]) != 1) {
                             player2CellValues[col][row] = randomNum(1, 20);
                         }
+                        while (existsInArray(player3CellValues, player3CellValues[col][row]) != 1) {
+                            player3CellValues[col][row] = randomNum(1, 20);
+                        }
+                        while (existsInArray(player4CellValues, player4CellValues[col][row]) != 1) {
+                            player4CellValues[col][row] = randomNum(1, 20);
+                        }
+
                         while (existsInArray(computer1CellValues, computer1CellValues[col][row]) != 1) {
                             computer1CellValues[col][row] = randomNum(1, 20);
                         }
                         while (existsInArray(computer2CellValues, computer2CellValues[col][row]) != 1) {
                             computer2CellValues[col][row] = randomNum(1, 20);
+                        }
+                        while (existsInArray(computer3CellValues, computer3CellValues[col][row]) != 1) {
+                            computer3CellValues[col][row] = randomNum(1, 20);
+                        }
+                        while (existsInArray(computer4CellValues, computer4CellValues[col][row]) != 1) {
+                            computer4CellValues[col][row] = randomNum(1, 20);
                         }
 
                     } else if (col == 1) {
@@ -1960,11 +3388,24 @@ public class Hard_Controller {
                         while (existsInArray(player2CellValues, player2CellValues[col][row]) != 1) {
                             player2CellValues[col][row] = randomNum(20, 40);
                         }
+                        while (existsInArray(player3CellValues, player3CellValues[col][row]) != 1) {
+                            player3CellValues[col][row] = randomNum(20, 40);
+                        }
+                        while (existsInArray(player4CellValues, player4CellValues[col][row]) != 1) {
+                            player4CellValues[col][row] = randomNum(20, 40);
+                        }
+
                         while (existsInArray(computer1CellValues, computer1CellValues[col][row]) != 1) {
                             computer1CellValues[col][row] = randomNum(20, 40);
                         }
                         while (existsInArray(computer2CellValues, computer2CellValues[col][row]) != 1) {
                             computer2CellValues[col][row] = randomNum(20, 40);
+                        }
+                        while (existsInArray(computer3CellValues, computer3CellValues[col][row]) != 1) {
+                            computer3CellValues[col][row] = randomNum(20, 40);
+                        }
+                        while (existsInArray(computer4CellValues, computer4CellValues[col][row]) != 1) {
+                            computer4CellValues[col][row] = randomNum(20, 40);
                         }
 
                     } else if (col == 2 && row != 2) {
@@ -1974,11 +3415,24 @@ public class Hard_Controller {
                         while (existsInArray(player2CellValues, player2CellValues[col][row]) != 1) {
                             player2CellValues[col][row] = randomNum(40, 60);
                         }
+                        while (existsInArray(player3CellValues, player3CellValues[col][row]) != 1) {
+                            player3CellValues[col][row] = randomNum(40, 60);
+                        }
+                        while (existsInArray(player4CellValues, player4CellValues[col][row]) != 1) {
+                            player4CellValues[col][row] = randomNum(40, 60);
+                        }
+
                         while (existsInArray(computer1CellValues, computer1CellValues[col][row]) != 1) {
                             computer1CellValues[col][row] = randomNum(40, 60);
                         }
                         while (existsInArray(computer2CellValues, computer2CellValues[col][row]) != 1) {
                             computer2CellValues[col][row] = randomNum(40, 60);
+                        }
+                        while (existsInArray(computer3CellValues, computer3CellValues[col][row]) != 1) {
+                            computer3CellValues[col][row] = randomNum(40, 60);
+                        }
+                        while (existsInArray(computer4CellValues, computer4CellValues[col][row]) != 1) {
+                            computer4CellValues[col][row] = randomNum(40, 60);
                         }
 
                     } else if (col == 3) {
@@ -1988,11 +3442,24 @@ public class Hard_Controller {
                         while (existsInArray(player2CellValues, player2CellValues[col][row]) != 1) {
                             player2CellValues[col][row] = randomNum(60, 80);
                         }
+                        while (existsInArray(player3CellValues, player3CellValues[col][row]) != 1) {
+                            player3CellValues[col][row] = randomNum(60, 80);
+                        }
+                        while (existsInArray(player4CellValues, player4CellValues[col][row]) != 1) {
+                            player4CellValues[col][row] = randomNum(60, 80);
+                        }
+
                         while (existsInArray(computer1CellValues, computer1CellValues[col][row]) != 1) {
                             computer1CellValues[col][row] = randomNum(60, 80);
                         }
                         while (existsInArray(computer2CellValues, computer2CellValues[col][row]) != 1) {
                             computer2CellValues[col][row] = randomNum(60, 80);
+                        }
+                        while (existsInArray(computer3CellValues, computer3CellValues[col][row]) != 1) {
+                            computer3CellValues[col][row] = randomNum(60, 80);
+                        }
+                        while (existsInArray(computer4CellValues, computer4CellValues[col][row]) != 1) {
+                            computer4CellValues[col][row] = randomNum(60, 80);
                         }
 
                     } else if (col == 4) {
@@ -2002,11 +3469,24 @@ public class Hard_Controller {
                         while (existsInArray(player2CellValues, player2CellValues[col][row]) != 1) {
                             player2CellValues[col][row] = randomNum(80, 99);
                         }
+                        while (existsInArray(player3CellValues, player3CellValues[col][row]) != 1) {
+                            player3CellValues[col][row] = randomNum(80, 99);
+                        }
+                        while (existsInArray(player4CellValues, player4CellValues[col][row]) != 1) {
+                            player4CellValues[col][row] = randomNum(80, 99);
+                        }
+
                         while (existsInArray(computer1CellValues, computer1CellValues[col][row]) != 1) {
                             computer1CellValues[col][row] = randomNum(80, 99);
                         }
                         while (existsInArray(computer2CellValues, computer2CellValues[col][row]) != 1) {
                             computer2CellValues[col][row] = randomNum(80, 99);
+                        }
+                        while (existsInArray(computer3CellValues, computer3CellValues[col][row]) != 1) {
+                            computer3CellValues[col][row] = randomNum(80, 99);
+                        }
+                        while (existsInArray(computer4CellValues, computer4CellValues[col][row]) != 1) {
+                            computer4CellValues[col][row] = randomNum(80, 99);
                         }
                     }
 
@@ -2014,13 +3494,23 @@ public class Hard_Controller {
                     if (col == 2 && row == 2) {
                         player1CellStates[col][row] = true;
                         player2CellStates[col][row] = true;
+                        player3CellStates[col][row] = true;
+                        player4CellStates[col][row] = true;
+
                         computer1CellStates[col][row] = true;
                         computer2CellStates[col][row] = true;
+                        computer3CellStates[col][row] = true;
+                        computer4CellStates[col][row] = true;
                     } else {
                         player1CellStates[col][row] = false;
                         player2CellStates[col][row] = false;
+                        player3CellStates[col][row] = false;
+                        player4CellStates[col][row] = false;
+
                         computer1CellStates[col][row] = false;
                         computer2CellStates[col][row] = false;
+                        computer3CellStates[col][row] = false;
+                        computer4CellStates[col][row] = false;
                     }
                 }
             }
@@ -2076,6 +3566,56 @@ public class Hard_Controller {
             player2_4_3.setText("" + player2CellValues[4][3]);
             player2_4_4.setText("" + player2CellValues[4][4]);
 
+            player3_0_0.setText("" + player3CellValues[0][0]);
+            player3_0_1.setText("" + player3CellValues[0][1]);
+            player3_0_2.setText("" + player3CellValues[0][2]);
+            player3_0_3.setText("" + player3CellValues[0][3]);
+            player3_0_4.setText("" + player3CellValues[0][4]);
+            player3_1_0.setText("" + player3CellValues[1][0]);
+            player3_1_1.setText("" + player3CellValues[1][1]);
+            player3_1_2.setText("" + player3CellValues[1][2]);
+            player3_1_3.setText("" + player3CellValues[1][3]);
+            player3_1_4.setText("" + player3CellValues[1][4]);
+            player3_2_0.setText("" + player3CellValues[2][0]);
+            player3_2_1.setText("" + player3CellValues[2][1]);
+            player3_2_3.setText("" + player3CellValues[2][3]);
+            player3_2_4.setText("" + player3CellValues[2][4]);
+            player3_3_0.setText("" + player3CellValues[3][0]);
+            player3_3_1.setText("" + player3CellValues[3][1]);
+            player3_3_2.setText("" + player3CellValues[3][2]);
+            player3_3_3.setText("" + player3CellValues[3][3]);
+            player3_3_4.setText("" + player3CellValues[3][4]);
+            player3_4_0.setText("" + player3CellValues[4][0]);
+            player3_4_1.setText("" + player3CellValues[4][1]);
+            player3_4_2.setText("" + player3CellValues[4][2]);
+            player3_4_3.setText("" + player3CellValues[4][3]);
+            player3_4_4.setText("" + player3CellValues[4][4]);
+
+            player4_0_0.setText("" + player4CellValues[0][0]);
+            player4_0_1.setText("" + player4CellValues[0][1]);
+            player4_0_2.setText("" + player4CellValues[0][2]);
+            player4_0_3.setText("" + player4CellValues[0][3]);
+            player4_0_4.setText("" + player4CellValues[0][4]);
+            player4_1_0.setText("" + player4CellValues[1][0]);
+            player4_1_1.setText("" + player4CellValues[1][1]);
+            player4_1_2.setText("" + player4CellValues[1][2]);
+            player4_1_3.setText("" + player4CellValues[1][3]);
+            player4_1_4.setText("" + player4CellValues[1][4]);
+            player4_2_0.setText("" + player4CellValues[2][0]);
+            player4_2_1.setText("" + player4CellValues[2][1]);
+            player4_2_3.setText("" + player4CellValues[2][3]);
+            player4_2_4.setText("" + player4CellValues[2][4]);
+            player4_3_0.setText("" + player4CellValues[3][0]);
+            player4_3_1.setText("" + player4CellValues[3][1]);
+            player4_3_2.setText("" + player4CellValues[3][2]);
+            player4_3_3.setText("" + player4CellValues[3][3]);
+            player4_3_4.setText("" + player4CellValues[3][4]);
+            player4_4_0.setText("" + player4CellValues[4][0]);
+            player4_4_1.setText("" + player4CellValues[4][1]);
+            player4_4_2.setText("" + player4CellValues[4][2]);
+            player4_4_3.setText("" + player4CellValues[4][3]);
+            player4_4_4.setText("" + player4CellValues[4][4]);
+
             // Set the randomly generated values for the computer's cards
             computer1_0_0.setText("" + computer1CellValues[0][0]);
             computer1_0_1.setText("" + computer1CellValues[0][1]);
@@ -2127,6 +3667,56 @@ public class Hard_Controller {
             computer2_4_3.setText("" + computer2CellValues[4][3]);
             computer2_4_4.setText("" + computer2CellValues[4][4]);
 
+            computer3_0_0.setText("" + computer3CellValues[0][0]);
+            computer3_0_1.setText("" + computer3CellValues[0][1]);
+            computer3_0_2.setText("" + computer3CellValues[0][2]);
+            computer3_0_3.setText("" + computer3CellValues[0][3]);
+            computer3_0_4.setText("" + computer3CellValues[0][4]);
+            computer3_1_0.setText("" + computer3CellValues[1][0]);
+            computer3_1_1.setText("" + computer3CellValues[1][1]);
+            computer3_1_2.setText("" + computer3CellValues[1][2]);
+            computer3_1_3.setText("" + computer3CellValues[1][3]);
+            computer3_1_4.setText("" + computer3CellValues[1][4]);
+            computer3_2_0.setText("" + computer3CellValues[2][0]);
+            computer3_2_1.setText("" + computer3CellValues[2][1]);
+            computer3_2_3.setText("" + computer3CellValues[2][3]);
+            computer3_2_4.setText("" + computer3CellValues[2][4]);
+            computer3_3_0.setText("" + computer3CellValues[3][0]);
+            computer3_3_1.setText("" + computer3CellValues[3][1]);
+            computer3_3_2.setText("" + computer3CellValues[3][2]);
+            computer3_3_3.setText("" + computer3CellValues[3][3]);
+            computer3_3_4.setText("" + computer3CellValues[3][4]);
+            computer3_4_0.setText("" + computer3CellValues[4][0]);
+            computer3_4_1.setText("" + computer3CellValues[4][1]);
+            computer3_4_2.setText("" + computer3CellValues[4][2]);
+            computer3_4_3.setText("" + computer3CellValues[4][3]);
+            computer3_4_4.setText("" + computer3CellValues[4][4]);
+
+            computer4_0_0.setText("" + computer4CellValues[0][0]);
+            computer4_0_1.setText("" + computer4CellValues[0][1]);
+            computer4_0_2.setText("" + computer4CellValues[0][2]);
+            computer4_0_3.setText("" + computer4CellValues[0][3]);
+            computer4_0_4.setText("" + computer4CellValues[0][4]);
+            computer4_1_0.setText("" + computer4CellValues[1][0]);
+            computer4_1_1.setText("" + computer4CellValues[1][1]);
+            computer4_1_2.setText("" + computer4CellValues[1][2]);
+            computer4_1_3.setText("" + computer4CellValues[1][3]);
+            computer4_1_4.setText("" + computer4CellValues[1][4]);
+            computer4_2_0.setText("" + computer4CellValues[2][0]);
+            computer4_2_1.setText("" + computer4CellValues[2][1]);
+            computer4_2_3.setText("" + computer4CellValues[2][3]);
+            computer4_2_4.setText("" + computer4CellValues[2][4]);
+            computer4_3_0.setText("" + computer4CellValues[3][0]);
+            computer4_3_1.setText("" + computer4CellValues[3][1]);
+            computer4_3_2.setText("" + computer4CellValues[3][2]);
+            computer4_3_3.setText("" + computer4CellValues[3][3]);
+            computer4_3_4.setText("" + computer4CellValues[3][4]);
+            computer4_4_0.setText("" + computer4CellValues[4][0]);
+            computer4_4_1.setText("" + computer4CellValues[4][1]);
+            computer4_4_2.setText("" + computer4CellValues[4][2]);
+            computer4_4_3.setText("" + computer4CellValues[4][3]);
+            computer4_4_4.setText("" + computer4CellValues[4][4]);
+
             // Randomly generate a letter and a number
             label_number.setText(generateRandomNumberLetter());
 
@@ -2166,7 +3756,7 @@ public class Hard_Controller {
             returnHome();
 
         } else if (gameState != 0 && key.getCode() == KeyCode.R) {
-            openWindow("Medium.fxml", "Bingo", currentStage);
+            openWindow("Hard.fxml", "Bingo", currentStage);
         }
     }
 
