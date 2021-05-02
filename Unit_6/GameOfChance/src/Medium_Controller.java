@@ -819,10 +819,7 @@ public class Medium_Controller {
                     }
                     
                     // Create a final variable to use in Platform.runLater()
-
-                    // -1 is for showing seconds left because when you have 0.5
-                    // seconds left, you should show 0 instead of 1
-                    final int SECONDS = timerDuration - seconds - 1;
+                    final int SECONDS = timerDuration - seconds;
 
                     // Update the timer label to show seconds left using
                     // Platform.runLater() so the timer thread can change
