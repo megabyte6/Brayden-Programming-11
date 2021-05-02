@@ -34,14 +34,14 @@ public class Start_Controller implements Initializable {
                 "Easy",
                 "Medium",
                 "Hard");
-        comboBox_gameMode.getSelectionModel().selectFirst();
+        comboBox_gameMode.getSelectionModel().select(DataStore.getInteger("defaultDifficulty"));
 
         // Add items to the ComboBox for different timer lengths and select the second item
         comboBox_timerLength.getItems().addAll(
                 "3",
                 "5",
                 "10");
-        comboBox_timerLength.getSelectionModel().selectLast();
+        comboBox_timerLength.getSelectionModel().select(DataStore.getInteger("defaultTimerLength"));
     }
 
     // Use to open a new window
@@ -104,16 +104,35 @@ public class Start_Controller implements Initializable {
         // Store the timer length selected
         DataStore.addInteger("timerDuration",
                 Integer.parseInt(comboBox_timerLength.getValue()));
+        
+        switch (comboBox_timerLength.getValue()) {
+            case "3":
+                DataStore.addInteger("defaultTimerLength", 0);
+                break;
+            case "5":
+                DataStore.addInteger("defaultTimerLength", 1);
+            default:
+                DataStore.addInteger("defaultTimerLength", 2);
+        }
 
         // Store the full screen state of the application
         DataStore.addBoolean("fullScreenState", currentStage.isFullScreen());
 
         // Check if easy, medium, or hard mode is selected
         if ("Easy".equals(comboBox_gameMode.getValue())) {
+            // Store the selected value for later use
+            DataStore.addInteger("defaultDifficulty", 0);
+
             openWindow("Easy.fxml", "Bingo", currentStage);
         } else if ("Medium".equals(comboBox_gameMode.getValue())) {
+            // Store the selected value for later use
+            DataStore.addInteger("defaultDifficulty", 1);
+
             openWindow("Medium.fxml", "Bingo", currentStage);
         } else if ("Hard".equals(comboBox_gameMode.getValue())) {
+            // Store the selected value for later use
+            DataStore.addInteger("defaultDifficulty", 2);
+
             openWindow("Hard.fxml", "Bingo", currentStage);
         }
     }

@@ -10,6 +10,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        // Set the default difficulty and timer settings
+        DataStore.addInteger("defaultDifficulty", 0);
+        DataStore.addInteger("defaultTimerLength", 2);
+
         primaryStage.setTitle("Bingo");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Start.fxml"))));
         primaryStage.show();
