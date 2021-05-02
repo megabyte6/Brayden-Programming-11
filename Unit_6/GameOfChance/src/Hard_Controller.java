@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Hard_Controller {
     // Set to true for debugging info
@@ -1967,6 +1968,16 @@ public class Hard_Controller {
     // Initialize game board when user starts the game
     public void overlayFunction() {
         if (!gameInitialized) {
+            Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
+
+            // Stop the timer thread when the window is closed
+            currentStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
+                @Override
+                public void handle(WindowEvent arg0) {
+                    gamePaused = true;
+                }
+            });
+
             // Key combination to activate the autopilot mode for the player
             final KeyCombination autopilotKeyCombo = new KeyCodeCombination(
                     KeyCode.A,
@@ -3722,7 +3733,6 @@ public class Hard_Controller {
 
             // Set the full screen state
             if (DataStore.getBoolean("fullScreenState")) {
-                Stage currentStage = (Stage) anchorPane_root.getScene().getWindow();
                 currentStage.setFullScreen(DataStore.getBoolean("fullScreenState"));
             }
 
@@ -3763,6 +3773,10 @@ public class Hard_Controller {
     // This is called when the user clicks the back button
     public void returnHome() {
         Stage currentStage = (Stage) button_back.getScene().getWindow();
+
+        // Stop the timer thread when the window is closed
+        gamePaused = true;
+
         openWindow("Start.fxml", "Bingo", currentStage);
     }
 
