@@ -1,1 +1,1 @@
-& 'C:\Program Files\Java\jdk-1.8.0_281\bin\java.exe' -jar .\BingoWithJavaFX.jar
+& 'C:\Program Files\Java\jdk-1.8.0_281\bin\java.exe' -jar .\bin\standalone-application\BingoWithJavaFX.jar
