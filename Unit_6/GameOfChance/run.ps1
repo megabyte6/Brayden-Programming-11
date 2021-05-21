@@ -8,5 +8,5 @@ if (($args[0]) -and ($args[0] -eq 'app')) {
         Write-Host "Error: the file '$pathToJava8' doesn't seem to exist"
     }
 } else {
-    java --module-path ..\javafx-sdk-16\lib\ --add-modules javafx.controls,javafx.fxml -cp .\bin\compiled\ Main
+    java --module-path ..\resources\win\javafx-sdk-16\lib --add-modules javafx.controls,javafx.fxml -cp .\bin\compiled\ Main
 }

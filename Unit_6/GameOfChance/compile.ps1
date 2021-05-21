@@ -9,5 +9,5 @@ Copy-Item -Path '.\src\*.fxml' -Destination '.\bin\compiled\' -Force
 jar -c -f .\bin\standalone-application\BingoWithJavaFX.jar -m .\MANIFEST.MF -C .\bin\compiled\ .
 
 # Recompile classes using the latest version of java and put them in the bin folder
-javac --module-path ..\javafx-sdk-16\lib\ --add-modules javafx.controls,javafx.fxml .\src\DataStore.java .\src\Easy_Controller.java .\src\Hard_Controller.java .\src\Instructions_Controller.java .\src\Main.java .\src\Medium_Controller.java .\src\Start_Controller.java
+javac --module-path ..\resources\win\javafx-sdk-16\lib\ --add-modules javafx.controls,javafx.fxml .\src\DataStore.java .\src\Easy_Controller.java .\src\Hard_Controller.java .\src\Instructions_Controller.java .\src\Main.java .\src\Medium_Controller.java .\src\Start_Controller.java
 Move-Item -Path '.\src\*.class' -Destination '.\bin\compiled\' -Force
