@@ -1,6 +1,4 @@
 $javaFiles = @(
-    '.\lib\com\github\megabyte6\utils\javafx\AlertBox.java'
-    '.\lib\com\github\megabyte6\utils\javafx\ConfirmBox.java'
     '.\lib\com\github\megabyte6\utils\Database.java'
     '.\src\App.java'
     '.\src\EditFriend.java'
