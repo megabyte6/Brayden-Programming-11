@@ -52,6 +52,7 @@ public class FriendBook implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         FriendDatabase.setInteger("friendIndex", -1);
+
         // TODO : Get friends from file
         FriendDatabase.addFriend(new Friend("John", "Glasscot"));
         FriendDatabase.addFriend(new Friend("Sebastian", "Stan"));
@@ -80,18 +81,22 @@ public class FriendBook implements Initializable {
     }
 
     public void processKey(KeyEvent key) {
-        if (key.getCode() == KeyCode.DELETE) {
+        if (key.isControlDown()) {
+            if (key.getCode() == KeyCode.R) {
+                refresh();
+            } else if (key.getCode() == KeyCode.N) {
+                createFriend();
+            } else if (key.getCode() == KeyCode.E) {
+                editFriend();
+            }
+        } else if (key.getCode() == KeyCode.DELETE) {
             deleteFriend();
-        } else if (key.getCode() == KeyCode.R) {
-            refresh();
-        } else if (key.getCode() == KeyCode.N) {
-            createFriend();
-        } else if (key.getCode() == KeyCode.E) {
-            editFriend();
-        }
+        } 
     }
 
     public void refresh() {
+        // Check if the ListView and array of Friend objects are out of sync
+        // Should not happen normally
         if (listView_friendList.getItems().size() != FriendDatabase.friendArraySize()) {
             // Reload all items
             listView_friendList.getItems().clear();
