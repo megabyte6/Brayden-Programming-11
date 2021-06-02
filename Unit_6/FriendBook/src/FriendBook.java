@@ -56,7 +56,12 @@ public class FriendBook implements Initializable {
         FriendDatabase.addFriend(new Friend("John", "Glasscot"));
         FriendDatabase.addFriend(new Friend("Sebastian", "Stan"));
         FriendDatabase.addFriend(new Friend("Tony", "Stark"));
-        refresh();
+
+        // Initialize ListView
+        for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
+            listView_friendList.getItems().add(FriendDatabase.getFriend(i));
+        }
+        listView_friendList.getSelectionModel().selectFirst();
     }
 
     private Stage openWindow(String fxmlFile, String titleName) {
@@ -87,9 +92,18 @@ public class FriendBook implements Initializable {
     }
 
     public void refresh() {
-        listView_friendList.getItems().clear();
+        if (listView_friendList.getItems().size() != FriendDatabase.friendArraySize()) {
+            // Reload all items
+            listView_friendList.getItems().clear();
+            for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
+                listView_friendList.getItems().add(FriendDatabase.getFriend(i));
+            }
+        }
         for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
-            listView_friendList.getItems().add(FriendDatabase.getFriend(i));
+            if (!(listView_friendList.getItems().get(i))
+                    .equals(FriendDatabase.getFriend(i))) {
+                listView_friendList.getItems().set(i, FriendDatabase.getFriend(i));
+            }
         }
     }
 
@@ -141,6 +155,7 @@ public class FriendBook implements Initializable {
         Friend removedFriend = FriendDatabase.removeFriend(selectedIndex);
         FriendDatabase.insertFriend(removedFriend, selectedIndex - 1);
         refresh();
+        listView_friendList.getSelectionModel().select(selectedIndex - 1);
     }
 
     public void moveItemDown() {
@@ -149,9 +164,10 @@ public class FriendBook implements Initializable {
             new Alert(AlertType.NONE, "Select a friend to move", ButtonType.OK)
                     .showAndWait();
             return;
-        }
+        } else if (selectedIndex == listView_friendList.getItems().size() - 1) return;
         Friend removedFriend = FriendDatabase.removeFriend(selectedIndex);
         FriendDatabase.insertFriend(removedFriend, selectedIndex + 1);
         refresh();
+        listView_friendList.getSelectionModel().select(selectedIndex + 1);
     }
 }
