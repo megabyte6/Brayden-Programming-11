@@ -6,7 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class EditFriend implements Initializable {
 
@@ -96,6 +99,12 @@ public class EditFriend implements Initializable {
 
             // Set other info
             textField_otherInfo.setText(friend.getOtherFeatures());
+        }
+    }
+
+    public void processKey(KeyEvent key) {
+        if (key.isControlDown() && key.getCode() == KeyCode.S) {
+            saveFriend();
         }
     }
 
@@ -216,6 +225,10 @@ public class EditFriend implements Initializable {
             } else {
                 FriendDatabase.replaceFriend(friend, friendIndex);
             }
+
+            // Close the window
+            Stage currentStage = (Stage) button_save.getScene().getWindow();
+            currentStage.close();
         }
     }
 
