@@ -3,9 +3,12 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -98,7 +101,7 @@ public class EditFriend implements Initializable {
             }
 
             // Set other info
-            textField_otherInfo.setText(friend.getOtherFeatures());
+            textField_otherInfo.setText(friend.getOtherInfo());
         }
     }
 
@@ -216,9 +219,26 @@ public class EditFriend implements Initializable {
 
             // Check if other information was given
             if (FriendDatabase.getBoolean("OtherInfo") == true) {
-                friend.setOtherFeatures(textField_otherInfo.getText());
+                friend.setOtherInfo(textField_otherInfo.getText());
             }
 
+            // Check if Friend is a duplicate
+            for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
+                if (FriendDatabase.getFriend(i).getFirstName().equals(friend.getFirstName())
+                        && FriendDatabase.getFriend(i).getLastName().equals(friend.getLastName())) {
+                    Alert duplicateFriend = new Alert(AlertType.NONE,
+                            "A friend with the same name already exists in your friend book. "
+                            + "Do you want to add it again?",
+                            ButtonType.YES, ButtonType.NO);
+                    duplicateFriend.showAndWait();
+                    if (duplicateFriend.getResult() == ButtonType.YES) {
+                        break;
+                    } else {
+                        return;
+                    }
+                }
+            }
+            
             // Add Friend to the array of Friends
             if (friendIndex == -1) {
                 FriendDatabase.addFriend(friend);
