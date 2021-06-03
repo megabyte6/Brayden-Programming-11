@@ -63,6 +63,8 @@ public class FriendBook implements Initializable {
             listView_friendList.getItems().add(FriendDatabase.getFriend(i));
         }
         listView_friendList.getSelectionModel().selectFirst();
+
+        displayInfo();
     }
 
     private Stage openWindow(String fxmlFile, String titleName) {
@@ -110,6 +112,41 @@ public class FriendBook implements Initializable {
                 listView_friendList.getItems().set(i, FriendDatabase.getFriend(i));
             }
         }
+    }
+
+    public void displayInfo() {
+        Friend friend = listView_friendList.getSelectionModel().getSelectedItem();
+        // Check if the values were set and if so, display them
+        if (friend.isNameSet()) label_name.setText(friend.getName());
+        if (friend.isAgeSet()) label_age.setText(String.valueOf(friend.getAge()));
+        if (friend.isBirthDateSet()) {
+            String birthDate = "";
+            switch (friend.getBirthMonth()) {
+                case 1: birthDate += "Jan "; break;
+                case 2: birthDate += "Feb "; break;
+                case 3: birthDate += "Mar "; break;
+                case 4: birthDate += "Apr "; break;
+                case 5: birthDate += "May "; break;
+                case 6: birthDate += "Jun "; break;
+                case 7: birthDate += "Jul "; break;
+                case 8: birthDate += "Aug "; break;
+                case 9: birthDate += "Sep "; break;
+                case 10: birthDate += "Oct "; break;
+                case 11: birthDate += "Nov "; break;
+                case 12: birthDate += "Dec "; break;
+            }
+            birthDate += friend.getBirthDay() + ", ";
+            birthDate += friend.getBirthYear();
+
+            label_birthday.setText(birthDate);
+        }
+        if (friend.isHeightSet()) {
+            label_height.setText(friend.getHeightUnit().equals("cm")
+                    ? friend.getHeight("cm") + " cm"
+                    : friend.getHeight("in") + " inches");
+        }
+        if (friend.isGenderSet()) label_gender.setText(friend.getGender());
+        if (friend.isOtherInfoSet()) label_otherInfo.setText(friend.getOtherInfo());
     }
 
     public void createFriend() {
