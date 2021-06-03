@@ -9,7 +9,7 @@ public class Friend {
     private double height = 0.0;
     private String height_unit = "";
     private String gender = "";
-    private String otherFeatures = "";
+    private String otherInfo = "";
 
     Friend() {}
     
@@ -244,25 +244,25 @@ public class Friend {
      * @return
      * A String of the other features
      */
-    public String getOtherFeatures() {
-        return this.otherFeatures;
+    public String getOtherInfo() {
+        return this.otherInfo;
     }
 
     /**
-     * @param otherFeatures A String of other features
+     * @param otherInfo A String of other features
      */
-    public void setOtherFeatures(String otherFeatures) {
-        this.otherFeatures = otherFeatures;
+    public void setOtherInfo(String otherInfo) {
+        this.otherInfo = otherInfo;
     }
 
     /**
-     * Check if other features was set
+     * Check if other info was set
      * 
      * @return
-     * {@code true} if other features were set, otherwise returns {@code false}
+     * {@code true} if other info were set, otherwise returns {@code false}
      */
-    public boolean isOtherFeaturesSet() {
-        return !this.otherFeatures.equals("");
+    public boolean isOtherInfoSet() {
+        return !this.otherInfo.equals("");
     }
 
     /**
