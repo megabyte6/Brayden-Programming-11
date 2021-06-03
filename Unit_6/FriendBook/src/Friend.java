@@ -2,8 +2,8 @@ import java.util.Calendar;
 
 public class Friend {
 
-    private String firstName;
-    private String lastName;
+    private String firstName = "";
+    private String lastName = "";
     private String birthday = "";
     // Height is stored as centimeters
     private double height = 0.0;
@@ -11,6 +11,8 @@ public class Friend {
     private String gender = "";
     private String otherFeatures = "";
 
+    Friend() {}
+    
     Friend(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +44,8 @@ public class Friend {
     }
 
     /**
-     * @return The name of the friend
+     * @return
+     * The name of the friend or an empty String if the name hasn't been set
      */
     @Override
     public String toString() {
@@ -50,28 +53,33 @@ public class Friend {
     }
 
     /**
-     * @return The first and last name separated by a space
+     * @return
+     * The first and last name separated by a space or an empty String if the
+     * name hasn't been set
      */
     public String getName() {
         return this.firstName + " " + this.lastName;
     }
 
     /**
-     * @return The first name of the friend
+     * @return
+     * The first name of the friend or an empty String if the first name hasn't
+     * been set
      */
     public String getFirstName() {
         return this.firstName;
     }
 
     /**
-     * @return The last name of the friend
+     * @return
+     * The last name of the friend or an empty String if the last name hasn't
+     * been set
      */
     public String getLastName() {
         return this.lastName;
     }
 
     /**
-     * Set the name for the friend
      * @param firstName The first name of the friend
      * @param lastName  The last name of the friend
      */
@@ -81,14 +89,27 @@ public class Friend {
     }
 
     /**
-     * @return The date of birth as a String in format year/month/day
+     * Check if the name is set
+     * 
+     * @return
+     * {@code true} if the name has been set, otherwise returns {@code false}
+     */
+    public boolean isNameSet() {
+        return !this.firstName.equals("") && !this.lastName.equals("");
+    }
+
+    /**
+     * @return
+     * The date of birth as a String in format year/month/day or an empty
+     * String if the birth date hasn't been set
      */
     public String getBirthDate() {
         return this.birthday;
     }
 
     /**
-     * @return The birth year as an int. Will return 0 if no birth year was set
+     * @return
+     * The birth year as an int. Will return 0 if no birth year was set
      */
     public int getBirthYear() {
         if (!(this.birthday).equals("")) {
@@ -98,7 +119,8 @@ public class Friend {
     }
 
     /**
-     * @return The birth month as an int. Will return 0 if no birth year was set
+     * @return
+     * The birth month as an int. Will return 0 if no birth year was set
      */
     public int getBirthMonth() {
         if (!(this.birthday).equals("")) {
@@ -108,7 +130,8 @@ public class Friend {
     }
 
     /**
-     * @return The birth day as an int. Will return 0 if no birth day was set
+     * @return
+     * The birth day as an int. Will return 0 if no birth day was set
      */
     public int getBirthDay() {
         if (!(this.birthday).equals("")) {
@@ -118,7 +141,6 @@ public class Friend {
     }
 
     /**
-     * Set the date of birth
      * @param year  The year born
      * @param month The month born
      * @param day   The day born
@@ -128,7 +150,19 @@ public class Friend {
     }
 
     /**
-     * @return The height in centimeters. If no height is specified, this returns 0.0
+     * Check if the birth date is set
+     * 
+     * @return
+     * {@code true} if the birth date has been set, otherwise returns
+     * {@code false}
+     */
+    public boolean isBirthDateSet() {
+        return !this.birthday.equals("");
+    }
+
+    /**
+     * @return
+     * The height in centimeters. If no height is specified, this returns 0.0
      */
     public double getHeight() {
         if ((this.height_unit).equals("in")) {
@@ -139,9 +173,11 @@ public class Friend {
 
     /**
      * @param unit The unit to return the height in (cm/in). cm is the default
-     * @return The height as a double
+     * @return
+     * The height as a double. If no height is specified, this returns 0.0
      */
     public double getHeight(String unit) {
+        if (this.height == 0.0) return 0.0;
         if (unit.equals("in")) {
             if ((this.height_unit).equals("cm")) {
                 return this.height / 2.54;
@@ -152,13 +188,22 @@ public class Friend {
     }
 
     /**
-     * Set the height of this friend object
      * @param height    The height
      * @param unit      The unit the height was given (cm/in)
      */
     public void setHeight(double height, String unit) {
         this.height = height;
         this.setHeightUnit(unit);
+    }
+
+    /**
+     * Check if the height was set
+     * 
+     * @return
+     * {@code true} if the height was set, otherwise returns {@code false}
+     */
+    public boolean isHeightSet() {
+        return this.height != 0.0;
     }
 
     /**
@@ -181,21 +226,33 @@ public class Friend {
     }
 
     /**
-     * @return A String representing the gender
+     * @return
+     * A String representing the gender
      */
     public String getGender() {
         return this.gender;
     }
 
     /**
-     * @param gender    Set gender
+     * @param gender
      */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
     /**
-     * @return A String of the other features
+     * Check if the gender was set
+     * 
+     * @return
+     * {@code true} if the gender was set, otherwise returns {@code false}
+     */
+    public boolean isGenderSet() {
+        return !this.gender.equals("");
+    }
+
+    /**
+     * @return
+     * A String of the other features
      */
     public String getOtherFeatures() {
         return this.otherFeatures;
@@ -209,13 +266,30 @@ public class Friend {
     }
 
     /**
-     * @return The calculated age from the birthday as an int
+     * Check if other features was set
+     * 
+     * @return
+     * {@code true} if other features were set, otherwise returns {@code false}
+     */
+    public boolean isOtherFeaturesSet() {
+        return !this.otherFeatures.equals("");
+    }
+
+    /**
+     * @return
+     * The calculated age from the birthday as an int. If no birthday set,
+     * returns 0
      */
     public int getAge() {
-        if (!this.birthday.equals("")) {
-            return calculateAge();
-        } else {
-            return 0;
-        }
+        return !this.birthday.equals("") ? calculateAge() : 0;
+    }
+
+    /**
+     * Check if the age was set
+     * @return
+     * {@code true} if the age was set, otherwise returns {@code false}
+     */
+    public boolean isAgeSet() {
+        return isBirthDateSet();
     }
 }
