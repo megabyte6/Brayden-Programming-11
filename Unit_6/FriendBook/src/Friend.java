@@ -112,10 +112,9 @@ public class Friend {
      * The birth year as an int. Will return 0 if no birth year was set
      */
     public int getBirthYear() {
-        if (!(this.birthday).equals("")) {
-            return Integer.parseInt((this.birthday).split("/")[0]);
-        }
-        return 0;
+        return !(this.birthday).equals("")
+                ? Integer.parseInt((this.birthday).split("/")[0])
+                : 0;
     }
 
     /**
@@ -123,10 +122,9 @@ public class Friend {
      * The birth month as an int. Will return 0 if no birth year was set
      */
     public int getBirthMonth() {
-        if (!(this.birthday).equals("")) {
-            return Integer.parseInt((this.birthday).split("/")[1]);
-        }
-        return 0;
+        return !(this.birthday).equals("")
+                ? Integer.parseInt((this.birthday).split("/")[1])
+                : 0;
     }
 
     /**
@@ -134,10 +132,9 @@ public class Friend {
      * The birth day as an int. Will return 0 if no birth day was set
      */
     public int getBirthDay() {
-        if (!(this.birthday).equals("")) {
-            return Integer.parseInt((this.birthday).split("/")[2]);
-        }
-        return 0;
+        return !(this.birthday).equals("")
+                ? Integer.parseInt((this.birthday).split("/")[2])
+                : 0;
     }
 
     /**
@@ -165,10 +162,7 @@ public class Friend {
      * The height in centimeters. If no height is specified, this returns 0.0
      */
     public double getHeight() {
-        if ((this.height_unit).equals("in")) {
-            return this.height * 2.54;
-        }
-        return this.height;
+        return this.height_unit.equals("in") ? this.height * 2.54 : this.height;
     }
 
     /**
@@ -179,7 +173,7 @@ public class Friend {
     public double getHeight(String unit) {
         if (this.height == 0.0) return 0.0;
         if (unit.equals("in")) {
-            if ((this.height_unit).equals("cm")) {
+            if (this.height_unit.equals("cm")) {
                 return this.height / 2.54;
             }
             return this.height;
@@ -218,11 +212,7 @@ public class Friend {
      * @param unit The unit the height is given in (cm/in). Default is cm
      */
     public void setHeightUnit(String unit) {
-        if (unit.equals("in")) {
-            this.height_unit = "in";
-            return;
-        }
-        this.height_unit = "cm";
+        this.height_unit = unit.equals("in") ? "in" : "cm";
     }
 
     /**
