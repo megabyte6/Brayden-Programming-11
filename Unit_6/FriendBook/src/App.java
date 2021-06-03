@@ -9,7 +9,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Start the main UI
         primaryStage.setTitle("Friend Book");
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("fxml/FriendBook.fxml"))));
+        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("layout/FriendBook.fxml"))));
         primaryStage.show();
     }
 

@@ -151,7 +151,7 @@ public class FriendBook implements Initializable {
 
     public void createFriend() {
         FriendDatabase.changeInteger("friendIndex", -1);
-        openWindow("fxml/EditFriend.fxml", "CreateFriend");
+        openWindow("layout/EditFriend.fxml", "CreateFriend");
     }
 
     public void editFriend() {
@@ -162,7 +162,7 @@ public class FriendBook implements Initializable {
             return;
         }
         FriendDatabase.changeInteger("friendIndex", selectedIndex);
-        openWindow("fxml/EditFriend.fxml", "EditFriend");
+        openWindow("layout/EditFriend.fxml", "EditFriend");
     }
 
     public void deleteFriend() {
