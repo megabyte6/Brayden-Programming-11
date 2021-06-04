@@ -53,11 +53,6 @@ public class FriendBook implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         FriendDatabase.setInteger("friendIndex", -1);
 
-        // TODO : Get friends from file
-        FriendDatabase.addFriend(new Friend("John", "Glasscot"));
-        FriendDatabase.addFriend(new Friend("Sebastian", "Stan"));
-        FriendDatabase.addFriend(new Friend("Tony", "Stark"));
-
         // Initialize ListView
         for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
             listView_friendList.getItems().add(FriendDatabase.getFriend(i));
