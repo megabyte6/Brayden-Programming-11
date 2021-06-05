@@ -6,11 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -19,16 +17,7 @@ import javafx.stage.Stage;
 public class FriendBook implements Initializable {
 
     @FXML
-    private SplitPane splitPane_root;
-
-    @FXML
     private ListView<Friend> listView_friendList = new ListView<Friend>();
-    @FXML
-    private Button button_refresh;
-    @FXML
-    private Button button_moveItemUp;
-    @FXML
-    private Button button_moveItemDown;
 
     @FXML
     private Label label_name;
@@ -42,12 +31,6 @@ public class FriendBook implements Initializable {
     private Label label_gender;
     @FXML
     private Label label_otherInfo;
-    @FXML
-    private Button button_createFriend;
-    @FXML
-    private Button button_editFriend;
-    @FXML
-    private Button button_deleteFriend;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -100,6 +83,7 @@ public class FriendBook implements Initializable {
             for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
                 listView_friendList.getItems().add(FriendDatabase.getFriend(i));
             }
+            return;
         }
         for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
             if (!(listView_friendList.getItems().get(i))
@@ -111,6 +95,7 @@ public class FriendBook implements Initializable {
 
     public void displayInfo() {
         Friend friend = listView_friendList.getSelectionModel().getSelectedItem();
+        if (listView_friendList.getSelectionModel().getSelectedIndex() == -1) return;
         // Check if the values were set and if so, display them
         if (friend.isNameSet()) label_name.setText(friend.getName());
         if (friend.isAgeSet()) label_age.setText(String.valueOf(friend.getAge()));
