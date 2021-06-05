@@ -11,7 +11,7 @@ $javaFiles = @(
 # This is to make sure that the jar file can run as a JavaFX application
 # because JavaFX jar files are not supported by later versions of java
 & 'C:\Program Files\Java\jdk1.8.0_291\bin\javac.exe' -d .\bin\compiled\ $javaFiles
-Copy-Item -Path '.\src\fxml\' -Destination '.\bin\compiled\' -Recurse -Force
+Copy-Item -Path '.\src\layout\' -Destination '.\bin\compiled\' -Recurse -Force
 
 & 'jar' -c -f .\bin\jar\FriendBook.jar -m MANIFEST.MF -C .\bin\compiled\ .
 
