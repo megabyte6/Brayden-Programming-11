@@ -124,8 +124,8 @@ public class FriendDatabase extends Database {
 
     /**
      * Get a Friend from the group specified
-     * @param index     The index of the Friend to get
      * @param groupID   The group to check
+     * @param index     The index of the Friend to get
      * @return The Friend object that matches the index. Will return
      *         {@code null} if the index is out of range ( 
      *         {@code index < 0 || index >= size()}) or if the group
