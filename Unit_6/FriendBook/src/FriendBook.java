@@ -1,5 +1,6 @@
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Supplier;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class FriendBook implements Initializable {
+
+    private final Supplier<String> friendGroupID = () ->
+            FriendDatabase.getString("groupID");
+    private final Supplier<Friend[]> friendGroup = () ->
+            FriendDatabase.getFriendGroup(friendGroupID.get());
+    private final Supplier<Integer> friendGroupSize = () ->
+            FriendDatabase.friendGroupSize(friendGroupID.get());
 
     @FXML
     private ListView<Friend> listView_friendList = new ListView<Friend>();
@@ -37,8 +45,9 @@ public class FriendBook implements Initializable {
         FriendDatabase.setInteger("friendIndex", -1);
 
         // Initialize ListView
-        for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
-            listView_friendList.getItems().add(FriendDatabase.getFriend(i));
+        for (int i = 0; i < friendGroupSize.get(); i++) {
+            listView_friendList.getItems().add(
+                    FriendDatabase.getFriend(friendGroupID.get(), i));
         }
         listView_friendList.getSelectionModel().selectFirst();
 
@@ -77,18 +86,20 @@ public class FriendBook implements Initializable {
     public void refresh() {
         // Check if the ListView and array of Friend objects are out of sync
         // Should not happen normally
-        if (listView_friendList.getItems().size() != FriendDatabase.friendArraySize()) {
+        if (listView_friendList.getItems().size() != friendGroupSize.get()) {
             // Reload all items
             listView_friendList.getItems().clear();
-            for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
-                listView_friendList.getItems().add(FriendDatabase.getFriend(i));
+            for (int i = 0; i < friendGroupSize.get(); i++) {
+                listView_friendList.getItems().add(
+                        FriendDatabase.getFriend(friendGroupID.get(), i));
             }
             return;
         }
-        for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
+        for (int i = 0; i < friendGroupSize.get(); i++) {
             if (!(listView_friendList.getItems().get(i))
-                    .equals(FriendDatabase.getFriend(i))) {
-                listView_friendList.getItems().set(i, FriendDatabase.getFriend(i));
+                    .equals(FriendDatabase.getFriend(friendGroupID.get(), i))) {
+                listView_friendList.getItems().set(i,
+                        FriendDatabase.getFriend(friendGroupID.get(), i));
             }
         }
     }
@@ -163,7 +174,7 @@ public class FriendBook implements Initializable {
         if (deleteFriend.getResult() == ButtonType.YES) {
             listView_friendList.getSelectionModel().select(newSelectedIndex);
             listView_friendList.getItems().remove(selectedFriendIndex);
-            FriendDatabase.removeFriend(selectedFriendIndex);
+            FriendDatabase.removeFriend(friendGroupID.get(), selectedFriendIndex);
         }
     }
 
@@ -174,8 +185,8 @@ public class FriendBook implements Initializable {
                     .showAndWait();
             return;
         } else if (selectedIndex == 0) return;
-        Friend removedFriend = FriendDatabase.removeFriend(selectedIndex);
-        FriendDatabase.insertFriend(removedFriend, selectedIndex - 1);
+        Friend removedFriend = FriendDatabase.removeFriend(friendGroupID.get(), selectedIndex);
+        FriendDatabase.insertFriend(removedFriend, friendGroupID.get(), selectedIndex - 1);
         refresh();
         listView_friendList.getSelectionModel().select(selectedIndex - 1);
     }
@@ -187,8 +198,8 @@ public class FriendBook implements Initializable {
                     .showAndWait();
             return;
         } else if (selectedIndex == listView_friendList.getItems().size() - 1) return;
-        Friend removedFriend = FriendDatabase.removeFriend(selectedIndex);
-        FriendDatabase.insertFriend(removedFriend, selectedIndex + 1);
+        Friend removedFriend = FriendDatabase.removeFriend(friendGroupID.get(), selectedIndex);
+        FriendDatabase.insertFriend(removedFriend, friendGroupID.get(), selectedIndex + 1);
         refresh();
         listView_friendList.getSelectionModel().select(selectedIndex + 1);
     }
