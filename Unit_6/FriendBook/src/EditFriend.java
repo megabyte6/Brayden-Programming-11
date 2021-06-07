@@ -1,5 +1,6 @@
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Supplier;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +19,12 @@ public class EditFriend implements Initializable {
 
     private final String BORDER_CLEAR = "-fx-border-color: transparent";
     private final String BORDER_RED = "-fx-border-color: red";
+    private final Supplier<String> friendGroupID = () ->
+            FriendDatabase.getString("groupID");
+    private final Supplier<Friend[]> friendGroup = () ->
+            FriendDatabase.getFriendGroup(friendGroupID.get());
+    private final Supplier<Integer> friendGroupSize = () ->
+            FriendDatabase.friendGroupSize(friendGroupID.get());
 
     private int friendIndex = FriendDatabase.getInteger("friendIndex");
 
@@ -71,21 +78,24 @@ public class EditFriend implements Initializable {
         if (friendIndex != -1) {
             // Edit friend instead of creating one
 
-            Friend friend = FriendDatabase.getFriend(friendIndex);
+            Friend friend = FriendDatabase.getFriend(friendGroupID.get(), friendIndex);
 
             // Set the name
             textField_firstName.setText(friend.getFirstName());
             textField_lastName.setText(friend.getLastName());
 
             // Set the birthday
-            textField_birthday_year.setText(friend.getBirthYear() == 0 ? "" : String.valueOf(friend.getBirthYear()));
+            textField_birthday_year.setText(friend.getBirthYear() == 0
+                    ? ""
+                    : String.valueOf(friend.getBirthYear()));
             comboBox_birthday_month.getSelectionModel().select(friend.getBirthMonth() - 1);
             comboBox_birthday_day.getSelectionModel().select(friend.getBirthDay() - 1);
 
             // Set the height
             if (friend.getHeight() != 0.0) {
                 textField_height.setText(String.valueOf(friend.getHeight()));
-                comboBox_height_unit.getSelectionModel().select((friend.getHeightUnit()).equals("cm") ? 0 : 1);
+                comboBox_height_unit.getSelectionModel().select(
+                        friend.getHeightUnit().equals("cm") ? 0 : 1);
             }
 
             // Set the gender
@@ -122,7 +132,7 @@ public class EditFriend implements Initializable {
         FriendDatabase.setBoolean("OtherInfo", false);
 
         // Make sure that the required name fields aren't empty
-        if (!(textField_firstName.getText()).equals("") && !(textField_lastName.getText()).equals("")) {
+        if (!textField_firstName.getText().equals("") && !textField_lastName.getText().equals("")) {
 
             FriendDatabase.changeBoolean("FirstName", true);
             FriendDatabase.changeBoolean("LastName", true);
@@ -130,7 +140,7 @@ public class EditFriend implements Initializable {
             textField_lastName.setStyle(BORDER_CLEAR);
 
             // Check if birthday information was given
-            if (!(textField_birthday_year.getText()).equals("")
+            if (!textField_birthday_year.getText().equals("")
                     && !comboBox_birthday_month.getSelectionModel().isEmpty()
                     && !comboBox_birthday_day.getSelectionModel().isEmpty()) {
 
@@ -149,7 +159,7 @@ public class EditFriend implements Initializable {
             }
 
             // Check if a height was given
-            if (!(textField_height.getText()).equals("")) {
+            if (!textField_height.getText().equals("")) {
                 FriendDatabase.changeBoolean("Height", true);
                 textField_height.setStyle(BORDER_CLEAR);
 
@@ -166,25 +176,25 @@ public class EditFriend implements Initializable {
 
             // Check if the gender was given
             if (comboBox_gender.getSelectionModel().getSelectedItem() != null
-                    && !(comboBox_gender.getSelectionModel().getSelectedItem()).equals("")) {
+                    && !comboBox_gender.getSelectionModel().getSelectedItem().equals("")) {
                 FriendDatabase.changeBoolean("Gender", true);
             } else {
                 FriendDatabase.changeBoolean("Gender", false);
             }
 
             // Check if other info was given
-            if (!(textField_otherInfo.getText()).equals("")) {
+            if (!textField_otherInfo.getText().equals("")) {
                 FriendDatabase.changeBoolean("OtherInfo", true);
             } else {
                 FriendDatabase.changeBoolean("OtherInfo", false);
             }
 
         } else {
-            if ((textField_firstName.getText()).equals("")) {
+            if (textField_firstName.getText().equals("")) {
                 FriendDatabase.changeBoolean("FirstName", false);
                 textField_firstName.setStyle(BORDER_RED);
             }
-            if ((textField_lastName.getText()).equals("")) {
+            if (textField_lastName.getText().equals("")) {
                 FriendDatabase.changeBoolean("LastName", false);
                 textField_lastName.setStyle(BORDER_RED);
             }
@@ -223,9 +233,9 @@ public class EditFriend implements Initializable {
             }
 
             // Check if Friend is a duplicate
-            for (int i = 0; i < FriendDatabase.friendArraySize(); i++) {
-                if (FriendDatabase.getFriend(i).getFirstName().equals(friend.getFirstName())
-                        && FriendDatabase.getFriend(i).getLastName().equals(friend.getLastName())) {
+            for (int i = 0; i < friendGroupSize.get(); i++) {
+                if (FriendDatabase.getFriend(friendGroupID.get(), i).getFirstName().equals(friend.getFirstName())
+                        && FriendDatabase.getFriend(friendGroupID.get(), i).getLastName().equals(friend.getLastName())) {
                     Alert duplicateFriend = new Alert(AlertType.NONE,
                             "A friend with the same name already exists in your friend book. "
                             + "Do you want to add it again?",
@@ -241,9 +251,9 @@ public class EditFriend implements Initializable {
             
             // Add Friend to the array of Friends
             if (friendIndex == -1) {
-                FriendDatabase.addFriend(friend);
+                FriendDatabase.addFriend(friendGroupID.get(), friend);
             } else {
-                FriendDatabase.replaceFriend(friend, friendIndex);
+                FriendDatabase.replaceFriend(friendGroupID.get(), friendIndex, friend);
             }
 
             // Close the window
