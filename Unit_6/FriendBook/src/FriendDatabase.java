@@ -38,7 +38,7 @@ public class FriendDatabase extends Database {
      *         {@code false} if the group with that ID already exists
      */
     public static boolean newFriendGroup(String groupID, ArrayList<Friend> friends) {
-        if (!FriendDatabase.friendGroupExists(groupID)) return false;
+        if (FriendDatabase.friendGroupExists(groupID)) return false;
         FriendDatabase.friendList.put(groupID, friends);
         return true;
     }
@@ -51,7 +51,7 @@ public class FriendDatabase extends Database {
      *         {@code false} if the group with that ID already exists
      */
     public static boolean newFriendGroup(String groupID, Friend... friends) {
-        if (!FriendDatabase.friendGroupExists(groupID)) return false;
+        if (FriendDatabase.friendGroupExists(groupID)) return false;
         FriendDatabase.friendList.put(groupID, new ArrayList<Friend>());
         Arrays.asList(friends)
                 .forEach(e -> FriendDatabase.friendList.get(groupID).add(e));
@@ -66,7 +66,7 @@ public class FriendDatabase extends Database {
      *         returns {@code false}
      */
     public static boolean changeFriendGroup(String groupID, ArrayList<Friend> friends) {
-        if (FriendDatabase.friendGroupExists(groupID)) return false;
+        if (!FriendDatabase.friendGroupExists(groupID)) return false;
         FriendDatabase.friendList.put(groupID, friends);
         return true;
     }
@@ -79,7 +79,7 @@ public class FriendDatabase extends Database {
      *         returns {@code false}
      */
     public static boolean changeFriendGroup(String groupID, Friend... friends) {
-        if (FriendDatabase.friendGroupExists(groupID)) return false;
+        if (!FriendDatabase.friendGroupExists(groupID)) return false;
         FriendDatabase.friendList.put(groupID, new ArrayList<Friend>());
         Arrays.asList(friends)
                 .forEach(e -> FriendDatabase.friendList.get(groupID).add(e));
