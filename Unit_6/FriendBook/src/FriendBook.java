@@ -96,7 +96,7 @@ public class FriendBook implements Initializable {
             return;
         }
         for (int i = 0; i < friendGroupSize.get(); i++) {
-            if (!(listView_friendList.getItems().get(i))
+            if (!listView_friendList.getItems().get(i)
                     .equals(FriendDatabase.getFriend(friendGroupID.get(), i))) {
                 listView_friendList.getItems().set(i,
                         FriendDatabase.getFriend(friendGroupID.get(), i));
