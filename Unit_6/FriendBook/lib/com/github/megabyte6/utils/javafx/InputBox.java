@@ -37,10 +37,14 @@ public class InputBox {
 
         this.rootLayout.setAlignment(Pos.CENTER);
         this.rootLayout.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
-            if (key.getCode() == KeyCode.ENTER ||
-                    key.getCode() == KeyCode.ESCAPE) this.window.close();
+            if (key.getCode() == KeyCode.ENTER) this.window.close();
+            if (key.getCode() == KeyCode.ESCAPE) {
+                this.input.setText("");
+                this.window.close();
+            }
         });
 
+        this.window.setOnCloseRequest(e -> this.input.setText(""));
         this.window.setScene(new Scene(rootLayout));
     }
     
