@@ -17,18 +17,18 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <ComboBox fx:id="comboBox_selectGroup" layoutX="10.0" layoutY="14.0" prefWidth="150.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+            <ComboBox fx:id="selectGroup" layoutX="10.0" layoutY="14.0" onAction="#selectGroup" prefWidth="150.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                <contextMenu>
                   <ContextMenu>
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Create New Group" />
-                        <MenuItem mnemonicParsing="false" text="Edit Group Name" />
-                        <MenuItem mnemonicParsing="false" text="Remove Group" />
+                        <MenuItem mnemonicParsing="false" onAction="#createGroup" text="Create New Group" />
+                        <MenuItem mnemonicParsing="false" onAction="#renameGroup" text="Edit Group Name" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteGroup" text="Remove Group" />
                     </items>
                   </ContextMenu>
                </contextMenu>
             </ComboBox>
-            <ListView fx:id="listView_friendList" layoutX="10.0" layoutY="76.0" onMouseClicked="#displayInfo" prefHeight="303.0" prefWidth="186.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
+            <ListView fx:id="friendList" layoutX="10.0" layoutY="76.0" onMouseClicked="#displayInfo" prefHeight="303.0" prefWidth="186.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
                <contextMenu>
                   <ContextMenu>
                     <items>
