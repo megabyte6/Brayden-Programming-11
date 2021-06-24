@@ -59,7 +59,7 @@ public class InputBox {
         this.window.setWidth(this.width);
 
         if (!this.defaultText.equals("")) {
-            this.input = new TextField(this.defaultText);
+            this.input.setText(this.defaultText);
         }
 
         this.rootLayout.setPadding(this.padding);
