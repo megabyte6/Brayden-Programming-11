@@ -27,7 +27,20 @@ public class FriendDatabase extends Database {
      */
     public static Friend[] getFriendGroup(String groupID) {
         if (!FriendDatabase.friendGroupExists(groupID)) return null;
-        return (Friend[]) FriendDatabase.friendList.get(groupID).toArray();
+        return FriendDatabase.friendList.get(groupID)
+                .toArray(new Friend[FriendDatabase.friendList.get(groupID).size()]);
+    }
+
+    /**
+     * Create a empty group of Friends
+     * @param groupID The ID of the new group
+     * @return {@code true} if the group was successfully added or
+     *         {@code false} if the group with that ID already exists
+     */
+    public static boolean newFriendGroup(String groupID) {
+        if (FriendDatabase.friendGroupExists(groupID)) return false;
+        FriendDatabase.friendList.put(groupID, new ArrayList<Friend>());
+        return true;
     }
 
     /**
@@ -52,9 +65,24 @@ public class FriendDatabase extends Database {
      */
     public static boolean newFriendGroup(String groupID, Friend... friends) {
         if (FriendDatabase.friendGroupExists(groupID)) return false;
-        FriendDatabase.friendList.put(groupID, new ArrayList<Friend>());
-        Arrays.asList(friends)
-                .forEach(e -> FriendDatabase.friendList.get(groupID).add(e));
+        ArrayList<Friend> tempArrayList = new ArrayList<Friend>();
+        Arrays.asList(friends).forEach(e -> tempArrayList.add(e));
+        FriendDatabase.friendList.put(groupID, tempArrayList);
+        return true;
+    }
+
+    /**
+     * Change the data in the group corresponding to the ID given
+     * @param groupID   The ID of the group to change
+     * @param friends   Friend objects to replace with
+     * @return {@code true} if the group was replaced successfully, otherwise
+     *         returns {@code false}
+     */
+    public static boolean changeFriendGroup(String groupID, Friend... friends) {
+        if (!FriendDatabase.friendGroupExists(groupID)) return false;
+        ArrayList<Friend> tempArrayList = new ArrayList<Friend>();
+        Arrays.asList(friends).forEach(e -> tempArrayList.add(e));
+        FriendDatabase.friendList.put(groupID, tempArrayList);
         return true;
     }
 
@@ -70,22 +98,6 @@ public class FriendDatabase extends Database {
         FriendDatabase.friendList.put(groupID, friends);
         return true;
     }
-
-    /**
-     * Change the data in the group corresponding to the ID given
-     * @param groupID   The ID of the group to change
-     * @param friends   Friend objects to replace with
-     * @return {@code true} if the group was replaced successfully, otherwise
-     *         returns {@code false}
-     */
-    public static boolean changeFriendGroup(String groupID, Friend... friends) {
-        if (!FriendDatabase.friendGroupExists(groupID)) return false;
-        FriendDatabase.friendList.put(groupID, new ArrayList<Friend>());
-        Arrays.asList(friends)
-                .forEach(e -> FriendDatabase.friendList.get(groupID).add(e));
-        return true;
-    }
-
     /**
      * Change the ID of a group
      * @param groupID   The ID of the group to change
@@ -140,9 +152,14 @@ public class FriendDatabase extends Database {
      * Add a Friend to end of the group specified
      * @param groupID   The ID of the group to add it to
      * @param friend    The friend to add
+     * @return {@code true} if the Friend object was successfully
+     *         added or returns {@code false} if a group with the ID given
+     *         doesn't exist
      */
-    public static void addFriend(String groupID, Friend friend) {
+    public static boolean addFriend(String groupID, Friend friend) {
+        if (FriendDatabase.friendList.get(groupID) == null) return false;
         FriendDatabase.friendList.get(groupID).add(friend);
+        return true;
     }
 
     /**
