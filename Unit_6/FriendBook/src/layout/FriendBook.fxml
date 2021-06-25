@@ -22,7 +22,7 @@
                   <ContextMenu>
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#createGroup" text="Create New Group" />
-                        <MenuItem mnemonicParsing="false" onAction="#renameGroup" text="Edit Group Name" />
+                        <MenuItem mnemonicParsing="false" onAction="#renameGroup" text="Rename Group" />
                         <MenuItem mnemonicParsing="false" onAction="#deleteGroup" text="Remove Group" />
                     </items>
                   </ContextMenu>
