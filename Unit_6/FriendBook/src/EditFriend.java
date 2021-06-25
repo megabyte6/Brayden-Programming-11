@@ -208,12 +208,12 @@ public class EditFriend implements Initializable {
         if (FriendDatabase.getBoolean("FirstName") == true
                 && FriendDatabase.getBoolean("LastName") == true) {
             // Create a new Friend object
-            Friend friend = new Friend(textField_firstName.getText(),
-                    textField_lastName.getText());
+            Friend friend = new Friend(textField_firstName.getText().trim(),
+                    textField_lastName.getText().trim());
 
             // Check if birthday information was given
             if (FriendDatabase.getBoolean("BirthDate") == true) {
-                friend.setBirthDate(Integer.parseInt(textField_birthday_year.getText()),
+                friend.setBirthDate(Integer.parseInt(textField_birthday_year.getText().trim()),
                         comboBox_birthday_month.getSelectionModel().getSelectedIndex() + 1,
                         comboBox_birthday_day.getSelectionModel().getSelectedIndex() + 1);
             }
@@ -221,7 +221,7 @@ public class EditFriend implements Initializable {
             // Check if height information was given
             if (FriendDatabase.getBoolean("Height") == true) {
                 friend.setHeight(
-                        ((double) Math.round(Double.parseDouble(textField_height.getText())
+                        ((double) Math.round(Double.parseDouble(textField_height.getText().trim())
                         * 1000)) / 1000,
                         comboBox_height_unit.getSelectionModel().getSelectedIndex() == 0
                         ? "cm"
@@ -235,7 +235,7 @@ public class EditFriend implements Initializable {
 
             // Check if other information was given
             if (FriendDatabase.getBoolean("OtherInfo") == true) {
-                friend.setOtherInfo(textField_otherInfo.getText());
+                friend.setOtherInfo(textField_otherInfo.getText().trim());
             }
 
             // Check if Friend is a duplicate
