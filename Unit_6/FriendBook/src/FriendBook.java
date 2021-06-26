@@ -1,6 +1,5 @@
-import static java.lang.System.out;
-
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Supplier;
 
@@ -26,8 +25,6 @@ public class FriendBook implements Initializable {
             FriendDatabase.getStringArray("groupIDs");
     private final Supplier<String> friendGroupID = () ->
             FriendDatabase.getString("groupID");
-    private final Supplier<Friend[]> friendGroup = () ->
-            FriendDatabase.getFriendGroup(friendGroupID.get());
     private final Supplier<Integer> friendGroupSize = () ->
             FriendDatabase.friendGroupSize(friendGroupID.get());
 
@@ -117,8 +114,6 @@ public class FriendBook implements Initializable {
     }
 
     public void refresh() {
-        out.println("Refresh");
-
         // Check if the ComboBox and array of IDs are out of sync
         if (selectGroup.getItems().size() != groupIDs.get().length) {
             selectGroup.getItems().clear();
@@ -275,9 +270,11 @@ public class FriendBook implements Initializable {
         }
         refresh();
     }
-    
+
     public void createGroup() {
-        InputBox inputBox = new InputBox("Enter a name for the new group:", "New Friend Group");
+        InputBox inputBox = new InputBox(
+                "Enter a name for the new group:",
+                "New Friend Group");
         inputBox.setHeight(175);
         inputBox.setWidth(300);
         inputBox.show();
@@ -291,11 +288,68 @@ public class FriendBook implements Initializable {
         }
         tempArray[tempArray.length - 1] = result;
         FriendDatabase.changeStringArray("groupIDs", tempArray);
-
         FriendDatabase.changeString("groupID", result);
+        FriendDatabase.newFriendGroup(result);
+        refresh();
     }
 
-    public void renameGroup() {}
+    public void renameGroup() {
+        InputBox inputBox = new InputBox(
+                "Enter a new name for this group;",
+                "Rename Friend Group");
+        inputBox.setHeight(175);
+        inputBox.setWidth(300);
+        inputBox.setDefaultText(selectGroup.getSelectionModel().getSelectedItem());
+        inputBox.show();
+        String result = inputBox.getResult();
 
-    public void deleteGroup() {}
+        if (result.equals("") || result.equals(friendGroupID.get())) return;
+
+        int selectedIndex = selectGroup.getSelectionModel().getSelectedIndex();
+        String[] tempArray = new String[groupIDs.get().length];
+        for (int i = 0; i < groupIDs.get().length; i++) {
+            if (i == selectedIndex) {
+                tempArray[i] = result;
+            } else {
+                tempArray[i] = groupIDs.get()[i];
+            }
+        }
+        FriendDatabase.changeStringArray("groupIDs", tempArray);
+        refresh();
+    }
+
+    public void deleteGroup() {
+        int selectedIndex = selectGroup.getSelectionModel().getSelectedIndex();
+        if (selectedIndex == -1) {
+            new Alert(AlertType.NONE, "Please select a group to remove", ButtonType.OK)
+                    .showAndWait();
+            return;
+        }
+
+        Alert deleteGroup = new Alert(
+                AlertType.NONE,
+                "Are you sure you want to delete this group?",
+                ButtonType.YES, ButtonType.NO);
+        deleteGroup.showAndWait();
+
+        if (deleteGroup.getResult() != ButtonType.YES) return;
+
+        selectGroup.getSelectionModel().select(selectedIndex > 0
+                ? selectedIndex - 1
+                : 1);
+        selectGroup.getItems().remove(selectedIndex);
+
+        ArrayList<String> tempArray = new ArrayList<>();
+        for (String item : groupIDs.get()) {
+            // Check that the current ID isn't the ID to be removed
+            if (!item.equals(friendGroupID.get())) {
+                tempArray.add(item);
+            }
+        }
+        FriendDatabase.changeStringArray("groupIDs", tempArray.toArray(new String[0]));
+        FriendDatabase.removeFriendGroup(friendGroupID.get());
+        FriendDatabase.changeString("groupID", groupIDs.get()[selectedIndex > 0
+                ? selectedIndex - 1
+                : 0]);
+    }
 }
