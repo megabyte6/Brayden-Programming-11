@@ -48,12 +48,18 @@ public class App extends Application {
         //     e.printStackTrace();
         // }
 
-        FriendDatabase.setStringArray("groupIDs", new String[]{"mainGroup"});
-        FriendDatabase.setString("groupID", "mainGroup");
-        FriendDatabase.newFriendGroup(FriendDatabase.getString("groupID"), 
+        FriendDatabase.setStringArray("groupIDs", new String[]{"All Friends", "Other Friends"});
+        FriendDatabase.setString("groupID", "All Friends");
+        FriendDatabase.newFriendGroup(FriendDatabase.getString("groupID"),
                 new Friend("John", "Glasscot"),
                 new Friend("Sebastian", "Stan"),
                 new Friend("Tony", "Stark"));
+        FriendDatabase.newFriendGroup("Other Friends",
+                new Friend("Adam", "Levine"),
+                new Friend("Selena", "Gomez"),
+                new Friend("George", "Segal"),
+                new Friend("Hayley", "Orrantia"));
+
         primaryStage.setTitle("Friend Book");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("layout/FriendBook.fxml"))));
         primaryStage.show();
