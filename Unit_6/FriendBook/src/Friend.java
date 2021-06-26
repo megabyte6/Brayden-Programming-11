@@ -89,6 +89,20 @@ public class Friend {
     }
 
     /**
+     * @param firstName The first name of the friend
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * @param lastName The last name of the friend
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
      * Check if the name is set
      * 
      * @return
