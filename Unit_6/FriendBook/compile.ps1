@@ -1,4 +1,5 @@
 $javaFiles = @(
+    '.\lib\com\github\megabyte6\utils\javafx\InputBox.java'
     '.\lib\com\github\megabyte6\utils\Database.java'
     '.\src\App.java'
     '.\src\EditFriend.java'
