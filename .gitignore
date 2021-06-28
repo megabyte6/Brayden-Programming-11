@@ -1,0 +1,7 @@
+# vscode config files
+**/.vscode
+!.vscode/settings.json
+
+# Powershell scripts for automation
+**compile.ps1
+**run.ps
