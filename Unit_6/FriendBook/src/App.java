@@ -123,25 +123,6 @@ public class App extends Application {
             FriendDatabase.setStringArray("groupIDs", new String[]{"All Friends"});
             // Set the selected group
             FriendDatabase.setString("groupID", FriendDatabase.getStringArray("groupIDs")[0]);
-
-
-
-            String[] tempArray = new String[FriendDatabase.getStringArray("groupIDs").length + 2];
-            for (int i = 0; i < FriendDatabase.getStringArray("groupIDs").length; i++) {
-                tempArray[i] = FriendDatabase.getStringArray("groupIDs")[i];
-            }
-            tempArray[tempArray.length - 2] = "My Friends";
-            tempArray[tempArray.length - 1] = "Other Friends";
-            FriendDatabase.changeStringArray("groupIDs", tempArray);
-            FriendDatabase.newFriendGroup("My Friends",
-                    new Friend("George", "Glasscot"),
-                    new Friend("Sebastian", "Stan"),
-                    new Friend("Tony", "Stark"));
-            FriendDatabase.newFriendGroup("Other Friends",
-                    new Friend("Adam", "Levine"),
-                    new Friend("Selena", "Gomez"),
-                    new Friend("George", "Segal"),
-                    new Friend("Hayley", "Orrantia"));
         }
 
         primaryStage.setTitle("Friend Book");
